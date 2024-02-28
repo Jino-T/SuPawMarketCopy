@@ -11,6 +11,11 @@ class User {
       this.cart = [];
     }
   
+    static async getUsername(username) {
+      this.username = username;
+      return true;
+    }
+
     static async setUsername(username) {
       this.username = username;
       return true;
