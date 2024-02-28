@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+var connection = require('./database').databaseConnection;
 
 // Require the module you just created
 const myApi = require('./routes/myApi');

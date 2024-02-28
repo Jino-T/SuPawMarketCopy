@@ -2,7 +2,7 @@
 
 const express = require("express");
 const router = express.Router();
-
+var connection = require('../database').databaseConnection;
 
 router.get("/", function (req, res) {
     res.render("pages/home"); // This will render views/pages/home.ejs
@@ -12,7 +12,7 @@ router.get("/", function (req, res) {
   router.get("/about", function (req, res) {
     res.render("pages/about"); // This will render views/pages/about.ejs
   });
-  
-  
 
+
+  
 module.exports = router;
