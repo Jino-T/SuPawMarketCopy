@@ -8,26 +8,25 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px; /* Increase padding for more vertical space */
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    /* Removed fixed height to accommodate content of variable size */
 }
 
 .hamburger {
-    display: inline-block;
-    font-size: 24px;
+    font-size: 40px;
+    font-weight: bold;
     background: none;
     border: none;
     color: #333;
     cursor: pointer;
+    padding: 10px;
+    margin-right: 10px;
 }
 
 .navbar-logo {
-    /* If you're using an image for the logo, adjust as necessary */
-    display: flex; /* This ensures vertical centering of the logo */
-    align-items: center; /* Align logo vertically */
-    /* Remove font-size and color if you're using an image */
+    display: flex;
+    align-items: center;
 }
 
 .search-container {
@@ -35,16 +34,17 @@ body {
     align-items: center;
     position: relative;
     border: 1px solid #ccc;
+    flex-grow: .2;
     border-radius: 22px;
     background-color: #fff;
-    margin: 0 15px; /* Add some margin to the left and right of the search bar */
+    margin: 0 15px;
 }
 
 .search-container input[type="text"] {
     flex-grow: 1;
     padding: 8px 16px;
-    padding-left: 40px; /* Space for the search icon */
-    padding-right: 40px; /* Space for the close icon */
+    padding-left: 40px;
+    padding-right: 40px;
     font-size: 17px;
     border: none;
     border-radius: 22px;
@@ -68,23 +68,20 @@ body {
     color: #333;
 }
 
-/* Profile image styles */
 .navbar-profile img {
-    height: auto; /* Maintain aspect ratio */
-    max-height: 50px; /* Set a maximum height that fits well within the navbar */
-    width: auto; /* Maintain aspect ratio */
-    border-radius: 50%; /* Circular image */
-    object-fit: cover; /* Ensures the image covers the area without distorting */
+    height: auto;
+    max-height: 50px;
+    width: auto;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
-/* You may also want to ensure that the container for the profile is aligned properly */
 .navbar-profile {
     display: flex;
     align-items: center;
-    justify-content: center; /* Center the image horizontally */
-    padding: 0 10px; /* Add some padding if needed */
+    justify-content: center;
+    padding: 0 10px;
 }
-
 
 .shopping-cart {
     font-size: 24px;
@@ -94,19 +91,17 @@ body {
     cursor: pointer;
 }
 
-/* Responsive adjustments for mobile views */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
-        padding: 20px; /* Consistent padding for stacked layout */
+        padding: 20px;
     }
     
     .search-container {
-        width: 100%; /* Full width for the search bar */
+        width: 100%;
         margin-bottom: 10px;
     }
 
-    /* Adjust the logo and profile image sizing for mobile as needed */
     .hamburger,
     .navbar-logo,
     .navbar-profile {
