@@ -12,30 +12,23 @@ class Address {
   
     static async setShipping(newAddress, userid) {
       console.log('setting shipping');
-      let existCheck = `SELECT EXISTS(SELECT * FROM address WHERE addressID = (SELECT id FROM useraddress WHERE id=${userid} && addressType='shipping'));`;
-      let addShipping = `INSERT INTO address VALUES(0,${newAddress[0]},${newAddress[1]},${newAddress[2]},${newAddress[3]},${newAddress[4]}); 
-        INSERT INTO useraddress VALUES(0,${userid},SELECT addressID FROM address WHERE ${newAddress[0]} = line1 && ${newAddress[1]} = line2,'shipping')`;
-      //let updateShipping = `UPDATE `
+      let sql = `INSERT INTO address VALUES(0,'${newAddress[0]}','${newAddress[1]}','${newAddress[2]}','${newAddress[3]}',${newAddress[4]}); UPDATE useraddress SET address=(SELECT addressID FROM address WHERE line1='${newAddress[0]}' && line2='${newAddress[1]}' && zip=${newAddress[4]} LIMIT 1) WHERE user = ${userid} && addressType='shipping';`;
 
-      connection.query(existCheck, (err, result) => {
+      connection.query(sql, (err, result) => {
         if(err) throw err;
-        console.log(result.changedRows)
-        if(result[0] === false){
-          console.log('result was false')
-          connection.query(addshipping,(err,result) => {
-            if(err) throw err;
-            console.log(result)
-          })
-        }
-        if(result[0] === true){
-          console.log('result was tru')
-        }
+        console.log(result)
       })
       
     }
 
     static async setBilling(newAddress, userid) {
-      // Implementation here
+      console.log('setting billing');
+      let sql = `INSERT INTO address VALUES(0,'${newAddress[0]}','${newAddress[1]}','${newAddress[2]}','${newAddress[3]}',${newAddress[4]}); UPDATE useraddress SET address=(SELECT addressID FROM address WHERE line1='${newAddress[0]}' && line2='${newAddress[1]}' && zip=${newAddress[4]} LIMIT 1) WHERE user = ${userid} && addressType='billing';`;
+
+      connection.query(sql, (err, result) => {
+        if(err) throw err;
+        console.log(result)
+      })
     }
   
     static async getLine1(userid) {
@@ -84,12 +77,13 @@ class Address {
     }
   }
   
-  let addy = Address.getLine1(1)
+  // Address.getLine1(1)
   // Address.getLine2(1)
   // Address.getCity(1)
   // Address.getState(1)
   // Address.getZip(1)
-  //Address.setShipping(['1234 Street St','','Test City','Testesse',54321],2)
+  // Address.setShipping(["1234 Another St","Apt 1","Test City","Testesse",54321],1)
+  // Address.setBilling(["1234 Another St","Apt 1","Test City","Testesse",54321],1)
 
 
   module.exports = Address;
