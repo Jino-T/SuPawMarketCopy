@@ -93,3 +93,18 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`userAddress` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
+  CREATE TABLE `review` (
+  `reviewID` int NOT NULL AUTO_INCREMENT,
+  `userID` int NOT NULL,
+  `productID` int NOT NULL,
+  `reviewText` varchar(200) DEFAULT NULL,
+  `rating` int NOT NULL,
+  `reviewcol` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`reviewID`),
+  UNIQUE KEY `reviewID_UNIQUE` (`reviewID`),
+  KEY `user_idx` (`userID`),
+  KEY `product_idx` (`productID`),
+  CONSTRAINT `product` FOREIGN KEY (`productID`) REFERENCES `product` (`productID`),
+  CONSTRAINT `user` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
+  );
+
