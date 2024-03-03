@@ -5,12 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
+    <style>
+        body {
+            background-color: #4CAF50; /* This sets the background color to a green shade */
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        main {
+            color: white; /* This sets the text color to white for contrast */
+            padding: 20px; /* Add some padding around the main content */
+        }
+        /* Add any other styles you need here */
+    </style>
 </head>
 
 <body>
-        <main>
-            <p>SuPawMarket For the Boys</p>
-        </main>
+    <!-- This line includes the navbar.ejs file -->
+    <%- include('../partials/navbar') %>
+    <main>
+        <p>SuPawMarket For the Boys</p>
+    </main>
 </body>
 
 </html>

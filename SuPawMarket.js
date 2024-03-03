@@ -7,6 +7,7 @@ const port = 3000;
 app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'views')))
+app.use(express.static(path.join(__dirname, 'public')))
 
 // Require the module you just created
 const myApi = require('./routes/myApi');

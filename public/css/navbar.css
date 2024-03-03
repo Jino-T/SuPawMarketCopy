@@ -1,0 +1,126 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: white; /* Changed from green to white */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-radius: 10px; /* Added rounded corners */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: adds a subtle shadow for depth */
+    height: 60px; /* Increased height for more vertical space */
+}
+
+.hamburger {
+    display: inline-block;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: #333; /* Changed color for visibility on white background */
+    cursor: pointer;
+}
+
+.navbar-logo {
+    color: #333; /* Changed color for visibility on white background */
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    position: relative; /* Allows absolute positioning of the icons */
+    border: 1px solid #ccc; /* Border color as per the image */
+    border-radius: 22px; /* Larger border-radius for a pill-shaped search bar */
+    background-color: #fff; /* White background */
+}
+
+.search-container input[type="text"] {
+    flex-grow: 1; /* Allows the input to fill the space */
+    padding: 8px 16px; /* Smaller padding for a slimmer bar */
+    padding-left: 40px; /* Space for the search icon */
+    font-size: 17px; /* Font size as per your preference */
+    border: none; /* Removes the border inside the search bar */
+    border-radius: 22px; /* Inherited border-radius for a pill-shaped input */
+    outline: none; /* Removes the blue outline on focus */
+}
+
+.search-container button {
+    position: absolute;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.search-icon {
+    left: 10px; /* Position inside the search bar on the left */
+    color: #333; /* Icon color */
+}
+
+.close-icon {
+    right: 10px; /* Position inside the search bar on the right */
+    color: #333; /* Icon color */
+}
+
+/* Hides the default browser clear 'X' on inputs */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-clear-button {
+    display: none;
+}
+
+/* Optional: Add focus style for the input */
+.search-container input[type="text"]:focus {
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.2); /* Soft inset shadow on focus */
+}
+
+/* Optional: Adjust padding if the close button is not needed */
+.search-container input[type="text"]:focus + .close-icon {
+    display: none;
+}
+
+/* Optional: Add a hover effect for the buttons */
+.search-container button:hover {
+    opacity: 0.7;
+}
+
+
+/* Profile image and cart styles */
+.navbar-profile img {
+    height: 40px;
+    border-radius: 50%;
+}
+
+.navbar-profile {
+    display: flex;
+    align-items: center;
+}
+
+.shopping-cart {
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: #333; /* Changed color for visibility on white background */
+    cursor: pointer;
+}
+
+/* Responsive adjustments for mobile views */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 10px 20px; /* Adjusted padding for a stacked layout */
+    }
+    
+    .search-container {
+        margin-bottom: 10px;
+    }
+
+    .hamburger,
+    .navbar-logo,
+    .navbar-profile {
+        margin-bottom: 10px; /* Added margin-bottom for spacing */
+    }
+}
