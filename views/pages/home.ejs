@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+    <!--const path = require('path');
+    app.use(express.static(path.join(__dirname, 'public')))-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
 </head>
-<body>
+<body> 
+    <body style="background-color:#5E9A44;">
     <header>
-        <h1>Welcome to the Home Page</h1>
+        <h1>SuPawMarket</h1>
+        <h2>All the Needs for Your Furry Friends</h2>
+        <h3 style="position:absolute;TOP:350px;LEFT:364px;font-family: Courier"> Our Dog Products</h3>
+        <h3 style="position:absolute;TOP:350px;LEFT:765px; font-family: Courier;"> Our Cat Products</h3>
         <nav>
             <ul>
+                <!--<a href="link address"><img src="image destination"></a>-->
+                <a href="/about"><img src=
+                    "https://www.southernliving.com/thmb/tXa6uF93OgesMpTj8UVX6HfMNZw=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-185743593-2000-507c6c8883a44851885ea4fbc10a2c9e.jpg" 
+                    alt="DOGIMAGE????" 
+                    width = "186" 
+                    height = "124"
+                    style="position:absolute;TOP:235px;LEFT:364px;"
+                     /> </a>
+                <a href="/about"><img src=
+                    "https://www.purina.co.nz/sites/default/files/2020-12/Why%20Do%20Cats%20Eat%20GrassHERO.jpg" 
+                    alt="CATIMAGE????" 
+                    width = "318" 
+                    height = "124" 
+                    style="position:absolute;TOP:235px;LEFT:693px;"
+                    /> </a>
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About</a></li>
             </ul>
@@ -18,5 +39,6 @@
     <main>
         <p>SuPawMarket For the Boys</p>
     </main>
+
 </body>
 </html>
