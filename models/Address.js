@@ -31,8 +31,8 @@ class Address {
       })
     }
   
-    static async getLine1(userid) {
-      let sql = `SELECT line1 FROM address WHERE addressID = (SELECT id FROM useraddress WHERE id=${userid});`;
+    static async getShippingLine1(userid) {
+      let sql = `SELECT line1 FROM address WHERE addressID = (SELECT address FROM useraddress WHERE user=${userid} && addressType='shipping');`;
 
       connection.query(sql, (err, result) => {
         if(err) throw err;
@@ -40,8 +40,8 @@ class Address {
       })
     }
   
-    static async getLine2(userid) {
-      let sql = `SELECT line2 FROM address WHERE addressID = (SELECT id FROM useraddress WHERE id=${userid});`;
+    static async getShippingLine2(userid) {
+      let sql = `SELECT line2 FROM address WHERE addressID = (SELECT address FROM useraddress WHERE user=${userid} && addressType='shipping');`;
 
       connection.query(sql, (err, result) => {
         if(err) throw err;
@@ -49,8 +49,8 @@ class Address {
       })
     }
   
-    static async getCity(userid) {
-      let sql = `SELECT city FROM address WHERE addressID = (SELECT id FROM useraddress WHERE id=${userid});`;
+    static async getShippingCity(userid) {
+      let sql = `SELECT city FROM address WHERE addressID = (SELECT address FROM useraddress WHERE user=${userid} && addressType='shipping');`;
 
       connection.query(sql, (err, result) => {
         if(err) throw err;
@@ -58,8 +58,8 @@ class Address {
       })
     }
   
-    static async getState(userid) {
-      let sql = `SELECT state FROM address WHERE addressID = (SELECT id FROM useraddress WHERE id=${userid});`;
+    static async getShippingState(userid) {
+      let sql = `SELECT state FROM address WHERE addressID = (SELECT address FROM useraddress WHERE user=${userid} && addressType='shipping');`;
 
       connection.query(sql, (err, result) => {
         if(err) throw err;
@@ -67,23 +67,74 @@ class Address {
       })
     }
   
-    static async getZip(userid) {
-      let sql = `SELECT zip FROM address WHERE addressID = (SELECT id FROM useraddress WHERE id=${userid});`;
+    static async getShippingZip(userid) {
+      let sql = `SELECT zip FROM address WHERE addressID = (SELECT address FROM useraddress WHERE user=${userid} && addressType='shipping');`;
 
       connection.query(sql, (err, result) => {
         if(err) throw err;
         console.log(result);
       })
     }
+
+    static async getBillingLine1(userid) {
+      let sql = `SELECT line1 FROM address WHERE addressID = (SELECT address FROM useraddress WHERE user=${userid} && addressType='billing');`;
+
+      connection.query(sql, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+      })
+    }
+  
+    static async getBillingLine2(userid) {
+      let sql = `SELECT line2 FROM address WHERE addressID = (SELECT address FROM useraddress WHERE user=${userid} && addressType='billing');`;
+
+      connection.query(sql, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+      })
+    }
+  
+    static async getBillingCity(userid) {
+      let sql = `SELECT city FROM address WHERE addressID = (SELECT address FROM useraddress WHERE user=${userid} && addressType='billing');`;
+
+      connection.query(sql, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+      })
+    }
+  
+    static async getBillingState(userid) {
+      let sql = `SELECT state FROM address WHERE addressID = (SELECT address FROM useraddress WHERE user=${userid} && addressType='billing');`;
+
+      connection.query(sql, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+      })
+    }
+  
+    static async getBillingZip(userid) {
+      let sql = `SELECT zip FROM address WHERE addressID = (SELECT address FROM useraddress WHERE user=${userid} && addressType='billing');`;
+
+      connection.query(sql, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+      })
+    }
+
   }
   
-  // Address.getLine1(1)
-  // Address.getLine2(1)
-  // Address.getCity(1)
-  // Address.getState(1)
-  // Address.getZip(1)
-  // Address.setShipping(["1234 Another St","Apt 1","Test City","Testesse",54321],1)
-  // Address.setBilling(["1234 Another St","Apt 1","Test City","Testesse",54321],1)
+  // Address.setShipping(["1234 Another St","Apt 1","Test City","Testesse",54321],1);
+  // Address.setBilling(["4321 Parker Ave","","Trinity","Testylvania",98765],1);
+  Address.getShippingLine1(1);
+  Address.getShippingLine2(1);
+  Address.getShippingCity(1);
+  Address.getShippingState(1);
+  Address.getShippingZip(1);
+  Address.getBillingLine1(1);
+  Address.getBillingLine2(1);
+  Address.getBillingCity(1);
+  Address.getBillingState(1);
+  Address.getBillingZip(1);
 
 
   module.exports = Address;
