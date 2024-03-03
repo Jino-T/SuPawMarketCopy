@@ -4,14 +4,14 @@ body {
 }
 
 .navbar {
-    background-color: white; /* Changed from green to white */
+    background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
-    border-radius: 10px; /* Added rounded corners */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: adds a subtle shadow for depth */
-    height: 60px; /* Increased height for more vertical space */
+    padding: 20px; /* Increase padding for more vertical space */
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* Removed fixed height to accommodate content of variable size */
 }
 
 .hamburger {
@@ -19,33 +19,36 @@ body {
     font-size: 24px;
     background: none;
     border: none;
-    color: #333; /* Changed color for visibility on white background */
+    color: #333;
     cursor: pointer;
 }
 
 .navbar-logo {
-    color: #333; /* Changed color for visibility on white background */
-    font-size: 24px;
-    cursor: pointer;
+    /* If you're using an image for the logo, adjust as necessary */
+    display: flex; /* This ensures vertical centering of the logo */
+    align-items: center; /* Align logo vertically */
+    /* Remove font-size and color if you're using an image */
 }
 
 .search-container {
     display: flex;
     align-items: center;
-    position: relative; /* Allows absolute positioning of the icons */
-    border: 1px solid #ccc; /* Border color as per the image */
-    border-radius: 22px; /* Larger border-radius for a pill-shaped search bar */
-    background-color: #fff; /* White background */
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 22px;
+    background-color: #fff;
+    margin: 0 15px; /* Add some margin to the left and right of the search bar */
 }
 
 .search-container input[type="text"] {
-    flex-grow: 1; /* Allows the input to fill the space */
-    padding: 8px 16px; /* Smaller padding for a slimmer bar */
+    flex-grow: 1;
+    padding: 8px 16px;
     padding-left: 40px; /* Space for the search icon */
-    font-size: 17px; /* Font size as per your preference */
-    border: none; /* Removes the border inside the search bar */
-    border-radius: 22px; /* Inherited border-radius for a pill-shaped input */
-    outline: none; /* Removes the blue outline on focus */
+    padding-right: 40px; /* Space for the close icon */
+    font-size: 17px;
+    border: none;
+    border-radius: 22px;
+    outline: none;
 }
 
 .search-container button {
@@ -56,54 +59,38 @@ body {
 }
 
 .search-icon {
-    left: 10px; /* Position inside the search bar on the left */
-    color: #333; /* Icon color */
+    left: 10px;
+    color: #333;
 }
 
 .close-icon {
-    right: 10px; /* Position inside the search bar on the right */
-    color: #333; /* Icon color */
+    right: 10px;
+    color: #333;
 }
 
-/* Hides the default browser clear 'X' on inputs */
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-clear-button {
-    display: none;
-}
-
-/* Optional: Add focus style for the input */
-.search-container input[type="text"]:focus {
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.2); /* Soft inset shadow on focus */
-}
-
-/* Optional: Adjust padding if the close button is not needed */
-.search-container input[type="text"]:focus + .close-icon {
-    display: none;
-}
-
-/* Optional: Add a hover effect for the buttons */
-.search-container button:hover {
-    opacity: 0.7;
-}
-
-
-/* Profile image and cart styles */
+/* Profile image styles */
 .navbar-profile img {
-    height: 40px;
-    border-radius: 50%;
+    height: auto; /* Maintain aspect ratio */
+    max-height: 50px; /* Set a maximum height that fits well within the navbar */
+    width: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Circular image */
+    object-fit: cover; /* Ensures the image covers the area without distorting */
 }
 
+/* You may also want to ensure that the container for the profile is aligned properly */
 .navbar-profile {
     display: flex;
     align-items: center;
+    justify-content: center; /* Center the image horizontally */
+    padding: 0 10px; /* Add some padding if needed */
 }
+
 
 .shopping-cart {
     font-size: 24px;
     background: none;
     border: none;
-    color: #333; /* Changed color for visibility on white background */
+    color: #333;
     cursor: pointer;
 }
 
@@ -111,16 +98,18 @@ input[type="search"]::-webkit-clear-button {
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
-        padding: 10px 20px; /* Adjusted padding for a stacked layout */
+        padding: 20px; /* Consistent padding for stacked layout */
     }
     
     .search-container {
+        width: 100%; /* Full width for the search bar */
         margin-bottom: 10px;
     }
 
+    /* Adjust the logo and profile image sizing for mobile as needed */
     .hamburger,
     .navbar-logo,
     .navbar-profile {
-        margin-bottom: 10px; /* Added margin-bottom for spacing */
+        margin-bottom: 10px;
     }
 }
