@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`category` (
 
   CREATE TABLE IF NOT EXISTS `supawdb`.`product` (
   `productID` INT NOT NULL AUTO_INCREMENT,
-  `productName` VARCHAR(45) NOT NULL,
+  `productName` varchar(45) NOT NULL,
   `price` DECIMAL(2) NOT NULL,
   `inventory` INT NULL,
   `description` VARCHAR(1500) NULL,
@@ -93,3 +93,23 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`userAddress` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
+CREATE TABLE IF NOT EXISTS `supawdb`.`review` (
+  `reviewID` INT NOT NULL AUTO_INCREMENT,
+  `userID` INT NOT NULL,
+  `productID` INT NOT NULL,
+  `starRating` FLOAT NOT NULL,
+  `body` VARCHAR(1500) NOT NULL,
+  PRIMARY KEY (`reviewID`),
+  UNIQUE INDEX `reviewID_UNIQUE` (`reviewID` ASC) VISIBLE,
+  INDEX `userID_idx` (`user` ASC) VISIBLE,
+  INDEX `productID_idx` (`product` ASC) VISIBLE,
+  CONSTRAINT `userID`
+    FOREIGN KEY (`userID`)
+    REFERENCES `supawdb`.`userID` (`userID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `productID`
+    FOREIGN KEY (`product`)
+    REFERENCES `supawdb`.`product` (`productID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
