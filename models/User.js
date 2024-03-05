@@ -39,19 +39,31 @@ class User {
       })
     }
     
-    static async getUsername(username) {
-      this.username = username;
-      return true;
-    }
+    // static async getUsername(username) {
+    //   this.username = username;
+    //   return true;
+    // }
 
-    static async setUsername(username) {
-      this.username = username;
-      return true;
+    static async setUsername(oldUsername, newUsername) {  //setting newUsername to a username that already exists throws an error
+      let sql = `UPDATE user SET username='${newUsername}' WHERE username='${oldUsername}';`;
+      connection.query(sql, (err, res) => {
+        if(err) throw err;
+        console.log("Username updated")
+      });
     }
   
-    static async setPassword(password) {
-      this.password = password;
-      return true;
+    static async setPassword(username, oldPassword,newPassword) {
+      let check = await this.validateUser(username,oldPassword)
+      if(check) {
+        bcrypt.hash(newPassword, 10, function(err, hash) {
+          if(err) throw err;
+          connection.query(`UPDATE user SET password='${hash}' WHERE username='${username}';`);
+          console.log("Password Updated")
+        })
+      }
+      else {
+        console.log("Improper username or password")
+      }
     }
   
     static async addToCart(productId) {
@@ -87,10 +99,15 @@ class User {
   
   }
 
-  // async function foo(){User.createUser("bhorn1","iron").then(res => console.log(res))};
-  // foo();
-// async function bar(){User.validateUser("notexistant","pass").then(res => console.log(res))};
-//   bar();
+  // async function testCreate(){User.createUser("bhorn1","iron").then(res => console.log(res))};
+  // testCreate();
+  // async function testVal(){User.validateUser("notexistant","pass").then(res => console.log(res))};
+  // testVal();
+  // User.setUsername("bhorn1","bhorn");
+  // async function testSetUser(){User.setUsername("bhorn","bhorn1").then}
+  // User.setPassword("jburns","password","pass");
+  // async function testVal(){User.validateUser("jburns","pass").then(res => console.log(res))};
+  // testVal();
   
   module.exports = User;
   
