@@ -23,15 +23,15 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`category` (
   PRIMARY KEY (`categoryID`),
   UNIQUE INDEX `categoryID_UNIQUE` (`categoryID` ASC) VISIBLE);
 
-  CREATE TABLE IF NOT EXISTS `supawdb`.`product` (
-  `productID` INT NOT NULL AUTO_INCREMENT,
-  `productName` VARCHAR(45) NOT NULL,
-  `price` DECIMAL(2) NOT NULL,
-  `inventory` INT NULL,
-  `description` VARCHAR(1500) NULL,
-  `imagePath` VARCHAR(45) NULL,
+  CREATE TABLE `product` (
+  `productID` int NOT NULL AUTO_INCREMENT,
+  `productName` varchar(45) NOT NULL,
+  `price` decimal(5,2) NOT NULL,
+  `inventory` int DEFAULT NULL,
+  `description` varchar(1500) DEFAULT NULL,
+  `imagePath` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`productID`),
-  UNIQUE INDEX `productID_UNIQUE` (`productID` ASC) VISIBLE);
+  UNIQUE KEY `productID_UNIQUE` (`productID`));
 
 CREATE TABLE IF NOT EXISTS `supawdb`.`inCategory` (
   `id` INT NOT NULL AUTO_INCREMENT,

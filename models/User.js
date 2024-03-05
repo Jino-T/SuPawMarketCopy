@@ -17,14 +17,17 @@ class User {
       let sqlMatches = `SELECT * FROM user WHERE username='${username}'`;
       const matches = await connection.promise().query(sqlMatches);
       //console.log(matches[0]);
-      if(matches[0].length === 0) {
+      if(matches[0].length === 0) {       //if username does not yet exist -> create user
         bcrypt.hash(password, 10, function(err, hash) {
-          connection.query(`INSERT INTO user VALUES(0,'${username}','${hash}', 0)`);
-          console.log("User created")
+          connection.promise().query(`INSERT INTO user VALUES(0,'${username}','${hash}', 0)`).then(() => { //after user is inserted, set userAddress to a default address, so  it can be updated by the setAddress function in the address model
+            connection.query(`INSERT INTO userAddress VALUES(0,(SELECT userID FROM user WHERE username='${username}'), 1,'shipping')`);
+            connection.query(`INSERT INTO userAddress VALUES(0,(SELECT userID FROM user WHERE username='${username}'), 1,'billing')`);
+          });
+          console.log("User created");
         })
         return true;
       }
-      else{
+      else{ //if matches returns something, then the username already exists and user creation fails
         console.log("User creation failed - username already in use");
         return false;
       }
@@ -35,7 +38,7 @@ class User {
       const matches = await connection.promise().query(sqlMatches);
       //console.log(JSON.stringify(matches[0]).slice(14,JSON.stringify(matches[0]).length-3));
       return bcrypt.compareSync(password, JSON.stringify(matches[0]).slice(14,JSON.stringify(matches[0]).length-3),function(err, result) {
-        if(err) throw err;
+        if(err) throw err;                //^string parsing necessary because matches returns a string of an array, not just the PW
       })
     }
     
@@ -44,17 +47,17 @@ class User {
     //   return true;
     // }
 
-    static async setUsername(oldUsername, newUsername) {  //setting newUsername to a username that already exists throws an error
+    static async setUsername(oldUsername, newUsername) { //allows users to set a new username 
       let sql = `UPDATE user SET username='${newUsername}' WHERE username='${oldUsername}';`;
       connection.query(sql, (err, res) => {
-        if(err) throw err;
+        if(err) throw err;                        //setting newUsername to a username that already exists throws an error
         console.log("Username updated")
       });
     }
   
-    static async setPassword(username, oldPassword,newPassword) {
-      let check = await this.validateUser(username,oldPassword)
-      if(check) {
+    static async setPassword(username, oldPassword,newPassword) { //allows users to set a new password
+      let check = await this.validateUser(username,oldPassword)   //confirm user info before allowing them to change PW
+      if(check) { //if user info is accurate update pw in db with new hashed pw       
         bcrypt.hash(newPassword, 10, function(err, hash) {
           if(err) throw err;
           connection.query(`UPDATE user SET password='${hash}' WHERE username='${username}';`);
@@ -93,14 +96,19 @@ class User {
       // Logic to search for products
     }
   
-    static async getProducts() {
-      // Logic to get products
+    static async getProducts() { //returns a string of the list of all productsIDs in the database
+      let sql = `SELECT productID FROM product;`
+
+      let res = await connection.promise().query(sql);
+      return JSON.stringify(res[0]);
     }
+
+    //might need to implement other getProduct methods (like by category) or sorting -- check with rest of group
   
   }
 
-  // async function testCreate(){User.createUser("bhorn1","iron").then(res => console.log(res))};
-  // testCreate();
+  async function testCreate(){User.createUser("testaddy","addy").then(res => console.log(res))};
+  testCreate();
   // async function testVal(){User.validateUser("notexistant","pass").then(res => console.log(res))};
   // testVal();
   // User.setUsername("bhorn1","bhorn");
@@ -108,6 +116,8 @@ class User {
   // User.setPassword("jburns","password","pass");
   // async function testVal(){User.validateUser("jburns","pass").then(res => console.log(res))};
   // testVal();
+  // async function testgetProd(){User.getProducts().then(res => console.log(res))};
+  // testgetProd();
   
   module.exports = User;
   
