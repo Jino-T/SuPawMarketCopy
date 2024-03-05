@@ -1,4 +1,5 @@
 // models/Admin.js
+var connection = require('../database').databaseConnection;
 
 class Admin {
     constructor(username, id, password, email) {
@@ -8,23 +9,35 @@ class Admin {
       this.email = email;
     }
   
-    static async addItem(strings) {
+    static async addItem(productName, price, inventory, description, categories, imgPath='') { //adds product to DB including what categories its in
+      //assumes categories is an array of strings of already existing product categories
+      let prodInsSQL = `INSERT INTO product VALUES(0, '${productName}','${price}','${inventory}','${description}','${imgPath}')`;
+      //let catInsSQL = `INSERT INTO incategory VALUES(0, (SELECT categoryID FROM category WHERE categoryName))`
+
+      connection.promise().query(prodInsSQL).then(() => { //after product is inserted, assign it categories in db
+        for(let i of categories){ //for loop necessary if its in multiple cats
+          connection.query(`INSERT INTO incategory VALUES(0, (SELECT categoryID FROM category WHERE categoryName='${i}'), (SELECT productID FROM product WHERE productName='${productName}'))`)
+        }
+      })
+
+      console.log("product added");
+    }
+  
+    static async removeItem(productID) { //removes product from DB
+      let sql = `DELETE FROM product WHERE productID=${productID};`;
+      connection.query(sql);
+      console.log("product removed");
+    }
+  
+    static async setPrice(productID, newPrice) {
       // TODO
     }
   
-    static async removeItem(id) {
+    static async setProductName(productID, newName) {
       // TODO
     }
   
-    static async setPrice(id, price) {
-      // TODO
-    }
-  
-    static async setProductName(id, name) {
-      // TODO
-    }
-  
-    static async setDescription(id, description) {
+    static async setDescription(productID, newDescription) {
       // TODO
     }
   
@@ -36,6 +49,9 @@ class Admin {
       // TODO
     }
   }
+
+  // Admin.addItem("soemthing or other",12.45,50,"A really cool product description",["testCat"]);
+  Admin.removeItem(1);
   
   module.exports = Admin;
   
