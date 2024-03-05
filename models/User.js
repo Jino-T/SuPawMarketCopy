@@ -12,7 +12,7 @@ class User {
       this.shippingInfo = shippingInfo;
       this.cart = [];
     }
-  
+//ACCOUNT INFORMATION METHODS
     static async createUser(username, password) {
       let sqlMatches = `SELECT * FROM user WHERE username='${username}'`;
       const matches = await connection.promise().query(sqlMatches);
@@ -41,11 +41,6 @@ class User {
         if(err) throw err;                //^string parsing necessary because matches returns a string of an array, not just the PW
       })
     }
-    
-    // static async getUsername(username) {
-    //   this.username = username;
-    //   return true;
-    // }
 
     static async setUsername(oldUsername, newUsername) { //allows users to set a new username 
       let sql = `UPDATE user SET username='${newUsername}' WHERE username='${oldUsername}';`;
@@ -69,6 +64,7 @@ class User {
       }
     }
   
+//PURCHASING METHODS
     static async addToCart(productId) {
       // Logic to add a product to the cart
       return true;
@@ -92,6 +88,7 @@ class User {
       // Logic to get order history
     }
   
+//SEARCH AND GET METHODS
     static async searchProduct(keyword) {
       // Logic to search for products
     }
@@ -107,8 +104,8 @@ class User {
   
   }
 
-  async function testCreate(){User.createUser("testaddy","addy").then(res => console.log(res))};
-  testCreate();
+  // async function testCreate(){User.createUser("testaddy","addy").then(res => console.log(res))};
+  // testCreate();
   // async function testVal(){User.validateUser("notexistant","pass").then(res => console.log(res))};
   // testVal();
   // User.setUsername("bhorn1","bhorn");
