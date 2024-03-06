@@ -12,6 +12,11 @@ router.get("/", function (req, res) {
   router.get("/about", function (req, res) {
     res.render("pages/about"); // This will render views/pages/about.ejs
   });
+
+  //login page route
+  router.get("/login", function (req, res) {
+    res.render("pages/login"); // This will render views/pages/login.ejs
+  });
   
   
 
