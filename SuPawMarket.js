@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const port = 3000;
+var connection = require('./database').databaseConnection;
 
 // Set the view engine to ejs if you are rendering views
 app.set("view engine", "ejs");
