@@ -23,6 +23,37 @@ body {
     padding: 10px;
     margin-right: 10px;
 }
+.vertical-menu {
+    display: none; /* Hide the menu by default */
+    flex-direction: column;
+    background-color: #f8f9fa; /* Adjust the color to match your theme */
+    position: absolute; /* Position it below the navbar */
+    width: 250px; /* Fixed width for the menu */
+    max-width: 100%; /* Ensures menu does not exceed screen width on smaller devices */
+    top: 60px; /* Height of the navbar */
+    left: 0;
+    border-radius: 0 0 10px 10px; /* Rounded corners on the bottom */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.vertical-menu .nav-link {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black; /* Adjust text color as needed */
+    display: block;
+    border-bottom: 1px solid #ddd; /* Optional separator for items */
+}
+
+.vertical-menu .nav-link:hover {
+    background-color: #e9ecef; /* Hover background color */
+}
+
+/* navbar.css adjustments for the 'active' class to display the menu */
+#vertical-menu.active {
+    display: flex; /* Or 'block', depending on your layout preference */
+}
+
+  
 
 .navbar-logo {
     display: flex;
