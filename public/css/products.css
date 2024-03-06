@@ -1,0 +1,52 @@
+body {
+    background-color: #4CAF50; /* This sets the background color to a green shade */
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* This aligns the title "Our Dog Products" to the left with some padding and makes it bold and black */
+h1 {
+    text-align: left; /* Aligns text to the left */
+    font-weight: bold; /* Makes text bold */
+    color: black; /* Sets text color to black */
+    margin-left: 20px; /* Adds spacing from the left edge */
+    margin-top: 20px; /* Adds spacing from the top edge */
+    margin-bottom: 0; /* Removes any bottom margin to tighten up spacing */
+    padding-left: 15px; /* Adds padding inside the left edge for better alignment with the content below */
+    font-size: 36px; /* Sets a specific font size for the title */
+}
+
+/* Resets for images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Adjustments for Bootstrap row and columns */
+.row {
+    margin-top: 1rem; /* Adds top margin for spacing between rows */
+    justify-content: start; /* Aligns items to the start of the row */
+}
+
+/* Style adjustments for category titles */
+h3 {
+    color: #fff; /* White color for the titles */
+    margin-bottom: 10px; /* Space between title and image */
+    text-align: center; /* Center align the title */
+}
+
+/* Style adjustments for the category images */
+.category-image {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds some shadow for depth */
+    border-radius: 0.25rem; /* Rounds the corners of the images */
+    margin-bottom: 20px; /* Space below the image */
+    display: block; /* Ensures the image is a block element to center it */
+    margin-left: auto; /* Centers the image horizontally */
+    margin-right: auto; /* Centers the image horizontally */
+}
+
+/* Ensures the main content is centered and not stretching too wide */
+main.container {
+    padding-left: 15px; /* Padding on the left */
+    padding-right: 15px; /* Padding on the right */
+}
