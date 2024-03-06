@@ -5,31 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <link rel="stylesheet" href="/css/homepage.css">
-    <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/homepage.css">
+    <!-- Bootstrap CSS CDN -->
 </head>
 
 <body>
     <%- include('../partials/navbar') %>
-        <h3 class="dog-products-header">Our Dog Products</h3>
-        <h3 class="cat-products-header">Our Cat Products</h3>
+        <div class="product-container">
+            <div class="product-tile">
+                <a href="/about">
+                    <img src="../img/grasspuppy.jpg" alt="DOGIMAGE????" class="product-image dog-image" />
+                </a>
+                <h3 class="product-title dog-products-header">Our Dog Products</h3>
+            </div>
 
-        <div class="square dog-square"></div>
-
-        <a href="/about">
-            <img src="../img/grasspuppy.jpg" alt="DOGIMAGE????" class="dog-image" width="300" height="300" />
-        </a>
-
-        <div class="square cat-square"></div>
-
-        <a href="/about">
-            <img src="../img/cutecat.jpg" alt="CATIMAGE????" class="cat-image" width="300" height="300" />
-        </a>
-
-        <!-- This line includes the navbar.ejs file -->
-
+            <div class="product-tile">
+                <a href="/about">
+                    <img src="../img/cutecat.jpg" alt="CATIMAGE????" class="product-image cat-image" />
+                </a>
+                <h3 class="product-title cat-products-header">Our Cat Products</h3>
+            </div>
+        </div>
 
 </body>
 
