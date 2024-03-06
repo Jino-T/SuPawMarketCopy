@@ -1,13 +1,70 @@
+body {
+    background-color: #4CAF50; /* This sets the background color to a green shade */
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+main {
+    color: white; /* This sets the text color to white for contrast */
+    padding: 20px; /* Add some padding around the main content */
+}
+/* Add any other styles you need here */
 
-        body {
-            background-color: #4CAF50; /* This sets the background color to a green shade */
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        main {
-            color: white; /* This sets the text color to white for contrast */
-            padding: 20px; /* Add some padding around the main content */
-        }
-        /* Add any other styles you need here */
+/* Set the base position for the "Our Dog Products" and "Our Cat Products" headers */
+.dog-products-header,
+.cat-products-header {
+    position: absolute;
+    font-family: Courier;
+    top: 500px;
+}
 
-        h3 {}
+/* Position for "Our Dog Products" header */
+.dog-products-header {
+    left: 344px;
+}
+
+/* Position for "Our Cat Products" header */
+.cat-products-header {
+    left: 765px;
+}
+
+/* Base styling for the squares behind the images */
+.square {
+    height: 320px;
+    width: 320px;
+    background-color: #8E99A2;
+    position: absolute;
+    top: 190px;
+}
+
+/* Position for the square behind the dog image */
+.dog-square {
+    left: 261px;
+}
+
+/* Position for the square behind the cat image */
+.cat-square {
+    left: 687px;
+}
+
+/* Styling and position for the dog image */
+.dog-image {
+    position: absolute;
+    top: 200px;
+    left: 271px;
+    width: 300px;
+    height: 300px;
+}
+
+/* Styling and position for the cat image */
+.cat-image {
+    position: absolute;
+    top: 200px;
+    left: 697px;
+    width: 300px;
+    height: 300px;
+}
+
+/* Remove the default link decoration */
+a {
+    text-decoration: none;
+}
