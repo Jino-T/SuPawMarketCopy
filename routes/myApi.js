@@ -17,4 +17,6 @@ router.get("/", function (req, res) {
     res.render("pages/products"); // This will render views/pages/products.ejs
   });
 
+
+  
 module.exports = router;
