@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`userAddress` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
-  CREATE TABLE `review` (
+  CREATE TABLE IF NOT EXISTS `supawdb`.`review` (
   `reviewID` int NOT NULL AUTO_INCREMENT,
   `userID` int NOT NULL,
   `productID` int NOT NULL,
