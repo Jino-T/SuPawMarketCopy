@@ -8,9 +8,10 @@ router.get("/", function (req, res) {
   });
 
   // About page route
-  router.get("/about", function (req, res) {
-    res.render("pages/about"); // This will render views/pages/about.ejs
-  });
+  //router.get("/about", function (req, res) {
+  //  res.render("pages/about"); // This will render views/pages/about.ejs
+ // });
+ 
  // Product page rroute
  router.get("/products", function (req, res) {
   res.render("pages/products"); // This will render views/pages/products.ejs
