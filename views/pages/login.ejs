@@ -19,14 +19,25 @@
     <main>
         <img src="../img/loginimage2.png" alt="LOGINICON???" class="login_image" />
 
-        <label for="Name" class = userLabel>Username:</label>
-        <input type="text" id="Name" name="Name" placeholder="Your Username" class = "user">
+        <form method="post" action="/validate">
+            <label for="Name" class = userLabel>Username:</label>
+            <input type="text" id="Name" name="username" placeholder="Your Username" class = "user"></input>
 
-        <label for="Name" class = passLabel>Password:</label>
-        <input type="text" id="Name" name="Name" placeholder = "Your Password" class = "pass">
+            <label for="Pass" class = passLabel>Password:</label>
+            <input type="password" id="Pass" name="password" placeholder = "Your Password" class = "pass"></input>
 
-        <button type="button" class=button>Login!</button> 
-        <button type="button" class=button>Create Account</button> 
+            <button type="submit" class=button value="login">Login!</button>  
+        </form>
+<br><br>
+        <form method="post" action="/create">
+            <label for="Name" class = userLabel>Username:</label>
+            <input type="text" id="Name" name="username" placeholder="Your Username" class = "user"></input>
+
+            <label for="Pass" class = passLabel>Password:</label>
+            <input type="password" id="Pass" name="password" placeholder = "Your Password" class = "pass"></input>
+
+            <button type="submit" class=button value="create">Create Account</button> 
+        </form>
 
 
         <!--<div class="product-tile"> MAKE CLASS CALLED LOGIN_IMAGE AND INPUT STYLE INFO THERE
