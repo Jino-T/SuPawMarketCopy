@@ -1,39 +1,59 @@
-// models/Product.js
-
-const db = require('../database'); //This needs to be setup 
+var connection = require('../database').databaseConnection;
 
 class Product {
-  constructor(productId, name, description, quantity, price, category) {
+  constructor(productId, productName, description, inventory, price, imagePath) {
     this.productId = productId; // int
-    this.name = name; // string
+    this.productName = productName; // string
     this.description = description; // string
-    this.quantity = quantity; // int
-    this.price = price; // int
-    this.category = category; // array of strings
+    this.inventory = inventory; // int
+    this.price = price; // decimal
+    this.imagePath = imagePath; // string
   }
 
   static async getQuantity(productId) {
-    // TODO
+    let sql = `SELECT inventory FROM product WHERE productID = ?;`;
+    const [result] = await connection.promise().query(sql, [productId]);
+    if (result.length > 0) {
+      return result[0].inventory;
+    } else {
+      console.log("Product not found");
+      return null;
+    }
   }
 
-  static async setQuantity(productId, newQuantity) {
-    // TODO
+  static async setQuantity(productId, newInventory) {
+    let sql = `UPDATE product SET inventory = ? WHERE productID = ?;`;
+    await connection.promise().query(sql, [newInventory, productId]);
+    console.log("Product quantity updated");
   }
 
   static async setPrice(productId, newPrice) {
-    // TODO
+    let sql = `UPDATE product SET price = ? WHERE productID = ?;`;
+    await connection.promise().query(sql, [newPrice, productId]);
+    console.log("Product price updated");
   }
 
-  static async setProductName(productId, newName) {
-    // TODO
+  static async setProductName(productId, newProductName) {
+    let sql = `UPDATE product SET productName = ? WHERE productID = ?;`;
+    await connection.promise().query(sql, [newProductName, productId]);
+    console.log("Product name updated");
   }
 
   static async setDescription(productId, newDescription) {
-    // TODO
+    let sql = `UPDATE product SET description = ? WHERE productID = ?;`;
+    await connection.promise().query(sql, [newDescription, productId]);
+    console.log("Product description updated");
   }
 
   static async getImage(productId) {
-    // TODO
+    let sql = `SELECT imagePath FROM product WHERE productID = ?;`;
+    const [result] = await connection.promise().query(sql, [productId]);
+    if (result.length > 0) {
+      return result[0].imagePath;
+    } else {
+      console.log("Product not found");
+      return null;
+    }
   }
 }
 
