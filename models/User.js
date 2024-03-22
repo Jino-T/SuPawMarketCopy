@@ -101,7 +101,19 @@ class User {
       return JSON.stringify(res[0]);
     }
 
-    //might need to implement other getProduct methods (like by category) or sorting -- check with rest of group
+    static async getProducts() { //returns a string of the list of all productsIDs in the database
+      let sql = `SELECT productID FROM product;`
+
+      let res = await connection.promise().query(sql);
+      return JSON.stringify(res[0]);
+    }
+
+    static async getProductsByCategory(category) { //returns a string of the list of all productsIDs in the database
+      let sql = `SELECT productID FROM incategory WHERE catID=(SELECT categoryID FROM category WHERE categoryName='${category}');`
+
+      let res = await connection.promise().query(sql);
+      return JSON.stringify(res[0]);
+    }
   
   }
 
@@ -116,6 +128,8 @@ class User {
   // testVal();
   // async function testgetProd(){User.getProducts().then(res => console.log(res))};
   // testgetProd();
+  async function testgetProdByCat(){User.getProductsByCategory("testCat").then(res => console.log(res))};
+  testgetProdByCat();
   
   module.exports = User;
   
