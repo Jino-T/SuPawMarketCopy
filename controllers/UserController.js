@@ -22,6 +22,12 @@ class UserController {
         console.log(check)
         return check;
     }
+
+    static async productsByCat(info) {
+        let check = User.productsByCat(info);
+        console.log(check)
+        return check;
+    }    
 }
 
 module.exports = UserController;

@@ -128,8 +128,8 @@ class User {
   // testVal();
   // async function testgetProd(){User.getProducts().then(res => console.log(res))};
   // testgetProd();
-  async function testgetProdByCat(){User.getProductsByCategory("testCat").then(res => console.log(res))};
-  testgetProdByCat();
+  // async function testgetProdByCat(){User.getProductsByCategory("testCat").then(res => console.log(res))};
+  // testgetProdByCat();
   
   module.exports = User;
   
