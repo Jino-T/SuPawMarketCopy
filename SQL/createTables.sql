@@ -108,3 +108,16 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`userAddress` (
   CONSTRAINT `user` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
   );
 
+  CREATE TABLE `cart` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `cartUser` int NOT NULL,
+  `prodInCart` int NOT NULL,
+  `quantity` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `userID_idx` (`cartUser`),
+  KEY `prodID_idx` (`prodInCart`),
+  CONSTRAINT `cartUser` FOREIGN KEY (`cartUser`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `prodInCart` FOREIGN KEY (`prodInCart`) REFERENCES `product` (`productID`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+

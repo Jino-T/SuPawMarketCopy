@@ -66,18 +66,27 @@ class User {
     }
   
 //PURCHASING METHODS
-    static async addToCart(productId) {
-      // Logic to add a product to the cart
+    static async addToCart(productID, userID, quantity) {//all parameters should be ints
+      let sql = `INSERT INTO cart VALUES(0,${userID},${productID},${quantity});`
+      connection.query(sql, (err, result) => {
+        if(err) throw err;
+      })
       return true;
     }
   
-    static async removeFromCart(productId) {
-      // Logic to remove a product from the cart
+    static async removeFromCart(productID, userID) {
+      let sql = `DELETE FROM cart WHERE cartUser=${userID} && prodInCart=${productID};`
+      connection.query(sql, (err, result) => {
+        if(err) throw err;
+      })
       return true;
     }
   
-    static async getCart() {
-      return this.cart;
+    static async getCart(userID) {
+      let sql = `SELECT prodInCart, quantity FROM cart WHERE cartUser=${userID};`
+      let res = await connection.promise().query(sql);
+
+      return JSON.stringify(res[0]);
     }
   
     static async checkout() {
@@ -85,13 +94,18 @@ class User {
       return true;
     }
   
-    static async getOrderHistory() {
-      // Logic to get order history
+    static async getOrderHistory(userID) {
+      let sql = `SELECT * FROM purchase WHERE user=${userID};`
+      let res = await connection.promise().query(sql);
+
+      return JSON.stringify(res[0]);
     }
   
 //SEARCH AND GET METHODS
     static async searchProduct(keyword) {
-      // Logic to search for products
+      let sql = `SELECT productID FROM product WHERE productName LIKE '%${keyword}%';`
+      let res = await connection.promise().query(sql);
+      return JSON.stringify(res[0]);
     }
   
     static async getProducts() { //returns a string of the list of all productsIDs in the database
@@ -108,7 +122,7 @@ class User {
       return JSON.stringify(res[0]);
     }
 
-    static async getProductsByCategory(category) { //returns a string of the list of all productsIDs in the database
+    static async getProductsByCategory(category) { //takes a string of the category name; returns a string of the list of all productsIDs in the database
       let sql = `SELECT productID FROM incategory WHERE catID=(SELECT categoryID FROM category WHERE categoryName='${category}');`
 
       let res = await connection.promise().query(sql);
@@ -128,8 +142,14 @@ class User {
   // testVal();
   // async function testgetProd(){User.getProducts().then(res => console.log(res))};
   // testgetProd();
-  async function testgetProdByCat(){User.getProductsByCategory("testCat").then(res => console.log(res))};
-  testgetProdByCat();
+  // async function testgetProdByCat(){User.getProductsByCategory("testCat").then(res => console.log(res))};
+  // testgetProdByCat();
+  // User.addToCart(3,2,3);
+  // async function testGetCart(){User.getCart(2).then(res => console.log(res))};
+  // testGetCart();
+  // User.removeFromCart(2,2);
+  // async function testSearch(){User.searchProduct("or").then(res => console.log(res))};
+  // testSearch();
   
   module.exports = User;
   
