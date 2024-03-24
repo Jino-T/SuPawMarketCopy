@@ -31,6 +31,10 @@ router.get("/login", function (req, res) {
   res.render("pages/login"); // This will render views/pages/login.ejs
 });
 
+router.get("/create", function (req, res) {
+  res.render("pages/createaccount"); // This will render views/pages/login.ejs
+});
+
 router.post("/validate",urlencodedParser, async function(req, res) {
   //console.log(req);
     let check = await UserController.validate(req.body);
