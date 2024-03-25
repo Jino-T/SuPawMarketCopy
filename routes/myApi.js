@@ -58,12 +58,21 @@ router.post("/create",urlencodedParser, async function(req, res) {
     let check = await UserController.createUser(req.body);
     console.log(check);
     if(check === true) {
+      req.session.isLoggedIn = true;
+      req.session.username = req.username;
       res.render("pages/home");
     }
     else {
       res.send("Username already in use");
     }
   
+})
+
+router.get("/sessionTest", function(req,res) {
+  if(req.session.isLoggedIn === true) {
+    res.send("Session says logged in")
+  }
+  else res.send("bad session")
 })
 
 
