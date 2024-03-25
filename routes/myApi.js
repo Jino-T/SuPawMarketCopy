@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 router.get("/", function (req, res) {
+    const sessionData = req.session;
     res.render("pages/home"); // This will render views/pages/home.ejs
   });
 
@@ -38,8 +39,12 @@ router.get("/create", function (req, res) {
 router.post("/validate",urlencodedParser, async function(req, res) {
   //console.log(req);
     let check = await UserController.validate(req.body);
-    console.log(check);
+    //let userID = await UserController.getUserID(req.session.username);
+    //console.log(check);
     if(check === true) {
+      req.session.isLoggedIn = true;
+      req.session.username = req.username;
+      //req.session.userID = userID;
       res.render("pages/home");
     }
     else {

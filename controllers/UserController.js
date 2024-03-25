@@ -11,7 +11,7 @@ class UserController {
         // console.log("cotoller user: " + info.username);
         // console.log("controller pass: " + info.password);
         let check = User.validateUser(info.username,info.password);
-        console.log(check)
+        //console.log(check)
         return check;
     }
 
@@ -19,8 +19,13 @@ class UserController {
         // console.log("cotoller user: " + info.username);
         // console.log("controller pass: " + info.password);
         let check = User.createUser(info.username,info.password);
-        console.log(check)
+        //console.log(check)
         return check;
+    }
+
+    static async getUserID(username) {
+        let res = User.getUserID(username);
+        return res;
     }
 }
 

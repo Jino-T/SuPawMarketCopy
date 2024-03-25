@@ -64,6 +64,14 @@ class User {
         console.log("Improper username or password")
       }
     }
+
+    static async getUserID(username) {
+      let sql = `SELECT userID FROM user WHERE username='${username}';`;
+      let res = await connection.promise().query(sql);
+      //console.log(JSON.stringify(res[0]).split(':')[1]);
+      let result = JSON.stringify(res[0]).split(':')[1].split('}')[0];
+      return parseInt(result);
+    }
   
 //PURCHASING METHODS
     static async addToCart(productId) {
@@ -116,6 +124,8 @@ class User {
   // testVal();
   // async function testgetProd(){User.getProducts().then(res => console.log(res))};
   // testgetProd();
+  async function testGetID(){User.getUserID('jburns').then(res => console.log(res))};
+  testGetID();
   
   module.exports = User;
   
