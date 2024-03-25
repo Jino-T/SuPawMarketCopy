@@ -22,6 +22,69 @@ class ProductController {
         }
     }
 
+    static async getProductName(req, res) {
+        try {
+            const productId = req.params.productId;
+            const productName = await Product.getProductName(productId);
+            if(productName !== null) {
+                res.status(200).json({ productName });
+            } else {
+                res.status(404).json({ message: "Product not found" });
+            }
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Internal server error" });
+        }
+    }
+
+    // Get product description
+    static async getDescription(req, res) {
+        try {
+            const productId = req.params.productId;
+            const description = await Product.getDescription(productId);
+            if(description !== null) {
+                res.status(200).json({ description });
+            } else {
+                res.status(404).json({ message: "Product not found" });
+            }
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Internal server error" });
+        }
+    }
+
+    // Get product price
+    static async getPrice(req, res) {
+        try {
+            const productId = req.params.productId;
+            const price = await Product.getPrice(productId);
+            if(price !== null) {
+                res.status(200).json({ price });
+            } else {
+                res.status(404).json({ message: "Product not found" });
+            }
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Internal server error" });
+        }
+    }
+
+    // Get product image path
+    static async getImage(req, res) {
+        try {
+            const productId = req.params.productId;
+            const imagePath = await Product.getImage(productId);
+            if(imagePath !== null) {
+                res.status(200).json({ imagePath });
+            } else {
+                res.status(404).json({ message: "Product not found" });
+            }
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Internal server error" });
+        }
+    }    
+
     // Update quantity of a product
     static async setQuantity(req, res) {
         try {

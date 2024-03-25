@@ -7,6 +7,7 @@ const ProductController = require("../controllers/ProductController");
 const router = express.Router();
 
 var bodyParser = require("body-parser");
+const User = require("../models/User");
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
@@ -23,13 +24,13 @@ router.get("/", function(req, res) {
 });
 
 // Dog Products page route
-router.get("/dogProducts", function(req, res) {
-  res.render("pages/dogProducts"); // This will render views/pages/dogProducts.ejs
+router.get("/dogSubProducts", function(req, res) {
+  res.render("pages/dogSubProducts"); // This will render views/pages/dogSubProducts.ejs
 });
 
 // Product page rroute
-router.get("/products", function(req, res) {
-  res.render("pages/products"); // This will render views/pages/products.ejs
+router.get("/dogProducts", function(req, res) {
+  res.render("pages/dogProducts"); // This will render views/pages/products.ejs
 });
 
 //login page route
@@ -59,6 +60,21 @@ router.post("/create", urlencodedParser, async function(req, res) {
   }
 });
 
+// Get product quantity
 router.get("/product/quantity/:productId", ProductController.getQuantity);
+
+// Get product name
+router.get("/product/name/:productId", ProductController.getProductName);
+
+router.get("/product/quantity/:productId", ProductController.getQuantity);
+
+// Get product description
+router.get("/product/description/:productId", ProductController.getDescription);
+
+// Get product price
+router.get("/product/price/:productId", ProductController.getPrice);
+
+// Get cat 
+router.get("/user/category/:categoryName", UserController.productsByCat);
 
 module.exports = router;

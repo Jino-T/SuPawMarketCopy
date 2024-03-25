@@ -21,6 +21,54 @@ class Product {
     }
   }
 
+  static async getImage(productId) {
+    let sql = `SELECT imagePath FROM product WHERE productID = ?;`;
+    const [result] = await connection.promise().query(sql, [productId]);
+    if (result.length > 0) {
+      return result[0].imagePath;
+    } else {
+      console.log("Product not found");
+      return null;
+    }
+  }
+
+  // Method to get productName
+  static async getProductName(productId) {
+    let sql = `SELECT productName FROM product WHERE productID = ?;`;
+    const [result] = await connection.promise().query(sql, [productId]);
+    if (result.length > 0) {
+      return result[0].productName;
+    } else {
+      console.log("Product not found");
+      return null;
+    }
+  }
+
+  // Method to get description
+  static async getDescription(productId) {
+    let sql = `SELECT description FROM product WHERE productID = ?;`;
+    const [result] = await connection.promise().query(sql, [productId]);
+    if (result.length > 0) {
+      return result[0].description;
+    } else {
+      console.log("Product not found");
+      return null;
+    }
+  }
+
+  // Method to get price
+  static async getPrice(productId) {
+    let sql = `SELECT price FROM product WHERE productID = ?;`;
+    const [result] = await connection.promise().query(sql, [productId]);
+    if (result.length > 0) {
+      return result[0].price;
+    } else {
+      console.log("Product not found");
+      return null;
+    }
+  }
+
+
   static async setQuantity(productId, newInventory) {
     let sql = `UPDATE product SET inventory = ? WHERE productID = ?;`;
     await connection.promise().query(sql, [newInventory, productId]);
@@ -45,16 +93,7 @@ class Product {
     console.log("Product description updated");
   }
 
-  static async getImage(productId) {
-    let sql = `SELECT imagePath FROM product WHERE productID = ?;`;
-    const [result] = await connection.promise().query(sql, [productId]);
-    if (result.length > 0) {
-      return result[0].imagePath;
-    } else {
-      console.log("Product not found");
-      return null;
-    }
-  }
+
 }
 
 module.exports = Product;
