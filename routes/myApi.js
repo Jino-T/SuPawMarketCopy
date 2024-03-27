@@ -66,7 +66,7 @@ router.get("/product/quantity/:productId", ProductController.getQuantity);
 // Get product name
 router.get("/product/name/:productId", ProductController.getProductName);
 
-router.get("/product/quantity/:productId", ProductController.getQuantity);
+router.get("/product/image/:productId", ProductController.getImage);
 
 // Get product description
 router.get("/product/description/:productId", ProductController.getDescription);
