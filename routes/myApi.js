@@ -60,6 +60,7 @@ router.post("/create",urlencodedParser, async function(req, res) {
     let check = await UserController.createUser(req.body);
     //console.log(check);
     if(check === true) {
+      console.log(req.body.username)
       req.session.isLoggedIn = true;
       req.session.username = req.body.username;
       req.session.isAdmin = false;
