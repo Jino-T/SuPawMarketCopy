@@ -27,7 +27,7 @@ router.get("/", function (req, res) {
   res.render("pages/products"); // This will render views/pages/products.ejs
 });
 
-//login page route
+//ACCOUNT ROUTES
 router.get("/login", function (req, res) {
   res.render("pages/login"); // This will render views/pages/login.ejs
 });
@@ -40,11 +40,14 @@ router.post("/validate",urlencodedParser, async function(req, res) {
   //console.log(req);
     let check = await UserController.validate(req.body);
     //let userID = await UserController.getUserID(req.session.username);
-    //console.log(check);
+    //console.log("check: " + check);
     if(check === true) {
+      //console.log(req.body.username)
       req.session.isLoggedIn = true;
-      req.session.username = req.username;
+      req.session.username = req.body.username;
+      req.session.isAdmin = await UserController.checkIsAdmin(req.body.username);
       //req.session.userID = userID;
+      //console.log(req.session.isAdmin)
       res.render("pages/home");
     }
     else {
@@ -56,10 +59,11 @@ router.post("/validate",urlencodedParser, async function(req, res) {
 router.post("/create",urlencodedParser, async function(req, res) {
   //console.log(req);
     let check = await UserController.createUser(req.body);
-    console.log(check);
+    //console.log(check);
     if(check === true) {
       req.session.isLoggedIn = true;
       req.session.username = req.username;
+      req.session.isAdmin = false;
       res.render("pages/home");
     }
     else {
@@ -68,11 +72,13 @@ router.post("/create",urlencodedParser, async function(req, res) {
   
 })
 
-router.get("/sessionTest", function(req,res) {
-  if(req.session.isLoggedIn === true) {
-    res.send("Session says logged in")
+
+//ADMIN ROUTES
+router.get("/admin", function(req,res) {
+  if(req.session.isLoggedIn === true && req.session.isAdmin === 1) {
+    res.send("admin dash")
   }
-  else res.send("bad session")
+  else res.send("Admin account required")
 })
 
 

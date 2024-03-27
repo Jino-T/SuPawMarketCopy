@@ -27,6 +27,12 @@ class UserController {
         let res = User.getUserID(username);
         return res;
     }
+
+    static async checkIsAdmin(username) {
+        let res = await User.checkIsAdmin(username);
+        console.log(res.substring(12,13));
+        return parseInt(res.substring(12,13));
+    }
 }
 
 module.exports = UserController;

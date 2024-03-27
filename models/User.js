@@ -72,6 +72,13 @@ class User {
       let result = JSON.stringify(res[0]).split(':')[1].split('}')[0];
       return parseInt(result);
     }
+
+    static async checkIsAdmin(username) {
+      let sql = `SELECT isAdmin FROM user WHERE username='${username}';`;
+      let res = await connection.promise().query(sql);
+      console.log(res);
+      return JSON.stringify(res[0]);
+    }
   
 //PURCHASING METHODS
     static async addToCart(productId) {
@@ -124,8 +131,10 @@ class User {
   // testVal();
   // async function testgetProd(){User.getProducts().then(res => console.log(res))};
   // testgetProd();
-  async function testGetID(){User.getUserID('jburns').then(res => console.log(res))};
-  testGetID();
+  // async function testGetID(){User.getUserID('jburns').then(res => console.log(res))};
+  // testGetID();
+  // async function testCheckAdmin(){User.checkIsAdmin('jburns').then(res => console.log(res))};
+  // testCheckAdmin();
   
   module.exports = User;
   
