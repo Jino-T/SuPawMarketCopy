@@ -39,15 +39,14 @@ router.get("/create", function (req, res) {
 router.post("/validate",urlencodedParser, async function(req, res) {
   //console.log(req);
     let check = await UserController.validate(req.body);
-    //let userID = await UserController.getUserID(req.session.username);
     //console.log("check: " + check);
     if(check === true) {
       //console.log(req.body.username)
       req.session.isLoggedIn = true;
       req.session.username = req.body.username;
       req.session.isAdmin = await UserController.checkIsAdmin(req.body.username);
-      //req.session.userID = userID;
-      //console.log(req.session.isAdmin)
+      req.session.userID = await UserController.getUserID(req.body.username);
+      //console.log(req.session.userID)
       res.render("pages/home");
     }
     else {
@@ -62,8 +61,9 @@ router.post("/create",urlencodedParser, async function(req, res) {
     //console.log(check);
     if(check === true) {
       req.session.isLoggedIn = true;
-      req.session.username = req.username;
+      req.session.username = req.body.username;
       req.session.isAdmin = false;
+      req.session.userID = await UserController.getUserID(req.body.username);
       res.render("pages/home");
     }
     else {

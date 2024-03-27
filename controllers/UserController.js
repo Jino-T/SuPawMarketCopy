@@ -30,9 +30,12 @@ class UserController {
 
     static async checkIsAdmin(username) {
         let res = await User.checkIsAdmin(username);
-        console.log(res.substring(12,13));
+        //console.log(res.substring(12,13));
         return parseInt(res.substring(12,13));
     }
 }
+
+    // async function testGetID(){User.getUserID('jburns').then(res => console.log(res))};
+    // testGetID();
 
 module.exports = UserController;

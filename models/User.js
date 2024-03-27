@@ -76,7 +76,7 @@ class User {
     static async checkIsAdmin(username) {
       let sql = `SELECT isAdmin FROM user WHERE username='${username}';`;
       let res = await connection.promise().query(sql);
-      console.log(res);
+      //console.log(res);
       return JSON.stringify(res[0]);
     }
   
