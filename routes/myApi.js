@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 router.get("/", function (req, res) {
+    const sessionData = req.session;
     res.render("pages/home"); // This will render views/pages/home.ejs
   });
 
@@ -26,7 +27,7 @@ router.get("/", function (req, res) {
   res.render("pages/products"); // This will render views/pages/products.ejs
 });
 
-//login page route
+//ACCOUNT ROUTES
 router.get("/login", function (req, res) {
   res.render("pages/login"); // This will render views/pages/login.ejs
 });
@@ -38,8 +39,14 @@ router.get("/create", function (req, res) {
 router.post("/validate",urlencodedParser, async function(req, res) {
   //console.log(req);
     let check = await UserController.validate(req.body);
-    console.log(check);
+    //console.log("check: " + check);
     if(check === true) {
+      //console.log(req.body.username)
+      req.session.isLoggedIn = true;
+      req.session.username = req.body.username;
+      req.session.isAdmin = await UserController.checkIsAdmin(req.body.username);
+      req.session.userID = await UserController.getUserID(req.body.username);
+      //console.log(req.session.userID)
       res.render("pages/home");
     }
     else {
@@ -51,14 +58,28 @@ router.post("/validate",urlencodedParser, async function(req, res) {
 router.post("/create",urlencodedParser, async function(req, res) {
   //console.log(req);
     let check = await UserController.createUser(req.body);
-    console.log(check);
+    //console.log(check);
     if(check === true) {
+      console.log(req.body.username)
+      req.session.isLoggedIn = true;
+      req.session.username = req.body.username;
+      req.session.isAdmin = false;
+      req.session.userID = await UserController.getUserID(req.body.username);
       res.render("pages/home");
     }
     else {
       res.send("Username already in use");
     }
   
+})
+
+
+//ADMIN ROUTES
+router.get("/admin", function(req,res) {
+  if(req.session.isLoggedIn === true && req.session.isAdmin === 1) {
+    res.send("admin dash")
+  }
+  else res.send("Admin account required")
 })
 
 
