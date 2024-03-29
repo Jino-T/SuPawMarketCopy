@@ -12,6 +12,7 @@ class User {
       this.shippingInfo = shippingInfo;
       this.cart = [];
     }
+    
 //ACCOUNT INFORMATION METHODS
     static async createUser(username, password) {
       let sqlMatches = `SELECT * FROM user WHERE username='${username}'`;

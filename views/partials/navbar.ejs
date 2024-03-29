@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Bar</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/navbar.css">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <!-- Hamburger Menu should be the first item if you want it on the left -->
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+        <div id="vertical-menu" class="vertical-menu collapse">
+            <a href="/dogs" class="nav-link">All Dog Products</a>
+            <a href="/cats" class="nav-link">All Cat Products</a>
+            <!-- ... more links ... -->
+        </div>
+        <!-- Logo and search next -->
+        <a href="/" class="navbar-logo-link">
+            <img src="../img/SuPawMarket.png" alt="SuPawMarket Logo" class="navbar-logo">
+        </a>
+        <div class="search-container">
+            <button class="search-icon">🔍</button>
+            <input type="text" placeholder="Search...">
+            <button class="close-icon">✖</button>
+        </div>
+
+        <!-- Profile last so it goes on the right -->
+        <div class="navbar-profile">
+            <a href = "/login" class="nav-link">
+            <img src="https://cdn4.iconfinder.com/data/icons/man-user-human-person-business-profile-avatar/100/20-1User_13-512.png"
+                alt="Profile">
+            <button class="shopping-cart">🛒</button>
+        </a>
+        </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"
+        integrity="sha384-+0n0xVDoz+3N1e3DeSWFg13nnnnnnnnnnnnnnnnnnn" crossorigin="anonymous"></script>
+</body>
+<script src="/javascript/hamburgerLogic.js"></script>
+
+</html>
