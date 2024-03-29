@@ -54,13 +54,16 @@ class Review {
       let sql = `SELECT reviewText FROM review WHERE reviewID = ?;`;
       const [result] = await connection.promise().query(sql, [reviewId]);
       if (result.length > 0) {
-        return result[0].inventory;
+        let tmp = result[0].inventory;
+        console.log(JSON.stringify(tmp));
+        return JSON.stringify(tmp);
       } else {
         console.log("Review not found");
         return null;
       }
     }
     
+    //New user id must be an int and for proper functionality must be an existing user id in the database
     static async setUserId(reviewId, newuserId) {
       console.log('setting user id for review: ' + reviewId.toString());
       this.userID = newuserId;
@@ -70,6 +73,7 @@ class Review {
       console.log("Review User Id updated");
     }
 
+    //New product id must be an int and for proper functionality must be an existing product id in the database
     static async setProductId(reviewId, newproductId) {
       console.log('setting user id for review: ' + reviewId.toString());
       this.productId = newproductId;
@@ -79,6 +83,7 @@ class Review {
       console.log("Review Product Id updated");
     }
 
+    //Star rating must be an int (no decimal ex: 0,1,2,3,4,5); rating cannot be less than 0 or greater than 5;
     static async setStarRating(reviewId, newStarRating) {
       console.log('setting star rating for review: ' + reviewId.toString());
 
@@ -94,6 +99,7 @@ class Review {
       }
     }
 
+    //Review text must be a string; can be an empty string
     static async setReviewText(reviewId, newReviewText) {
       console.log('setting Review text for review: ' + reviewId.toString());
       this.reviewText = newReviewText;
@@ -104,7 +110,11 @@ class Review {
     }
   }
 
+Review.getReviewText(6);
+//Review.setReviewText(6, "John");
+//console.log(Review.getReviewText(6));
 
+//node review.js
   
   module.exports = Review;
   

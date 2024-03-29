@@ -90,7 +90,7 @@ class Purchase {
       console.log("Purchase quantity updated");
     }
 
-    static async setPurchaseTme(purchaseId, newPurchaseTime) {
+    static async setPurchaseTime(purchaseId, newPurchaseTime) {
       console.log('setting purchase time for purchase: ' + purchaseId.toString());
       this.purchaseTime = newPurchaseTime;
 
@@ -100,5 +100,7 @@ class Purchase {
     }
   }
   
+  Review.setPurchaseTime(6);
+
   module.exports = Purchase;
   
