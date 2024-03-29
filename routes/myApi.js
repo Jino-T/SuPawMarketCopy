@@ -23,12 +23,17 @@ router.get("/", function(req, res) {
   res.render("pages/home"); // This will render views/pages/home.ejs
 });
 
+// Dog Products item page route
+router.get("/dogItemProduct", function(req, res) {
+  res.render("pages/dogItemProduct"); // This will render views/pages/dogItemProduct.ejs
+});
+
 // Dog Products page route
 router.get("/dogSubProducts", function(req, res) {
   res.render("pages/dogSubProducts"); // This will render views/pages/dogSubProducts.ejs
 });
 
-// Product page rroute
+// Product page route
 router.get("/dogProducts", function(req, res) {
   res.render("pages/dogProducts"); // This will render views/pages/products.ejs
 });
@@ -74,7 +79,7 @@ router.get("/product/description/:productId", ProductController.getDescription);
 // Get product price
 router.get("/product/price/:productId", ProductController.getPrice);
 
-// Get cat 
+// Get cat
 router.get("/user/category/:categoryName", UserController.productsByCat);
 
 module.exports = router;

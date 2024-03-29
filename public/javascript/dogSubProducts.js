@@ -16,6 +16,7 @@ $(document).ready(function() {
 
   async function fetchProductDetails(productId) {
     try {
+      const productID = productId;
       const nameResponse = await $.ajax({
         url: `/product/name/${productId}`,
         type: "GET"
@@ -36,6 +37,7 @@ $(document).ready(function() {
 
       const productHtml = `
           <div class="col-md-4 col-sm-6 mb-4">
+          <a href="/dogItemProduct?productID=${productID}" class="">
             <div class="card product-card h-100">
             <!-- Image goes here --!>
               <div class="card-body d-flex flex-column">
@@ -43,7 +45,9 @@ $(document).ready(function() {
                 <div class="product-rating mb-2">${starRatingHtml}</div>
                 <p class="card-text flex-grow-1">${descriptionResponse.description}</p>
               </div>
+              </a>
             </div>
+            
           </div>
         `;
 
