@@ -83,6 +83,15 @@ router.post("/create",urlencodedParser, async function(req, res) {
   
 })
 
+//cart page route
+router.get("/cart", function (req, res) {
+  res.render("pages/cart"); // This will render views/pages/cart.ejs
+});
+
+//checkout page route
+router.get("/checkout", function (req, res) {
+  res.render("pages/checkout"); // This will render views/pages/checkout.ejs
+});
 
 //ADMIN ROUTES
 router.get("/admin", function(req,res) {
