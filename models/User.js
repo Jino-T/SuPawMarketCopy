@@ -116,6 +116,13 @@ class User {
       return JSON.stringify(res[0]);
     }
 
+    static async getProductInfo() { //returns a string of the list of all productsIDs in the database
+      let sql = `SELECT * FROM product;`
+
+      let res = await connection.promise().query(sql);
+      return res[0];
+    }
+
     //might need to implement other getProduct methods (like by category) or sorting -- check with rest of group
   
   }

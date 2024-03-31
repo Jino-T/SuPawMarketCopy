@@ -8,7 +8,9 @@
     "express": "^4.18.2",
     "express-session": "^1.18.0",
     "mysql": "^2.18.1",
-    "mysql2": "^3.9.2"
+    "mysql2": "^3.9.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "name": "supawmarket",
   "description": "Welcome to the PetStore project repository! This project aims to develop a comprehensive website for a pet store specializing in selling supplies for dogs and cats, akin to popular platforms like PetCo, PetSmart, and Chewy. The website will feature a wide range of products including pet toys, food, accessories, and equipment, catering to the needs of pet owners.",

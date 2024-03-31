@@ -101,9 +101,33 @@ router.post("/validateProduct", urlencodedParser, async function(req,res) {
   else res.send("Admin Account Required")
 })
 
-router.get("/editProducts", function(req,res) {
-  if(req.session.isLoggedIn === true && req.session.isAdmin === 1) {
-    res.render("pages/editProducts");
+router.get("/editProducts", async function(req,res) {
+  if(req.session.isLoggedIn === true && req.session.isAdmin === 1) { 
+    res.render("pages/editProduct");
+  }
+  else res.send("Admin Account Required")
+})
+
+router.post("/updateProduct", jsonParser, async function(req,res) {
+  //console.log(JSON.stringify(req.body));
+  if(req.session.isLoggedIn === true && req.session.isAdmin === 1) { 
+    await AdminController.updateProduct(req.body);
+    res.render("pages/editProduct");
+  }
+  else res.send("Admin Account Required")
+})
+
+router.get("/getProducts", async function(req, res) {
+  if(req.session.isLoggedIn === true && req.session.isAdmin === 1) { 
+    let responseData = await AdminController.getProdInfo();
+    res.json(responseData)
+  }
+  else res.send("Admin Account Required");
+})
+
+router.post("/deleteProduct", jsonParser, async function(req, res) {
+  if(req.session.isLoggedIn === true && req.session.isAdmin === 1) { 
+    await AdminController.deleteProduct(req.body);
   }
   else res.send("Admin Account Required")
 })

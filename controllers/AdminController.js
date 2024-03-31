@@ -4,6 +4,7 @@ const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const Admin = require("../models/Admin");
 const router = require('../routes/myApi');
+const User = require('../models/User');
 
 class AdminController {
 
@@ -15,6 +16,24 @@ class AdminController {
         let categories = info.categories.split(",");
         Admin.addItem(info.productName,info.price,info.inventory,info.productDesc,categories);
         //console.log(check)
+    }
+
+    static async getProdInfo() {
+        let res = await User.getProductInfo();
+        return res;
+    }
+
+    static async updateProduct(info) {
+        Admin.setProductName(info.productID, info.productName);
+        Admin.setPrice(info.productID, info.price);
+        Admin.setInventory(info.productID, info.inventory);
+        Admin.setDescription(info.productID, info.description);
+        return true;
+    }
+
+    static async deleteProduct(info) {
+        Admin.removeItem(info.productID);
+        return true;
     }
 
 }
