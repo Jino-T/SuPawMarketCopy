@@ -42,7 +42,7 @@ class Admin {
     }
 
     static async setInventory(productID, newInventory){
-      console.log(productID)
+      //console.log(productID);
       let sql = `UPDATE product SET inventory='${newInventory}' WHERE productID=${productID};`;
       connection.query(sql);
       console.log("product updated");

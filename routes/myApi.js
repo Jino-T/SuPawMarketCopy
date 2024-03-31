@@ -96,7 +96,7 @@ router.post("/validateProduct", urlencodedParser, async function(req,res) {
   console.log(req.body);
   if(req.session.isLoggedIn === true && req.session.isAdmin === 1) {
     await AdminController.addProduct(req.body);
-    res.send("Product Added");
+    res.render("pages/adminDash");
   }
   else res.send("Admin Account Required")
 })

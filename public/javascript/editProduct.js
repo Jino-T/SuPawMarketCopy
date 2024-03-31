@@ -40,9 +40,9 @@ class productTable extends React.Component {
                       { key: index },
                       ce('td', {onClick: e => this.getEditForm(item)}, item.productID),
                       ce('td', {onClick: e => this.getEditForm(item)}, item.productName),
-                      ce('td', null, item.price),
-                      ce('td', null, item.description),
-                      ce('td', null, item.inventory)
+                      ce('td', {onClick: e => this.getEditForm(item)}, item.price),
+                      ce('td', {onClick: e => this.getEditForm(item)}, item.description),
+                      ce('td', {onClick: e => this.getEditForm(item)}, item.inventory)
                     )
                   )
                 )
@@ -50,22 +50,21 @@ class productTable extends React.Component {
         }
         else if(this.state.showing === "product") {
             return ce('div', null,
-            ce('h2', null, 'Product Information:'),
+            ce('h1', null, 'Product Information:'),
             ce('br'),
-            'Product Name: ',
+            ce('label',null,'Product Name '),
             ce('input', {type: "text", id: "productName", value: this.state.productName, onChange: e => this.changerHandler(e)}),
             ce('br'),
-            'Price: ',
-            ce('input', {type: "number", step: "0.01", min: "0.00", id: "price", value: this.state.price, onChange: e => this.changerHandler(e)}),
+            ce('label',null,'Description '),
+            ce('textarea', {id:"description", value: this.state.description, onChange: e => this.changerHandler(e)}),
             ce('br'),
-            'Inventory: ',
+            ce('label',null,'Price '),
+            ce('input', {type: "number", step: "0.01", min: "0.00", id: "price", value: this.state.price, onChange: e => this.changerHandler(e)}),
+            ce('label',null,'Inventory '),
             ce('input', {type: "number", min: "0", id:"inventory", value: this.state.inventory, onChange: e => this.changerHandler(e)}),
             ce('br'),
-            'Description: ',
-            ce('input', {type:"text", id:"description", value: this.state.description, onChange: e => this.changerHandler(e)}),
-            ce('br'),
-            ce('button', {onClick: e => this.updateProduct(e)}, 'Update Product'),
-            ce('button', {onClick: e => this.deleteProduct(e)}, 'Remove Product'),
+            ce('button', {id:"updateButton", onClick: e => this.updateProduct(e)}, 'Update Product'),
+            ce('button', {id:"removeButton", onClick: e => this.deleteProduct(e)}, 'Remove Product'),
             //ce('span', {id: "create-message"}, this.state.createMessage)
     );
         }
