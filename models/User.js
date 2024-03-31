@@ -68,7 +68,7 @@ class User {
     static async getUserID(username) {
       let sql = `SELECT userID FROM user WHERE username='${username}';`;
       let res = await connection.promise().query(sql);
-      console.log(res);
+      //console.log(res);
       let result = JSON.stringify(res[0]).split(':')[1].split('}')[0];
       return parseInt(result);
     }

@@ -19,7 +19,7 @@ class Admin {
           connection.query(`INSERT INTO incategory VALUES(0, (SELECT categoryID FROM category WHERE categoryName='${i}'), (SELECT productID FROM product WHERE productName='${productName}'))`)
         }
       })
-
+      
       console.log("product added");
     }
   
@@ -55,7 +55,7 @@ class Admin {
         console.log(res);
       });
       //console.log("product updated");
-    }
+    } 
 
     static async setCategories(productID, newCategories) {//change an items categories in the db, assumes newCategories is an array of strings
       let delSQL = `DELETE FROM incategory WHERE prodID=${productID};`; //removes an items old categories and adds the new ones to the DB

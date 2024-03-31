@@ -3,6 +3,7 @@
 const express = require("express");
 const UserController = require("../controllers/UserController");
 const router = express.Router();
+const AdminController = require("../controllers/AdminController");
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -37,7 +38,9 @@ router.get("/create", function (req, res) {
 });
 
 router.post("/validate",urlencodedParser, async function(req, res) {
-  //console.log(req);
+  // console.log(req);
+  // console.log(req.body);
+
     let check = await UserController.validate(req.body);
     //console.log("check: " + check);
     if(check === true) {
@@ -60,7 +63,7 @@ router.post("/create",urlencodedParser, async function(req, res) {
     let check = await UserController.createUser(req.body);
     //console.log(check);
     if(check === true) {
-      console.log(req.body.username)
+      //console.log(req.body.username)
       req.session.isLoggedIn = true;
       req.session.username = req.body.username;
       req.session.isAdmin = false;
@@ -77,9 +80,25 @@ router.post("/create",urlencodedParser, async function(req, res) {
 //ADMIN ROUTES
 router.get("/admin", function(req,res) {
   if(req.session.isLoggedIn === true && req.session.isAdmin === 1) {
-    res.send("admin dash")
+    res.render("pages/adminDash");
   }
-  else res.send("Admin account required")
+  else res.send("Admin Account Required")
+})
+
+router.get("/addProduct", function(req,res) {
+  if(req.session.isLoggedIn === true && req.session.isAdmin === 1) {
+    res.render("pages/addProduct");
+  }
+  else res.send("Admin Account Required")
+})
+
+router.post("/validateProduct", urlencodedParser, async function(req,res) {
+  console.log(req.body);
+  if(req.session.isLoggedIn === true && req.session.isAdmin === 1) {
+    await AdminController.addProduct(req.body);
+    res.send("Product Added");
+  }
+  else res.send("Admin Account Required")
 })
 
 
