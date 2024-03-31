@@ -16,6 +16,14 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Require the module you just created
 const myApi = require("./routes/myApi");
+const session = require("express-session");
+
+//Initialize a session object
+app.use(session({
+  secret:'secretKey',
+  resave: false,
+  saveUninitialized: false
+}));
 
 // Use the module with your Express application at the root path
 app.use("/", myApi); // Mount at the root path

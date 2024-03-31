@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`purchase` (
   `user` INT NOT NULL,
   `product` INT NOT NULL,
   `quantity` INT NOT NULL,
-  `purchsaseTime` DATETIME NOT NULL,
+  `purchaseTime` DATETIME NOT NULL,
   PRIMARY KEY (`purchaseID`),
   UNIQUE INDEX `purchaseID_UNIQUE` (`purchaseID` ASC) VISIBLE,
   INDEX `userID_idx` (`user` ASC) VISIBLE,
