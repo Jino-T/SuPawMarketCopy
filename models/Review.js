@@ -93,7 +93,7 @@ class Review {
 
       this.starRating = newStarRating;
 
-      let sql = `UPDATE review SET starRating = ? WHERE reviewID = ?;`;
+      let sql = `UPDATE review SET rating = ? WHERE reviewID = ?;`;
       await connection.promise().query(sql, [newStarRating, reviewId]);
       console.log("Review Star Rating updated");
       }
@@ -110,7 +110,7 @@ class Review {
     }
   }
 
-Review.getReviewText(6);
+Review.setUserId(801, 402);
 //Review.setReviewText(6, "John");
 //console.log(Review.getReviewText(6));
 

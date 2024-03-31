@@ -92,14 +92,18 @@ class Product {
     //Add sql statement
   }
 
+  // newImagePath needs to be in quotes "home/pic.jpg"
   static async setImagePath(productId, newImagePath) {
     console.log('setting image path for product: ' + productId.toString());
     this.imagePath = newImagePath;
 
-    //TODO
-    //Add sql statement
+    let sql = `UPDATE product SET imagePath = ? WHERE productID = ?;`;
+    await connection.promise().query(sql, [newImagePath, productId]);
+    console.log("Product's ImagePath updated");
   }
 }
+
+Product.setImagePath(116, "poop");
 
 // "Tests"
 //Product.getInventory(1);

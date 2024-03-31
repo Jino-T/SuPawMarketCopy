@@ -1,4 +1,5 @@
 // models/Purchase.js
+var connection = require('../database').databaseConnection;
 
 class Purchase {
     constructor(purchaseID, userID, productID, quantity, purchaseTime) {
@@ -67,29 +68,30 @@ class Purchase {
       console.log('setting user id for purchase: ' + purchaseId.toString());
         this.userID = newUserID;
 
-      let sql = `UPDATE purchase SET userID = ? WHERE purchaseID = ?;`;
+      let sql = `UPDATE purchase SET user = ? WHERE purchaseID = ?;`;
       await connection.promise().query(sql, [newUserID, purchaseId]);
       console.log("Purchase User Id updated");
     }
 
     static async setProductID(purchaseId, newProductID) {
       console.log('setting product id for purchase: ' + purchaseId.toString());
-        this.userID = newUserID;
+        this.productID = newProductID;
 
-      let sql = `UPDATE purchase SET productID = ? WHERE purchaseID = ?;`;
+      let sql = `UPDATE purchase SET product = ? WHERE purchaseID = ?;`;
       await connection.promise().query(sql, [newProductID, purchaseId]);
       console.log("Purchase Product Id updated");
     }
 
     static async setQuantity(purchaseId, newQuantity) {
       console.log('setting quantity for purchase: ' + purchaseId.toString());
-        this.userID = newUserID;
+        this.quantity = newQuantity;
 
       let sql = `UPDATE purchase SET quantity = ? WHERE purchaseID = ?;`;
       await connection.promise().query(sql, [newQuantity, purchaseId]);
       console.log("Purchase quantity updated");
     }
 
+    //put newPurchaseTime in single quotes
     static async setPurchaseTime(purchaseId, newPurchaseTime) {
       console.log('setting purchase time for purchase: ' + purchaseId.toString());
       this.purchaseTime = newPurchaseTime;
@@ -100,7 +102,7 @@ class Purchase {
     }
   }
   
-  Review.setPurchaseTime(6);
+  Purchase.setUserID(701, 402);
 
   module.exports = Purchase;
   
