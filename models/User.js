@@ -19,13 +19,13 @@ class User {
       const matches = await connection.promise().query(sqlMatches);
       //console.log(matches[0]);
       if(matches[0].length === 0) {       //if username does not yet exist -> create user
-        bcrypt.hash(password, 10, function(err, hash) {
-          connection.promise().query(`INSERT INTO user VALUES(0,'${username}','${hash}', 0)`).then(() => { //after user is inserted, set userAddress to a default address, so  it can be updated by the setAddress function in the address model
+        let hash = await bcrypt.hash(password, 10)
+        await connection.promise().query(`INSERT INTO user VALUES(0,'${username}','${hash}', 0)`).then(() => { 
+            //after user is inserted, set userAddress to a default address, so  it can be updated later
             connection.query(`INSERT INTO userAddress VALUES(0,(SELECT userID FROM user WHERE username='${username}'), 1,'shipping')`);
             connection.query(`INSERT INTO userAddress VALUES(0,(SELECT userID FROM user WHERE username='${username}'), 1,'billing')`);
-          });
-          console.log("User created");
-        })
+        });
+        console.log("User created");
         return true;
       }
       else{ //if matches returns something, then the username already exists and user creation fails
@@ -64,6 +64,21 @@ class User {
         console.log("Improper username or password")
       }
     }
+
+    static async getUserID(username) {
+      let sql = `SELECT userID FROM user WHERE username='${username}';`;
+      let res = await connection.promise().query(sql);
+      //console.log(res);
+      let result = JSON.stringify(res[0]).split(':')[1].split('}')[0];
+      return parseInt(result);
+    }
+
+    static async checkIsAdmin(username) {
+      let sql = `SELECT isAdmin FROM user WHERE username='${username}';`;
+      let res = await connection.promise().query(sql);
+      //console.log(res);
+      return JSON.stringify(res[0]);
+    }
   
 //PURCHASING METHODS
     static async addToCart(productId) {
@@ -101,6 +116,13 @@ class User {
       return JSON.stringify(res[0]);
     }
 
+    static async getProductInfo() { //returns a string of the list of all productsIDs in the database
+      let sql = `SELECT * FROM product;`
+
+      let res = await connection.promise().query(sql);
+      return res[0];
+    }
+
     //might need to implement other getProduct methods (like by category) or sorting -- check with rest of group
   
   }
@@ -116,6 +138,10 @@ class User {
   // testVal();
   // async function testgetProd(){User.getProducts().then(res => console.log(res))};
   // testgetProd();
+  // async function testGetID(){User.getUserID('jburns').then(res => console.log(res))};
+  // testGetID();
+  // async function testCheckAdmin(){User.checkIsAdmin('jburns').then(res => console.log(res))};
+  // testCheckAdmin();
   
   module.exports = User;
   

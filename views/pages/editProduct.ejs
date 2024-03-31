@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/navbar') %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/admin.css">
+
+    <title>Edit Products</title>
+</head>
+<body>
+    <main id="editMain">
+        <div id="react-root"></div>
+
+        <input type="hidden" id="productData" value="/getProducts">
+        <input type="hidden" id="editProdData" value="/updateProduct">
+        <input type="hidden" id="delProd" value="/deleteProduct">
+    </main>
+
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="/javascript/adminUtility.js"></script>
+    <script src="/javascript/editProduct.js"></script>
+</body>
+
