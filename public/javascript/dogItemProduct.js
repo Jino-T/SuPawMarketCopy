@@ -9,6 +9,10 @@ $(document).ready(function() {
         url: `/product/description/${productId}`,
         type: "GET"
       });
+      const priceResponse = await $.ajax({
+        url: `/product/price/${productId}`,
+        type: "GET"
+      });
       // TODO: Uncomment and use the image URL from the response
       // const imageResponse = await $.ajax({
       //   url: `/product/image/${productId}`,
@@ -46,7 +50,7 @@ $(document).ready(function() {
             <p class="product-description">${descriptionResponse.description}</p>
             </div>
             <div class="product-price">
-                <span class="price">${price}</span>
+                <span class="price">${priceResponse.price}</span>
                 <button class="btn btn-success add-to-cart">Add to Cart</button>
             </div>
           </div>
