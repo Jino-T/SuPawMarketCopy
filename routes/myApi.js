@@ -15,15 +15,20 @@ app.use(bodyParser.json());
 router.get("/", function (req, res) {
     res.render("pages/home"); // This will render views/pages/home.ejs
   });
-
-  // About page route
-  //router.get("/about", function (req, res) {
-  //  res.render("pages/about"); // This will render views/pages/about.ejs
- // });
  
- // Product page rroute
+ // Product page route
  router.get("/products", function (req, res) {
   res.render("pages/products"); // This will render views/pages/products.ejs
+});
+
+//cart page route
+router.get("/cart", function (req, res) {
+  res.render("pages/cart"); // This will render views/pages/cart.ejs
+});
+
+//checkout page route
+router.get("/checkout", function (req, res) {
+  res.render("pages/checkout"); // This will render views/pages/checkout.ejs
 });
 
 //login page route
@@ -31,9 +36,11 @@ router.get("/login", function (req, res) {
   res.render("pages/login"); // This will render views/pages/login.ejs
 });
 
+//create page route
 router.get("/create", function (req, res) {
   res.render("pages/createaccount"); // This will render views/pages/login.ejs
 });
+
 
 router.post("/validate",urlencodedParser, async function(req, res) {
   //console.log(req);
