@@ -101,5 +101,12 @@ router.post("/validateProduct", urlencodedParser, async function(req,res) {
   else res.send("Admin Account Required")
 })
 
+router.get("/editProducts", function(req,res) {
+  if(req.session.isLoggedIn === true && req.session.isAdmin === 1) {
+    res.render("pages/editProducts");
+  }
+  else res.send("Admin Account Required")
+})
+
 
 module.exports = router;
