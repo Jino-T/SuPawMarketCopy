@@ -73,7 +73,9 @@ class ProductController {
     static async getImage(req, res) {
         try {
             const productId = req.params.productId;
+            
             const imagePath = await Product.getImage(productId);
+
             if(imagePath !== null) {
                 res.status(200).json({ imagePath });
             } else {

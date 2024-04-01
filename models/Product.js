@@ -26,6 +26,7 @@ class Product {
     const [result] = await connection.promise().query(sql, [productId]);
     if (result.length > 0) {
       return result[0].imagePath;
+
     } else {
       console.log("Product not found");
       return null;

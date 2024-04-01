@@ -13,11 +13,10 @@ $(document).ready(function() {
         url: `/product/price/${productId}`,
         type: "GET"
       });
-      // TODO: Uncomment and use the image URL from the response
-      // const imageResponse = await $.ajax({
-      //   url: `/product/image/${productId}`,
-      //   type: "GET"
-      // });
+      const imageResponse = await $.ajax({
+        url: `/product/image/${productId}`,
+        type: "GET"
+      });
 
       // Sample static image URL and star rating
       //  const imageUrl = "path/to/product/image.jpg"; // Replace with `imageResponse.imageUrl` when ready
@@ -36,32 +35,34 @@ $(document).ready(function() {
             <div class="product-rating review-rating">★★★☆☆</div>
           </div>
         `;
-      // <img src="path/to/product/image.jpg" class="product-image" alt="${nameResponse.productName}>
+      imageUrl = "../" + imageResponse.imagePath;
+
       const productHtml = `
       <div class="card product-card">
-        <div class="card-header">
-          <!-- Image goes here -->
-          <div>
-            <div class="header-container">
-                <h2 class="card-title">${nameResponse.productName}</h2>
-                <div class="star-rating">★★★★★</div>
-            </div>            
-            <div class="card-body">
+      <div class="card-header">
+        <div>
+          <div class="header-container">
+            <h2 class="card-title">${nameResponse.productName}</h2>
+            <div class="star-rating">★★★★★</div>
+          </div> 
+          <!-- Moving the image here -->
+          <img src=${imageUrl} class="product-image" alt="${nameResponse.productName}">
+          <div class="card-body">
             <p class="product-description">${descriptionResponse.description}</p>
-            </div>
-            <div class="product-price">
-                <span class="price">${priceResponse.price}</span>
-                <button class="btn btn-success add-to-cart">Add to Cart</button>
-            </div>
           </div>
-        </div>
-        <div class="card-footer">
-          <div class="reviews">${reviewHtml}</div>
-          <div class="review-button">
-            <button class="btn btn-primary leave-review">Leave a Review</button>
+          <div class="product-price">
+            <span class="price">${priceResponse.price}</span>
+            <button class="btn btn-success add-to-cart">Add to Cart</button>
           </div>
         </div>
       </div>
+      <div class="card-footer">
+        <div class="reviews">${reviewHtml}</div>
+        <div class="review-button">
+          <button class="btn btn-primary leave-review">Leave a Review</button>
+        </div>
+      </div>
+    </div>    
     `;
 
       $("#productContainer").append(productHtml);

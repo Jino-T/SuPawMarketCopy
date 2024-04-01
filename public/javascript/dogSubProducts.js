@@ -25,21 +25,22 @@ $(document).ready(function() {
         url: `/product/description/${productId}`,
         type: "GET"
       });
-      // const imageResponse = await $.ajax({
-      //   url: `/product/image/${productId}`,
-      //   type: "GET"
-      // });
+      const imageResponse = await $.ajax({
+        url: `/product/image/${productId}`,
+        type: "GET"
+      });
 
       // Sample static image URL and star rating
-      const imageUrl = "path/to/product/image.jpg"; // Replace with `imageResponse.imageUrl` when ready
+
+      const imageUrl = "../" + imageResponse.imagePath; // Replace with `imageResponse.imageUrl` when ready
+      console.log(imageUrl);
       const starRatingHtml = "★★★★★"; // This should be dynamic based on product rating
-      //       <img src="${imageUrl}" class="card-img-top product-image" alt="${nameResponse.productName}">
 
       const productHtml = `
           <div class="col-md-4 col-sm-6 mb-4">
           <a href="/dogItemProduct?productID=${productID}" class="">
             <div class="card product-card h-100">
-            <!-- Image goes here --!>
+            <img src=${imageUrl} class="card-img-top product-image" alt="${nameResponse.productName}">
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title">${nameResponse.productName}</h5>
                 <div class="product-rating mb-2">${starRatingHtml}</div>

@@ -13,7 +13,7 @@ app.set("view engine", "ejs");
 // Added views and public folder
 app.use(express.static(path.join(__dirname, "views")));
 app.use(express.static(path.join(__dirname, "public")));
-
+app.use(express.static(path.join(__dirname, "product-images")));
 // Require the module you just created
 const myApi = require("./routes/myApi");
 

@@ -15,6 +15,19 @@ body {
     flex-direction: column; /* Stack elements vertically */
 }
 
+.product-image {
+    width: 50%; /* Half of its container's width */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  
+  /* Optionally, if needed, set a maximum height for the image or its container */
+  .product-image-container {
+    height: 300px; /* Example fixed height */
+    overflow: hidden;
+  }
+  
+
 .card-header {
     padding: 20px;
     background-color: #8e99a2; /* Continuous grey background */
@@ -52,7 +65,7 @@ body {
 }
 
 .card-body {
-    padding: 20px;
+    padding: 5px;
     align-self: stretch; /* Stretch card body to fill the width */
 
 }
