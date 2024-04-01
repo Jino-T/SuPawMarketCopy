@@ -36,6 +36,11 @@ class AdminController {
         return true;
     }
 
+    static async getUsers() {
+        let res = await Admin.getUsers();
+        return res;
+    }
+
 }
 
 module.exports = AdminController;

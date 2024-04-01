@@ -68,6 +68,11 @@ class Admin {
     }
   
 //METHODS RELATING TO REVIEWS
+    static async getUsers() {
+      let sql = `SELECT * FROM user;`
+      let res = await connection.promise().query(sql);
+      return res[0];
+    }
     static async hideReview() {
       // TODO
     }
