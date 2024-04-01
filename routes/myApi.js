@@ -169,6 +169,7 @@ router.get("/getUsers", async function(req, res) {
   }
   else res.send("Admin Account Required");
 })
+
 // Dog Products item page route
 router.get("/dogItemProduct", function(req, res) {
   res.render("pages/dogItemProduct"); // This will render views/pages/dogItemProduct.ejs
