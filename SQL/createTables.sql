@@ -36,18 +36,18 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`category` (
 CREATE TABLE IF NOT EXISTS `supawdb`.`inCategory` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `catID` INT NOT NULL,
-  `prodID` INT NOT NULL,
+  `productID` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   INDEX `catID_idx` (`catID` ASC) VISIBLE,
-  INDEX `prodID_idx` (`prodID` ASC) VISIBLE,
+  INDEX `productID_idx` (`productID` ASC) VISIBLE,
   CONSTRAINT `catID`
     FOREIGN KEY (`catID`)
     REFERENCES `supawdb`.`category` (`categoryID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `prodID`
-    FOREIGN KEY (`prodID`)
+  CONSTRAINT `productID`
+    FOREIGN KEY (`productID`)
     REFERENCES `supawdb`.`product` (`productID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE);
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`purchase` (
   `user` INT NOT NULL,
   `product` INT NOT NULL,
   `quantity` INT NOT NULL,
-  `purchsaseTime` DATETIME NOT NULL,
+  `purchaseTime` DATETIME NOT NULL,
   PRIMARY KEY (`purchaseID`),
   UNIQUE INDEX `purchaseID_UNIQUE` (`purchaseID` ASC) VISIBLE,
   INDEX `userID_idx` (`user` ASC) VISIBLE,

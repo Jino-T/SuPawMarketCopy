@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/navbar') %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/cart.css">
+    <title>Cart Page</title>
+</head>
+<body>
+    <header>
+        <h1>Your Cart</h1>
+    </header>
+    <main>
+        <b class = label1>Items</b> <b class = label2>Price</b> <b class = label3>Quantity</b> <b class = label4>Total</b>
+        <br> </br>
+        <img src="../img/PLACEHOLDER.png" alt="Placeholder TEXT" class = product> 
+        <b class = price> $10.00 </b> 
+        <button id = "plus" type="button" class=plusButton> + </button>
+        <b id = "qty" class="quantity"> 1 </b>
+        <button id = "minus" type="button" class=minusButton> - </button>
+        <b id = "total" class="total"> 10 </b>
+
+        <br></br>
+
+        <img src="../img/PLACEHOLDER.png" alt="Placeholder TEXT" class = product> 
+        <b class = price> $20.00 </b> 
+        <button id = "plus2" type="button" class=plusButton> + </button>
+        <b id = "qty2" class="quantity"> 1 </b>
+        <button id = "minus2" type="button" class=minusButton> - </button>
+        <b id = "total2" class="total"> 20 </b>
+
+        <br></br>
+
+        <div><b class="subtotal"> Subtotal: </b> <b id = "subtotal" class="subnum"> 30 </b> <button id = "update" type="button" class=updateButton> Update </button></div>
+        <div><b class="sales"> Sales Tax: </b> <b id = "sales" class="salesnum"> 2.4 </b> <a href="/checkout" class = "checkoutlink">Checkout!</a></div>
+        <div><b class="grand"> Grand Total: </b> <b id = "grand" class="grandnum"> 32 </b> </div>
+        
+<script>
+  // select the button and the div
+  const plusButton = document.getElementById('plus');
+  const minusButton = document.getElementById('minus');
+  const plusButton2 = document.getElementById('plus2');
+  const minusButton2 = document.getElementById('minus2');
+  const updateButton = document.getElementById('update');
+  const subtotal = document.getElementById('subtotal');
+  const sales = document.getElementById('sales');
+  const grand = document.getElementById('grand');
+  const qty = document.getElementById('qty');
+  const qty2 = document.getElementById('qty2');
+  const total = document.getElementById('total');
+  const total2 = document.getElementById('total2');
+  price = total.innerHTML;
+  price2 = total2.innerHTML;
+  val = 1;
+  val2 = 1;
+
+  function increment() {
+    val = val+1;
+    qty.innerHTML = val;
+    total.innerHTML = price * val;
+  }
+
+  function decrement() {
+    if(val>1){
+    val = val-1;
+    qty.innerHTML = val;
+    total.innerHTML = price * val;
+    }
+  }
+
+  function increment2() {
+    val2 = val2+1;
+    qty2.innerHTML = val2;
+    total2.innerHTML = price2 * val2;
+  }
+
+  function decrement2() {
+    if(val2>1){
+    val2 = val2-1;
+    qty2.innerHTML = val2;
+    total2.innerHTML = price2 * val2;
+    }
+  }
+
+  function updateNum() {
+    subtotal.innerHTML = parseInt(total.innerHTML) + parseInt(total2.innerHTML);
+    sales.innerHTML = subtotal.innerHTML * 0.08;
+    grand.innerHTML = parseInt(sales.innerHTML) + parseInt(subtotal.innerHTML)
+  }
+  // add event listener to the buttons
+  plus.addEventListener('click', increment);
+  minus.addEventListener('click', decrement);
+  plus2.addEventListener('click', increment2);
+  minus2.addEventListener('click', decrement2);
+  update.addEventListener('click', updateNum);
+</script>
+    </main>
+</body>
+</html>
