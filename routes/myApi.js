@@ -155,5 +155,44 @@ router.post("/deleteProduct", jsonParser, async function(req, res) {
   else res.send("Admin Account Required")
 })
 
+// Dog Products item page route
+router.get("/dogItemProduct", function(req, res) {
+  res.render("pages/dogItemProduct"); // This will render views/pages/dogItemProduct.ejs
+});
+
+
+// Dog Products page route
+router.get("/dogSubProducts", function(req, res) {
+  res.render("pages/dogSubProducts"); // This will render views/pages/dogSubProducts.ejs
+});
+
+
+// Product page route
+router.get("/dogProducts", function(req, res) {
+  res.render("pages/dogProducts"); // This will render views/pages/products.ejs
+});
+
+// Get product quantity
+router.get("/product/quantity/:productId", ProductController.getQuantity);
+
+
+// Get product name
+router.get("/product/name/:productId", ProductController.getProductName);
+
+
+router.get("/product/image/:productId", ProductController.getImage);
+
+
+// Get product description
+router.get("/product/description/:productId", ProductController.getDescription);
+
+
+// Get product price
+router.get("/product/price/:productId", ProductController.getPrice);
+
+
+// Get cat
+router.get("/user/category/:categoryName", UserController.productsByCat);
+
 
 module.exports = router;
