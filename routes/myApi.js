@@ -2,15 +2,22 @@
 
 const express = require("express");
 const UserController = require("../controllers/UserController");
+const ProductController = require("../controllers/ProductController");
+
 const router = express.Router();
+
 const AdminController = require("../controllers/AdminController");
-var bodyParser = require('body-parser');
+var bodyParser = require("body-parser");
+const User = require("../models/User");
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
 var app = express();
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
 app.use(bodyParser.json());
 
 router.get("/", function (req, res) {

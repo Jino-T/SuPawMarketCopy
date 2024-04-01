@@ -1,7 +1,7 @@
 // model/UserModel.js
-const Address = require('./Address');
-const bcrypt = require("bcrypt")
-var connection = require('../database').databaseConnection;
+const Address = require("./Address");
+const bcrypt = require("bcrypt");
+var connection = require("../database").databaseConnection;
 
 class User {
     constructor(username, id, password, email, shippingInfo) {
@@ -34,14 +34,21 @@ class User {
       }
     }
 
-    static async validateUser(username, password) {
-      let sqlMatches = `SELECT password FROM user WHERE username='${username}'`;
-      const matches = await connection.promise().query(sqlMatches);
-      //console.log(JSON.stringify(matches[0]).slice(14,JSON.stringify(matches[0]).length-3));
-      return bcrypt.compareSync(password, JSON.stringify(matches[0]).slice(14,JSON.stringify(matches[0]).length-3),function(err, result) {
-        if(err) throw err;                //^string parsing necessary because matches returns a string of an array, not just the PW
-      })
-    }
+  static async validateUser(username, password) {
+    let sqlMatches = `SELECT password FROM user WHERE username='${username}'`;
+    const matches = await connection.promise().query(sqlMatches);
+    //console.log(JSON.stringify(matches[0]).slice(14,JSON.stringify(matches[0]).length-3));
+    return bcrypt.compareSync(
+      password,
+      JSON.stringify(matches[0]).slice(
+        14,
+        JSON.stringify(matches[0]).length - 3
+      ),
+      function(err, result) {
+        if (err) throw err; //^string parsing necessary because matches returns a string of an array, not just the PW
+      }
+    );
+  }
 
     static async setUsername(oldUsername, newUsername) { //allows users to set a new username 
       let sql = `UPDATE user SET username='${newUsername}' WHERE username='${oldUsername}';`;
@@ -123,9 +130,31 @@ class User {
       return res[0];
     }
 
-    //might need to implement other getProduct methods (like by category) or sorting -- check with rest of group
-  
+  static async getProducts() {
+    //returns a string of the list of all productsIDs in the database
+    let sql = `SELECT productID FROM product;`;
+
+    let res = await connection.promise().query(sql);
+    return JSON.stringify(res[0]);
   }
+
+  static async getProductsByCategory(category) {
+    let sql = `
+          SELECT ic.prodID 
+          FROM incategory ic
+          JOIN category c ON ic.catID = c.categoryID
+          WHERE c.categoryName = ?;
+      `;
+      console.log("category: ", category)
+    try {
+      let rows = await connection.promise().query(sql, [category]);
+      return rows; 
+    } catch (error) {
+      console.error("Error in getProductsByCategory:", error);
+      throw error;
+    }
+  }
+}
 
   // async function testCreate(){User.createUser("testaddy","addy").then(res => console.log(res))};
   // testCreate();

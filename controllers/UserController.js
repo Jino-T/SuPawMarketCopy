@@ -1,10 +1,9 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require("express");
+const bodyParser = require("body-parser");
 const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const User = require("../models/User");
-const router = require('../routes/myApi');
-
+const router = require("../routes/myApi");
 
 class UserController {
     static async validate(info) {

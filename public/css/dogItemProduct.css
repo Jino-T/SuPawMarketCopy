@@ -1,0 +1,162 @@
+/* Overall page background */
+body {
+    background-color: #4CAF50; /* Sets the background color to a green shade */
+}
+
+/* Card styles to match the uploaded image */
+.product-card {
+    background-color: #8e99a2;
+    border-radius: 5px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 10px auto;
+    max-width: 900px;
+    display: flex; /* Use flexbox for the layout */
+    flex-direction: column; /* Stack elements vertically */
+}
+
+.product-image {
+    width: 50%; /* Half of its container's width */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  
+  /* Optionally, if needed, set a maximum height for the image or its container */
+  .product-image-container {
+    height: 300px; /* Example fixed height */
+    overflow: hidden;
+  }
+  
+
+.card-header {
+    padding: 20px;
+    background-color: #8e99a2; /* Continuous grey background */
+}
+
+.product-image {
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-title {
+    color: #333333;
+    margin-bottom: 0.5rem;
+    justify-content: space-between;
+    margin-right: 1rem;
+}
+
+.star-rating {
+    color: #FFD700; /* Gold color for stars */
+    font-size: 2rem; /* Adjust size as necessary */
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.product-rating {
+    color: #FFD700; /* Gold color for stars */
+    font-size: 1.5rem; /* Adjust size as necessary */
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-body {
+    padding: 5px;
+    align-self: stretch; /* Stretch card body to fill the width */
+
+}
+
+.product-description {
+    display: flex;
+    color: #333333;
+    font-size: 1rem;
+    margin-bottom: 1rem; /* Space between description and price */
+    order: 1; /* Ensure description is above price */
+}
+
+.price-and-actions {
+    display: flex;
+    justify-content: space-between; /* Space between price and button */
+    align-items: center;
+    width: 100%; /* Full width to allow justify-content to work */
+    order: 2; /* Below the description */
+}
+
+.price {
+    font-size: 1.5rem;
+    color: #28a745; /* Green color for price */
+    font-weight: bold;
+    margin-right: 1rem; /* Space between price and button */
+}
+
+/* Align the Add to Cart button to the right */
+.add-to-cart {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+}
+
+/* Hover effect for buttons */
+.btn-success:hover, .btn-primary:hover {
+    opacity: 0.9;
+}
+
+/* Styles for the review section */
+.review {
+    display: flex;
+    align-items: right;
+    margin-bottom: 1rem;
+    order: 3; /* Ensure reviews are at the bottom */
+}
+
+.review-button {
+    display: flex;
+    justify-content: flex-end; /* Move the button to the right */
+    width: 100%; /* Full width to allow justify-content to work */
+    order: 2; /* Below the description */
+}
+
+.add-to-cart {
+    margin-left: auto; /* Move the button to the right */
+}
+
+.product-price{
+    text-align: right;
+}
+.price-and-actions {
+    display: flex;
+    justify-content: flex-end; /* Move the button to the right */
+    align-items: center;
+    width: 100%; /* Full width to allow justify-content to work */
+    order: 2; /* Below the description */
+}
+
+
+.card-footer {
+    order: 4; /* Footer is the last element */
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .product-card {
+        margin: 10px;
+    }
+    
+
+    .product-image {
+        margin-bottom: 1rem;
+    }
+
+    .add-to-cart {
+        order: 3; /* Reset order for mobile layout */
+    }
+    .leave-review {
+        width: 100%;
+        order: 4; /* Leave review is the last on mobile */
+    }
+}
