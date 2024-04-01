@@ -32,7 +32,24 @@ class UserController {
         //console.log(res.substring(12,13));
         return parseInt(res.substring(12,13));
     }
+    static async productsByCat(req, res) {
+        try {
+        // Takes in category name from the request parameter
+        const category = req.params.categoryName;
+        const products = await User.getProductsByCategory(category);
+
+        // No need to stringify here, res.json() will do it for you
+        res.json(products);
+        
+        } catch (error) {
+        console.error("Error in productsByCat:", error);
+        res.status(500).send("Internal Server Error");
+        }
+    }
 }
+
+
+
 
     // async function testGetID(){User.getUserID('jburns').then(res => console.log(res))};
     // testGetID();
