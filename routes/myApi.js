@@ -93,7 +93,7 @@ router.get("/addProduct", function(req,res) {
 })
 
 router.post("/validateProduct", urlencodedParser, async function(req,res) {
-  console.log(req.body);
+  //console.log(req.body);
   if(req.session.isLoggedIn === true && req.session.isAdmin === 1) {
     await AdminController.addProduct(req.body);
     res.render("pages/adminDash");
@@ -132,5 +132,19 @@ router.post("/deleteProduct", jsonParser, async function(req, res) {
   else res.send("Admin Account Required")
 })
 
+router.get("/manageUsers", async function(req,res) {
+  if(req.session.isLoggedIn === true && req.session.isAdmin === 1) { 
+    res.render("pages/manageUsers");
+  }
+  else res.send("Admin Account Required")
+})
+
+router.get("/getUsers", async function(req, res) {
+  if(req.session.isLoggedIn === true && req.session.isAdmin === 1) { 
+    let responseData = await AdminController.getUsers();
+    res.json(responseData)
+  }
+  else res.send("Admin Account Required");
+})
 
 module.exports = router;
