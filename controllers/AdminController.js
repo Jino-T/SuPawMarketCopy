@@ -13,8 +13,9 @@ class AdminController {
         // console.log("controller pass: " + info.password);
         // console.log(info.productName);
         // console.log(info.categories);
-        let categories = info.categories.split(",");
-        Admin.addItem(info.productName,info.price,info.inventory,info.productDesc,categories);
+        // console.log(info.categories);
+        // let categories = info.categories.split(",");
+        Admin.addItem(info.productName,info.price,info.inventory,info.productDesc,info.categories);
         //console.log(check)
     }
 

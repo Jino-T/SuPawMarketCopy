@@ -29,9 +29,15 @@
             <input type="number" min="0" id="inventory" name="inventory" placeholder = "0" class = "inventory"></input>
             <br>
 
-            <label for="categories" class = catLabel>Categories (You can enter multiple categories with each separate by a comma, don't include spaces after comma):</label>
-            <input type="text" id="categories" name="categories" placeholder = "Enter your categories here" class = "categories"></input>
-            <br>
+            <label for="categories" class = catLabel>Categories (Select multiple with cntrl + click):</label>
+            <select name="categories" id="categories" multiple>
+                <option value="Dog">Dog</option>
+                <option value="Cat">Cat</option>
+                <option value="Dog Food">Dog Food</option>
+                <option value="Cat Food">Cat Food</option>
+            </select>
+            <!-- <input type="text" id="categories" name="categories" placeholder = "Enter your categories here" class = "categories"></input>
+            <br> -->
 
             <button type="submit" class=button value="Add Product">Add Product</button>  
         </form> 
