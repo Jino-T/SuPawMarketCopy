@@ -2,30 +2,42 @@
 
 const express = require("express");
 const UserController = require("../controllers/UserController");
+const ProductController = require("../controllers/ProductController");
+
 const router = express.Router();
+
 const AdminController = require("../controllers/AdminController");
-var bodyParser = require('body-parser');
+var bodyParser = require("body-parser");
+const User = require("../models/User");
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
 var app = express();
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
 app.use(bodyParser.json());
 
 router.get("/", function (req, res) {
     const sessionData = req.session;
     res.render("pages/home"); // This will render views/pages/home.ejs
   });
-
-  // About page route
-  //router.get("/about", function (req, res) {
-  //  res.render("pages/about"); // This will render views/pages/about.ejs
- // });
  
- // Product page rroute
+ // Product page route
  router.get("/products", function (req, res) {
   res.render("pages/products"); // This will render views/pages/products.ejs
+});
+
+//cart page route
+router.get("/cart", function (req, res) {
+  res.render("pages/cart"); // This will render views/pages/cart.ejs
+});
+
+//checkout page route
+router.get("/checkout", function (req, res) {
+  res.render("pages/checkout"); // This will render views/pages/checkout.ejs
 });
 
 //ACCOUNT ROUTES
@@ -33,9 +45,11 @@ router.get("/login", function (req, res) {
   res.render("pages/login"); // This will render views/pages/login.ejs
 });
 
+//create page route
 router.get("/create", function (req, res) {
   res.render("pages/createaccount"); // This will render views/pages/login.ejs
 });
+
 
 router.post("/validate",urlencodedParser, async function(req, res) {
   // console.log(req);
@@ -76,6 +90,15 @@ router.post("/create",urlencodedParser, async function(req, res) {
   
 })
 
+//cart page route
+router.get("/cart", function (req, res) {
+  res.render("pages/cart"); // This will render views/pages/cart.ejs
+});
+
+//checkout page route
+router.get("/checkout", function (req, res) {
+  res.render("pages/checkout"); // This will render views/pages/checkout.ejs
+});
 
 //ADMIN ROUTES
 router.get("/admin", function(req,res) {
@@ -146,5 +169,44 @@ router.get("/getUsers", async function(req, res) {
   }
   else res.send("Admin Account Required");
 })
+// Dog Products item page route
+router.get("/dogItemProduct", function(req, res) {
+  res.render("pages/dogItemProduct"); // This will render views/pages/dogItemProduct.ejs
+});
+
+
+// Dog Products page route
+router.get("/dogSubProducts", function(req, res) {
+  res.render("pages/dogSubProducts"); // This will render views/pages/dogSubProducts.ejs
+});
+
+
+// Product page route
+router.get("/dogProducts", function(req, res) {
+  res.render("pages/dogProducts"); // This will render views/pages/products.ejs
+});
+
+// Get product quantity
+router.get("/product/quantity/:productId", ProductController.getQuantity);
+
+
+// Get product name
+router.get("/product/name/:productId", ProductController.getProductName);
+
+
+router.get("/product/image/:productId", ProductController.getImage);
+
+
+// Get product description
+router.get("/product/description/:productId", ProductController.getDescription);
+
+
+// Get product price
+router.get("/product/price/:productId", ProductController.getPrice);
+
+
+// Get cat
+router.get("/user/category/:categoryName", UserController.productsByCat);
+
 
 module.exports = router;
