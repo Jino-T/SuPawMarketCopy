@@ -24,6 +24,11 @@ class AdminController {
         return res;
     }
 
+    static async getCategoryInfo() {
+        let res = await User.getCategories();
+        return res;
+    }
+
     static async updateProduct(info) {
         Admin.setProductName(info.productID, info.productName);
         Admin.setPrice(info.productID, info.price);

@@ -143,7 +143,15 @@ router.post("/updateProduct", jsonParser, async function(req,res) {
 router.get("/getProducts", async function(req, res) {
   if(req.session.isLoggedIn === true && req.session.isAdmin === 1) { 
     let responseData = await AdminController.getProdInfo();
-    res.json(responseData)
+    res.json(responseData);
+  }
+  else res.send("Admin Account Required");
+})
+
+router.get("/getCategories", async function(req, res) {
+  if(req.session.isLoggedIn === true && req.session.isAdmin === 1) { 
+    let responseData = await AdminController.getCategoryInfo();
+    res.json(responseData);
   }
   else res.send("Admin Account Required");
 })

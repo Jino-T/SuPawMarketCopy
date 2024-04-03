@@ -138,6 +138,12 @@ class User {
     return JSON.stringify(res[0]);
   }
 
+  static async getCategories() {
+    let sql = `SELECT categoryName FROM category;`;
+    let res = await connection.promise().query(sql);
+    return res[0];
+  }
+
   static async getProductsByCategory(category) {
     let sql = `
           SELECT ic.prodID 
