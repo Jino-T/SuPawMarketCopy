@@ -86,7 +86,7 @@ class User {
       let sql = `SELECT prodInCart, quantity FROM cart WHERE cartUser=${userID};`
       let res = await connection.promise().query(sql);
 
-      return JSON.stringify(res[0]);
+      return res[0];
     }
   
     static async checkout() {
@@ -98,7 +98,7 @@ class User {
       let sql = `SELECT * FROM purchase WHERE user=${userID};`
       let res = await connection.promise().query(sql);
 
-      return JSON.stringify(res[0]);
+      return res[0];
     }
   
 //SEARCH AND GET METHODS
