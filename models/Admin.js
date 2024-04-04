@@ -53,7 +53,7 @@ class Admin {
       //console.log(longDesc);
       connection.query(sql, (err, res) => {
         if(err) throw err;
-        console.log(res);
+        //console.log(res);
       });
       //console.log("product updated");
     } 
@@ -65,6 +65,7 @@ class Admin {
           connection.query(`INSERT INTO incategory VALUES(0, (SELECT categoryID FROM category WHERE categoryName='${i}'), (SELECT productID FROM product WHERE productID='${productID}'))`)
         }
       })
+      console.log("Category updated");
     }
   
 //METHODS RELATING TO REVIEWS

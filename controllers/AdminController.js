@@ -34,6 +34,7 @@ class AdminController {
         Admin.setPrice(info.productID, info.price);
         Admin.setInventory(info.productID, info.inventory);
         Admin.setDescription(info.productID, info.description);
+        Admin.setCategories(info.productID,info.category);
         return true;
     }
 
