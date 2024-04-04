@@ -1,0 +1,141 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.hamburger {
+    font-size: 40px;
+    font-weight: bold;
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    padding: 10px;
+    margin-right: 10px;
+}
+.vertical-menu {
+    display: none; /* Hide the menu by default */
+    flex-direction: column;
+    background-color: #f8f9fa; /* Adjust the color to match your theme */
+    position: absolute; /* Position it below the navbar */
+    width: 250px; /* Fixed width for the menu */
+    max-width: 100%; /* Ensures menu does not exceed screen width on smaller devices */
+    top: 60px; /* Height of the navbar */
+    left: 0;
+    border-radius: 0 0 10px 10px; /* Rounded corners on the bottom */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.vertical-menu .nav-link {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black; /* Adjust text color as needed */
+    display: block;
+    border-bottom: 1px solid #ddd; /* Optional separator for items */
+}
+
+.vertical-menu .nav-link:hover {
+    background-color: #e9ecef; /* Hover background color */
+}
+
+/* navbar.css adjustments for the 'active' class to display the menu */
+#vertical-menu.active {
+    display: flex; /* Or 'block', depending on your layout preference */
+}
+
+  
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: 1px solid #ccc;
+    flex-grow: .2;
+    border-radius: 22px;
+    background-color: #fff;
+    margin: 0 15px;
+}
+
+.search-container input[type="text"] {
+    flex-grow: 1;
+    padding: 8px 16px;
+    padding-left: 40px;
+    padding-right: 40px;
+    font-size: 17px;
+    border: none;
+    border-radius: 22px;
+    outline: none;
+}
+
+.search-container button {
+    position: absolute;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.search-icon {
+    left: 10px;
+    color: #333;
+}
+
+.close-icon {
+    right: 10px;
+    color: #333;
+}
+
+.navbar-profile img {
+    height: auto;
+    max-height: 50px;
+    width: auto;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.navbar-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+}
+
+.shopping-cart {
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 20px;
+    }
+    
+    .search-container {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .hamburger,
+    .navbar-logo,
+    .navbar-profile {
+        margin-bottom: 10px;
+    }
+}

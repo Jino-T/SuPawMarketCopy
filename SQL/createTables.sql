@@ -109,4 +109,3 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`userAddress` (
   CONSTRAINT `user` 
     FOREIGN KEY (`userID`) 
     REFERENCES `user` (`userID`)
-  );

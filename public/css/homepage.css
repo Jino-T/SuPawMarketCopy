@@ -1,0 +1,67 @@
+/* Apply a green background to the entire body */
+body {
+    background-color: #4CAF50; /* Green background color */
+    font-family: Arial, sans-serif;
+}
+
+/* Style the header including the logo and navigation */
+.header {
+    background-color: #333; /* Dark background for the header */
+    padding: 10px 20px; /* Some padding around the header content */
+    color: white; /* White text color */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space out the logo and navigation */
+}
+
+/* Container for product tiles */
+.product-container {
+    display: flex; /* Aligns children side by side */
+    justify-content: center; /* Centers children horizontally */
+    align-items: center; /* Centers children vertically */
+    gap: 20px; /* Adds space between the tiles */
+    margin-top: 20px; /* Additional spacing from top */
+}
+
+/* Product tile styling */
+.product-tile {
+    background-color: #8e99a2; /* White background for product tiles */
+    border-radius: 15px; /* Rounded corners for the tiles */
+    overflow: hidden; /* Ensures the content fits within the rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Smaller shadow for a tighter effect */
+    text-align: center; /* Center the text inside the tile */
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+    width: calc(30% - 10px); /* Splits the container space into two for the tiles, minus the gap */
+}
+
+.product-tile:hover {
+    transform: translateY(-5px); /* Lift tile on hover */
+}
+
+/* Product tile styling */
+.product-tile {
+    background-color: #8e99a2; /* Background color for product tiles */
+    border-radius: 15px; /* Rounded corners for the tiles */
+    overflow: hidden; /* Ensures the content fits within the rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Smaller shadow for a tighter effect */
+    text-align: center; /* Center the text inside the tile */
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+    padding: 10px; /* Reduce padding to shrink the grey border */
+}
+
+/* Image inside product tile */
+.product-image {
+    max-width: 100%; /* Image occupies the full width of its container, adjusted for padding */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Rounded corners for images, if desired */
+    /* other styles remain unchanged */
+}
+
+/* Style for the product headers */
+.dog-products-header, .cat-products-header {
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 0.5rem;
+    margin-top: 10px; /* Adds space above the headers */
+}
+

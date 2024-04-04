@@ -1,0 +1,105 @@
+body {
+    background-color: #4CAF50; /* This sets the background color to a green shade */
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+main {
+    color: white; /* This sets the text color to white for contrast */
+    padding: 20px; /* Add some padding around the main content */
+}
+#editMain {
+    color: black;
+    padding: 20px;
+}
+
+h1{
+    font-family: Arial, sans-serif;
+    width: 50%;
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+a:link {
+    color: darkblue;
+    font-size: large;
+    font-weight: 700; /*bolds the link*/
+}
+
+button{
+    background-color: #dddddd;
+    font-family: Arial, sans-serif;
+    width: 150px;
+    display: block;
+}
+
+#removeButton{
+    background-color: #dddddd;
+    font-family: Arial, sans-serif;
+    color: maroon;
+    width: 160px;
+    display: block;
+    background-image: url("../img/trash.png");
+    background-repeat: no-repeat;
+    background-size:contain;
+    text-align: right;
+    
+}
+#updateButton{
+    background-color: #dddddd;
+    font-family: Arial, sans-serif;
+    color: darkgreen;
+    width: 160px;
+    display: block;
+}
+
+label {
+    font-weight: 700;
+    color: white; /* This sets the text color to white for contrast */
+    padding: 5px; /* Add some padding around the main content */
+}
+
+input[type=text] {
+    width:100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+
+  input[type=number] {
+    width: 5%;
+    margin: 8px 0;
+    box-sizing: border-box;
+    margin-right: 15px;
+  }
+
+ textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+
+table {
+    width: 100%;
+  }
+
+th{
+    text-align: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    background-color: #04AA6D;
+}
+
+td{
+    text-align: left;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: lightgreen;
+}
+
+/* Add any other styles you need here */
