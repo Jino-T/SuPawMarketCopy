@@ -120,5 +120,18 @@ class Purchase {
     }
   }
   
+  //Test data
+  //Run: node ./models/Purchase.js
+    //Purchase.addPurchase(702, 401, 120, 5, '2022-03-30 09:49:30')
+    //Purchase.getUserID(701);
+    //Purchase.getProductID(701);
+    //Purchase.getQuantity(701);
+    //Purchase.getPurchaseTime(701);
+
+    //Purchase.setUserID(701, 402);
+    //Purchase.setProductID(701, 120);
+    //Purchase.setQuantity(701, 50);
+    //Purchase.setPurchaseTime(701, '2020-03-30 09:49:30');
+
   module.exports = Purchase;
   

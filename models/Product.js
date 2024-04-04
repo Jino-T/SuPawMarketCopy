@@ -1,111 +1,100 @@
-// models/Product.js
 var connection = require('../database').databaseConnection;
-//const db = require('../database'); //This needs to be setup 
 
 class Product {
-  constructor(productId, name, description, inventory, price, imagePath) {
+  constructor(productId, productName, description, inventory, price, imagePath) {
     this.productId = productId; // int
-    this.name = name; // string
+    this.productName = productName; // string
     this.description = description; // string
     this.inventory = inventory; // int
-    this.price = price; // int
-    this.imagePath = imagePath;
-
-    // Not currently in the database
-    //this.category = category; // array of strings
+    this.price = price; // decimal
+    this.imagePath = imagePath; // string
   }
 
-  static async getName(productId) {
-      console.log('getting name for product: ' + productId.toString());
-      let sql = `SELECT productName FROM product WHERE productID = ${productId}`
-      
-      let res = await connection.promise().query(sql);
-      return res;  
-  }
-
-  static async getPrice(productId) {
-      console.log('getting price for product: ' + productId.toString());
-      let sql = `SELECT price FROM product WHERE productID = ${productId}`
-      
-      let res = await connection.promise().query(sql);
-      return res;  
-  }
-
-  static async getInventory(productId) {
-      console.log('getting inventory for product: ' + productId.toString());
-      let sql = `SELECT inventory FROM product WHERE productID = ${productId}`
-      
-      let res = await connection.promise().query(sql);
-      return res;  
-  }
-
-  static async getDescription(productId) {
-      console.log('getting description for product: ' + productId.toString());
-      let sql = `SELECT description FROM product WHERE productID = ${productId}`
-      
-      let res = await connection.promise().query(sql);
-      return res;  
-  }
-
-  static async getImagePath(productId) {
-      console.log('getting imagepath for product: ' + productId.toString());
-      let sql = `SELECT imagePath FROM product WHERE productID = ${productId}`
-      
-      let res = await connection.promise().query(sql);
-      return res;  
-  }
-
-  static async setInventory(productId, newinventory) {
-    console.log('setting quanitity for product: ' + productId.toString());
-    if(Number.isInteger(newinventory)) {
-      this.inventory = newinventory;
-
-      // Add sql statement
-
+  static async getQuantity(productId) {
+    let sql = `SELECT inventory FROM product WHERE productID = ?;`;
+    const [result] = await connection.promise().query(sql, [productId]);
+    if (result.length > 0) {
+      return result[0].inventory;
     } else {
-      throw 'The inventory has to be an integer';
+      console.log("Product not found");
+      return null;
     }
   }
 
-  static async setPrice(productId, newPrice) {
-    console.log('setting price for product: ' + productId.toString());
-    //This should round down the price to only have 2 decimal points
-    this.price = newPrice.toFixed(2);
+  static async getImage(productId) {
+    let sql = `SELECT imagePath FROM product WHERE productID = ?;`;
+    const [result] = await connection.promise().query(sql, [productId]);
+    if (result.length > 0) {
+      return result[0].imagePath;
 
-    //TODO
-    //Add sql statement
+    } else {
+      console.log("Product not found");
+      return null;
+    }
   }
 
-  static async setProductName(productId, newName) {
-    console.log('setting product name for product: ' + productId.toString());
-    this.name = newName;
+  // Method to get productName
+  static async getProductName(productId) {
+    let sql = `SELECT productName FROM product WHERE productID = ?;`;
+    const [result] = await connection.promise().query(sql, [productId]);
+    if (result.length > 0) {
+      return result[0].productName;
+    } else {
+      console.log("Product not found");
+      return null;
+    }
+  }
 
-    //TODO
-    //Add sql statement
+  // Method to get description
+  static async getDescription(productId) {
+    let sql = `SELECT description FROM product WHERE productID = ?;`;
+    const [result] = await connection.promise().query(sql, [productId]);
+    if (result.length > 0) {
+      return result[0].description;
+    } else {
+      console.log("Product not found");
+      return null;
+    }
+  }
+
+  // Method to get price
+  static async getPrice(productId) {
+    let sql = `SELECT price FROM product WHERE productID = ?;`;
+    const [result] = await connection.promise().query(sql, [productId]);
+    if (result.length > 0) {
+      return result[0].price;
+    } else {
+      console.log("Product not found");
+      return null;
+    }
+  }
+
+
+  static async setQuantity(productId, newInventory) {
+    let sql = `UPDATE product SET inventory = ? WHERE productID = ?;`;
+    await connection.promise().query(sql, [newInventory, productId]);
+    console.log("Product quantity updated");
+  }
+
+  static async setPrice(productId, newPrice) {
+    let sql = `UPDATE product SET price = ? WHERE productID = ?;`;
+    await connection.promise().query(sql, [newPrice, productId]);
+    console.log("Product price updated");
+  }
+
+  static async setProductName(productId, newProductName) {
+    let sql = `UPDATE product SET productName = ? WHERE productID = ?;`;
+    await connection.promise().query(sql, [newProductName, productId]);
+    console.log("Product name updated");
   }
 
   static async setDescription(productId, newDescription) {
-    console.log('setting decription for product: ' + productId.toString());
-    this.description = newDescription;
-
-    //TODO
-    //Add sql statement
+    let sql = `UPDATE product SET description = ? WHERE productID = ?;`;
+    await connection.promise().query(sql, [newDescription, productId]);
+    console.log("Product description updated");
   }
 
-  // newImagePath needs to be in quotes "home/pic.jpg"
-  static async setImagePath(productId, newImagePath) {
-    console.log('setting image path for product: ' + productId.toString());
-    this.imagePath = newImagePath;
 
-    let sql = `UPDATE product SET imagePath = ? WHERE productID = ?;`;
-    await connection.promise().query(sql, [newImagePath, productId]);
-    console.log("Product's ImagePath updated");
-  }
 }
-
-Product.setImagePath(116, "poop");
-
-// "Tests"
-//Product.getInventory(1);
 
 module.exports = Product;

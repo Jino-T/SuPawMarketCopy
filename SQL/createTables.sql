@@ -23,41 +23,41 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`category` (
   PRIMARY KEY (`categoryID`),
   UNIQUE INDEX `categoryID_UNIQUE` (`categoryID` ASC) VISIBLE);
 
-  CREATE TABLE IF NOT EXISTS `supawdb`.`product` (
-  `productID` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `supawdb`.`product` (
+  `productID` int NOT NULL AUTO_INCREMENT,
   `productName` varchar(45) NOT NULL,
-  `price` DECIMAL(2) NOT NULL,
-  `inventory` INT NULL,
-  `description` VARCHAR(1500) NULL,
-  `imagePath` VARCHAR(45) NULL,
+  `price` decimal(5,2) NOT NULL,
+  `inventory` int DEFAULT NULL,
+  `description` varchar(1500) DEFAULT NULL,
+  `imagePath` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`productID`),
-  UNIQUE INDEX `productID_UNIQUE` (`productID` ASC) VISIBLE);
+  UNIQUE KEY `productID_UNIQUE` (`productID`));
 
 CREATE TABLE IF NOT EXISTS `supawdb`.`inCategory` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `catID` INT NOT NULL,
-  `prodID` INT NOT NULL,
+  `productID` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   INDEX `catID_idx` (`catID` ASC) VISIBLE,
-  INDEX `prodID_idx` (`prodID` ASC) VISIBLE,
+  INDEX `productID_idx` (`productID` ASC) VISIBLE,
   CONSTRAINT `catID`
     FOREIGN KEY (`catID`)
     REFERENCES `supawdb`.`category` (`categoryID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `prodID`
-    FOREIGN KEY (`prodID`)
+  CONSTRAINT `productID`
+    FOREIGN KEY (`productID`)
     REFERENCES `supawdb`.`product` (`productID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE);
 
 CREATE TABLE IF NOT EXISTS `supawdb`.`purchase` (
   `purchaseID` INT NOT NULL AUTO_INCREMENT,
-  `userID` INT NOT NULL,
-  `productID` INT NOT NULL,
+  `user` INT NOT NULL,
+  `product` INT NOT NULL,
   `quantity` INT NOT NULL,
-  `purchsaseTime` DATETIME NOT NULL,
+  `purchaseTime` DATETIME NOT NULL,
   PRIMARY KEY (`purchaseID`),
   UNIQUE INDEX `purchaseID_UNIQUE` (`purchaseID` ASC) VISIBLE,
   INDEX `userID_idx` (`user` ASC) VISIBLE,
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`purchase` (
     REFERENCES `supawdb`.`user` (`userID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `productID`
+  CONSTRAINT `product`
     FOREIGN KEY (`product`)
     REFERENCES `supawdb`.`product` (`productID`)
     ON DELETE CASCADE
@@ -92,17 +92,21 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`userAddress` (
     REFERENCES `supawdb`.`address` (`addressID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-  
-CREATE TABLE `review` (
+
+  CREATE TABLE IF NOT EXISTS `supawdb`.`review` (
   `reviewID` int NOT NULL AUTO_INCREMENT,
   `userID` int NOT NULL,
   `productID` int NOT NULL,
-  `starRating` int NOT NULL,
-  `reviewText` varchar(1500) DEFAULT NULL,
+  `reviewText` varchar(200) DEFAULT NULL,
+  `rating` int NOT NULL,
   PRIMARY KEY (`reviewID`),
   UNIQUE KEY `reviewID_UNIQUE` (`reviewID`),
   KEY `user_idx` (`userID`),
   KEY `product_idx` (`productID`),
-  CONSTRAINT `product` FOREIGN KEY (`productID`) REFERENCES `product` (`productID`),
-  CONSTRAINT `user` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
+  CONSTRAINT `idProduct` 
+    FOREIGN KEY (`productID`) 
+    REFERENCES `supawdb`.`product` (`productID`),
+  CONSTRAINT `user` 
+    FOREIGN KEY (`userID`) 
+    REFERENCES `user` (`userID`)
   );
