@@ -8,14 +8,14 @@ const User = require('../models/User');
 
 class AdminController {
 
-    static async addProduct(info) {
+    static async addProduct(info, imgName) {
         // console.log("cotoller user: " + info.username);
         // console.log("controller pass: " + info.password);
         // console.log(info.productName);
         // console.log(info.categories);
         // console.log(info.categories);
         // let categories = info.categories.split(",");
-        Admin.addItem(info.productName,info.price,info.inventory,info.productDesc,info.categories);
+        Admin.addItem(info.productName,info.price,info.inventory,info.productDesc,info.categories, "product-images/" + imgName);
         //console.log(check)
     }
 

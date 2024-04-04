@@ -1,17 +1,36 @@
 // myApi.js - My API route module
 
 const express = require("express");
-const UserController = require("../controllers/UserController");
-const ProductController = require("../controllers/ProductController");
-
 const router = express.Router();
 
+//FOR CONTROLLERS
+const UserController = require("../controllers/UserController");
+const ProductController = require("../controllers/ProductController");
 const AdminController = require("../controllers/AdminController");
+
+//FOR PARSING DIFFERENT OBJECTS
 var bodyParser = require("body-parser");
 const User = require("../models/User");
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
+const multer = require('multer');
 
+//FOR IMAGE UPLOAD
+const storage = multer.diskStorage({
+  destination: (req, file, cb)=>{
+    //This part defines where the files need to be saved
+    cb(null, 'public/product-images')
+  },
+  filename: (req, file, cb)=>{
+    // This part sets the file name of the file
+    cb(null, file.originalname)
+  }
+})
+// Then we will set the storage 
+const upload = multer({ storage: storage });
+
+
+//ROUTES 
 var app = express();
 app.use(
   bodyParser.urlencoded({
@@ -115,10 +134,11 @@ router.get("/addProduct", function(req,res) {
   else res.send("Admin Account Required")
 })
 
-router.post("/validateProduct", urlencodedParser, async function(req,res) {
+router.post("/validateProduct", upload.single("productImg"), async function(req,res) {
   //console.log(req.body);
+  //console.log(req.file.originalname)
   if(req.session.isLoggedIn === true && req.session.isAdmin === 1) {
-    await AdminController.addProduct(req.body);
+    await AdminController.addProduct(req.body, req.file.originalname);
     res.render("pages/adminDash");
   }
   else res.send("Admin Account Required")
