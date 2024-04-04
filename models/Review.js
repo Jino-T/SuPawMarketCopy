@@ -1,7 +1,7 @@
 var connection = require('../database').databaseConnection;
 
 class Review {
-    constructor(reviewID, userID, starRating, reviewText) {
+    constructor(reviewID, userID, productID, starRating, reviewText) {
       this.reviewID = reviewID;         // int
       this.userID = userID; // int
       this.productID = productID; // int
@@ -9,61 +9,76 @@ class Review {
       this.reviewText = reviewText;     // string
     }
 
+    //addes review in the database; Example function call: Review.addReview(802, 403, 102, `wow`, 2);
+    static async addReview(reviewID, userID, productID, reviewText, rating) {
+      console.log("Adding a review to the database");
+
+      let sql = `INSERT INTO \`supawdb\`.\`review\` (\`reviewID\`, \`userID\`, \`productID\`, \`reviewText\`, \`rating\`) VALUES ('?', '?', '?', ?, '?');`
+      await connection.promise().query(sql, [reviewID, userID, productID, reviewText, rating]);
+      console.log("Review Added");
+    }
+
+    //returns userID for given review id; Example call: Review.getUserID(801);
     static async getUserID(reviewId) {
       console.log('getting user id for review: ' + reviewId.toString());
 
       let sql = `SELECT userID FROM review WHERE reviewID = ?;`;
       const [result] = await connection.promise().query(sql, [reviewId]);
       if (result.length > 0) {
-        return result[0].inventory;
+        console.log(result[0].userID);
+        return result[0].userID;
       } else {
         console.log("Review not found");
         return null;
       }
     }
     
+    //returns productID for given review id; Example call: Review.getProductID(801);
     static async getProductID(reviewId) {
       console.log('getting product id for review: ' + reviewId.toString());
 
       let sql = `SELECT productID FROM review WHERE reviewID = ?;`;
       const [result] = await connection.promise().query(sql, [reviewId]);
       if (result.length > 0) {
-        return result[0].inventory;
+        console.log(result[0].productID);
+        return result[0].productID;
       } else {
         console.log("Review not found");
         return null;
       }
     }
 
+    //returns star rating for given review id; Example call: Review.getStarRating(801);
     static async getStarRating(reviewId) {
       console.log('getting star rating for review: ' + reviewId.toString());
 
-      let sql = `SELECT starRating FROM review WHERE reviewID = ?;`;
+      let sql = `SELECT rating FROM review WHERE reviewID = ?;`;
       const [result] = await connection.promise().query(sql, [reviewId]);
       if (result.length > 0) {
-        return result[0].inventory;
+        console.log(result[0].rating);
+        return result[0].rating;
       } else {
         console.log("Review not found");
         return null;
       }
     }
 
+    //returns review text for the given review id; Example call: Review.getReviewText(801);
     static async getReviewText(reviewId) {
       console.log('getting review Text for review: ' + reviewId.toString());
-
       let sql = `SELECT reviewText FROM review WHERE reviewID = ?;`;
       const [result] = await connection.promise().query(sql, [reviewId]);
       if (result.length > 0) {
-        let tmp = result[0].inventory;
-        console.log(JSON.stringify(tmp));
-        return JSON.stringify(tmp);
+        console.log(result[0].reviewText);
+        return result[0].reviewText;
       } else {
         console.log("Review not found");
         return null;
-      }
+      } 
     }
     
     //New user id must be an int and for proper functionality must be an existing user id in the database
+    //Updates userid associated with review id; Example call: Review.setUserId(801, 401);
     static async setUserId(reviewId, newuserId) {
       console.log('setting user id for review: ' + reviewId.toString());
       this.userID = newuserId;
@@ -74,6 +89,7 @@ class Review {
     }
 
     //New product id must be an int and for proper functionality must be an existing product id in the database
+    //Updates productid associated with review id; Example call: Review.setProductId(801, 120);
     static async setProductId(reviewId, newproductId) {
       console.log('setting user id for review: ' + reviewId.toString());
       this.productId = newproductId;
@@ -84,6 +100,7 @@ class Review {
     }
 
     //Star rating must be an int (no decimal ex: 0,1,2,3,4,5); rating cannot be less than 0 or greater than 5;
+    //Updates star rating associated with review id; Example call: Review.setStarRating(801, 3);
     static async setStarRating(reviewId, newStarRating) {
       console.log('setting star rating for review: ' + reviewId.toString());
 
@@ -99,7 +116,7 @@ class Review {
       }
     }
 
-    //Review text must be a string; can be an empty string
+    //Updates review text associated with review id; Review text must be a string; can be an empty string; Example call: Review.setReviewText(801, "bowow");
     static async setReviewText(reviewId, newReviewText) {
       console.log('setting Review text for review: ' + reviewId.toString());
       this.reviewText = newReviewText;
@@ -110,11 +127,6 @@ class Review {
     }
   }
 
-Review.setUserId(801, 402);
-//Review.setReviewText(6, "John");
-//console.log(Review.getReviewText(6));
-
 //node review.js
   
   module.exports = Review;
-  

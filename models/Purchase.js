@@ -10,60 +10,76 @@ class Purchase {
       this.purchaseTime = purchaseTime; // DATETIME in sql
     }
   
-    // May want to also have a method to return the user object (instance of class) as opposed to the user id
+    //adds purchase to the database; Example function call: Purchase.addPurchase(702, 401, 120, 5, '2022-03-30 09:49:30')
+    static async addPurchase(purchaseID, userID, productID, quantity, purchaseTime) {
+      console.log("Adding a purchase to the database");
+
+      let sql = `INSERT INTO \`supawdb\`.\`purchase\` (\`purchaseID\`, \`user\`, \`product\`, \`quantity\`, \`purchaseTime\`) VALUES ('?', '?', '?', '?', ?);`
+      await connection.promise().query(sql, [purchaseID, userID, productID, quantity, purchaseTime]);
+      console.log("Purchase Added");
+    }
+
+    // returns user id associated to the purchase id; Example call: Purchase.getUserID(701);
     static async getUserID(purchaseId) {
       console.log('getting user id for purchase: ' + purchaseId.toString());
 
-      let sql = `SELECT userID FROM purchase WHERE purchaseID = ?;`;
+      let sql = `SELECT user FROM purchase WHERE purchaseID = ?;`;
       const [result] = await connection.promise().query(sql, [purchaseId]);
       if (result.length > 0) {
-        return result[0].inventory;
+        console.log(result[0].user);
+        return result[0].user;
       } else {
         console.log("Review not found");
         return null;
       }
     }
 
-    // May want to also have a method to return the product object (instance of class) as opposed to the product id
+    // returns product id associated to the purchase id; Example call: Purchase.getProductID(701);
     static async getProductID(purchaseId) {
       console.log('getting product id for purchase: ' + purchaseId.toString());
 
-      let sql = `SELECT productID FROM purchase WHERE purchaseID = ?;`;
+      let sql = `SELECT product FROM purchase WHERE purchaseID = ?;`;
       const [result] = await connection.promise().query(sql, [purchaseId]);
       if (result.length > 0) {
-        return result[0].inventory;
+        console.log(result[0].product);
+        return result[0].product;
       } else {
         console.log("Review not found");
         return null;
       }
     }
 
+    // returns quantity associated with the purchase id; Example call: Purchase.getQuantity(701);
     static async getQuantity(purchaseId) {
       console.log('getting quantity for purchase: ' + purchaseId.toString());
 
       let sql = `SELECT quantity FROM purchase WHERE purchaseID = ?;`;
       const [result] = await connection.promise().query(sql, [purchaseId]);
       if (result.length > 0) {
-        return result[0].inventory;
+        console.log(result[0].quantity);
+        return result[0].quantity;
       } else {
         console.log("Review not found");
         return null;
       }
     }
 
+    // returns quantity associated with the purchase id; Example call: Purchase.getPurchaseTime(701);
     static async getPurchaseTime(purchaseId) {
       console.log('getting purchase time for purchase: ' + purchaseId.toString());
         
       let sql = `SELECT purchaseTime FROM purchase WHERE purchaseID = ?;`;
       const [result] = await connection.promise().query(sql, [purchaseId]);
       if (result.length > 0) {
-        return result[0].inventory;
+        console.log(result[0].purchaseTime);
+        return result[0].purchaseTime;
       } else {
         console.log("Review not found");
         return null;
       }
     }
 
+    //Updates user id associated with purchaseId; Example call: Purchase.setUserID(701, 402);
     static async setUserID(purchaseId, newUserID) {
       console.log('setting user id for purchase: ' + purchaseId.toString());
         this.userID = newUserID;
@@ -73,6 +89,7 @@ class Purchase {
       console.log("Purchase User Id updated");
     }
 
+    //Updates product id associated with purchaseId; Example call: Purchase.setProductID(701, 120);
     static async setProductID(purchaseId, newProductID) {
       console.log('setting product id for purchase: ' + purchaseId.toString());
         this.productID = newProductID;
@@ -82,6 +99,7 @@ class Purchase {
       console.log("Purchase Product Id updated");
     }
 
+    //Updates quantity associated with purchaseId; Example call: Purchase.setQuantity(701, 50);
     static async setQuantity(purchaseId, newQuantity) {
       console.log('setting quantity for purchase: ' + purchaseId.toString());
         this.quantity = newQuantity;
@@ -91,7 +109,7 @@ class Purchase {
       console.log("Purchase quantity updated");
     }
 
-    //put newPurchaseTime in single quotes
+    //Updates purchase time associated with purchase id; put newPurchaseTime in single quotes; Example call: Purchase.setPurchaseTime(701, '2020-03-30 09:49:30');
     static async setPurchaseTime(purchaseId, newPurchaseTime) {
       console.log('setting purchase time for purchase: ' + purchaseId.toString());
       this.purchaseTime = newPurchaseTime;
@@ -102,7 +120,5 @@ class Purchase {
     }
   }
   
-  Purchase.setUserID(701, 402);
-
   module.exports = Purchase;
   
