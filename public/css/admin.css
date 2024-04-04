@@ -18,6 +18,7 @@ h1{
     display: block;
     margin: auto;
     text-align: center;
+    font-weight: bold;
 }
 
 a:link {
@@ -60,7 +61,7 @@ label {
 }
 
 input[type=text] {
-    width:100%;
+    width:75%;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
@@ -74,7 +75,7 @@ input[type=text] {
   }
 
  textarea {
-    width: 100%;
+    width: 75%;
     height: 150px;
     padding: 12px 20px;
     margin: 8px 0;
@@ -100,6 +101,18 @@ td{
 
 tr:hover {
     background-color: lightgreen;
+}
+
+#catInput {
+    position: absolute;
+    right: 5%;
+    top: 29%;
+    text-align: center;
+
+}
+select{
+    height: 60vh;
+    width: 100%;
 }
 
 /* Add any other styles you need here */

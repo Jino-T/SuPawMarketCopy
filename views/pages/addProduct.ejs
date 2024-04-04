@@ -18,10 +18,12 @@
 
         <form method="post" action="/validateProduct">
             <label for="productName" class = prodLabel>Product Name</label>
+            <br>
             <input type="text" id="productName" name="productName" placeholder="Product Name" class = "productName"></input>
             <br>
 
             <label for="productDesc" class = descLabel>Description</label>
+            <br>
             <textarea id="productDesc" name="productDesc" placeholder = "Product Description" class = "productDesc"></textarea>
             <br>
 
@@ -32,17 +34,18 @@
             <input type="number" min="0" id="inventory" name="inventory" placeholder = "0" class = "inventory"></input>
             <br>
 
-            <label for="categories" class = catLabel>Categories (Select multiple with cntrl + click):</label>
-            <select name="categories" id="categories" multiple>
-                <!-- <option value="Dog">Dog</option>
-                <option value="Cat">Cat</option>
-                <option value="Dog Food">Dog Food</option>
-                <option value="Cat Food">Cat Food</option> -->
-            </select>
-            <!-- <input type="text" id="categories" name="categories" placeholder = "Enter your categories here" class = "categories"></input>
-            <br> -->
+            <div id="catInput">
+                <label for="categories" class = catLabel>Categories</label>
+                <div> Select multiple with cntrl + click </div>
+                <select name="categories" id="categories" multiple>
+                </select>
+            </div>
 
             <button type="submit" class=button value="Add Product">Add Product</button>  
         </form> 
+
+        <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+        <script src="/javascript/addProduct.js"></script>
     </main>
 </body>
