@@ -25,7 +25,7 @@ body {
 
 /* Product tile styling */
 .product-tile {
-    background-color: #6a6262; /* White background for product tiles */
+    background-color: #8e99a2; /* White background for product tiles */
     border-radius: 15px; /* Rounded corners for the tiles */
     overflow: hidden; /* Ensures the content fits within the rounded corners */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Smaller shadow for a tighter effect */
@@ -40,7 +40,7 @@ body {
 
 /* Product tile styling */
 .product-tile {
-    background-color: #6a6262; /* Background color for product tiles */
+    background-color: #8e99a2; /* Background color for product tiles */
     border-radius: 15px; /* Rounded corners for the tiles */
     overflow: hidden; /* Ensures the content fits within the rounded corners */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Smaller shadow for a tighter effect */

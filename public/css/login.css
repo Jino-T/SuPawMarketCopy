@@ -18,9 +18,9 @@ main {
 
 h1{
     font-family: Arial, sans-serif;
-    width: 530px;  /*Splits the container space into two for the tiles, minus the gap */
+    width: 625px;  /*Splits the container space into two for the tiles, minus the gap */
     display: block;
-    margin-left: calc(50% - 265px);
+    margin-left: calc(50% - 312.5px);
     margin-bottom: 15px
 }
 
@@ -39,7 +39,24 @@ h1{
     display: block;
     margin-left: calc(50% - 87.5px);
     margin-bottom: 0.5rem;
+}
 
+.create{
+    font-family: Arial, sans-serif;
+    color: white;
+    width: 134px;
+    display: block;
+    margin-left: calc(50% - 69px);
+    margin-bottom: 0 rem;
+}
+
+.home{
+    font-family: Arial, sans-serif;
+    color: white;
+    width: 134px;
+    display: block;
+    margin-left: calc(50% - 27px);
+    margin-bottom: 0.5rem;
 }
 
 .userLabel{
@@ -57,7 +74,6 @@ h1{
     display: block;
     margin-left: calc(50% - 75px);
     margin-bottom: 5px;
-
 }
 
 .button{

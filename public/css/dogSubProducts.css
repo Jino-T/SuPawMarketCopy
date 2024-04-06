@@ -1,0 +1,60 @@
+body {
+    background-color: #4CAF50; /* This sets the background color to a green shade */
+}
+
+h1 {
+    color: white; /* Sets title color to white */
+    /* Other styles remain as is */
+}
+
+/* Card styles to match the uploaded image */
+.product-card {
+    background-color: #8e99a2;
+    border-radius: 5px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 10px;
+}
+
+.product-image {
+    width: 100%;
+    object-fit: cover; /* Adjust as necessary to fit the image appropriately */
+}
+
+.card-body {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    color: #000000;
+    margin-bottom: .75rem;
+}
+
+.product-rating {
+    color: #FFD700; /* Gold color for stars */
+    font-size: 1.25rem; /* Adjust size as necessary */
+    margin-bottom: .5rem;
+}
+
+.card-text {
+    color: #000000;
+    font-size: 1rem;
+    flex-grow: 1;
+    overflow: hidden; /* Ensures the text does not overflow the card */
+}
+
+.product-card a {
+    text-decoration: none; /* Removes underline from anchor tags within product cards */
+  }
+
+/* Responsive grid adjustments */
+@media (max-width: 576px) {
+    .product-card {
+        margin: 10px 0;
+    }
+}
+
+
+

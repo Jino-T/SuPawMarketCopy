@@ -19,7 +19,7 @@ class Admin {
           connection.query(`INSERT INTO incategory VALUES(0, (SELECT categoryID FROM category WHERE categoryName='${i}'), (SELECT productID FROM product WHERE productName='${productName}'))`)
         }
       })
-
+      
       console.log("product added");
     }
   
@@ -42,6 +42,7 @@ class Admin {
     }
 
     static async setInventory(productID, newInventory){
+      //console.log(productID);
       let sql = `UPDATE product SET inventory='${newInventory}' WHERE productID=${productID};`;
       connection.query(sql);
       console.log("product updated");
@@ -49,13 +50,13 @@ class Admin {
   
     static async setDescription(productID, newDescription) { //sets description in database - inclusion of " in the description will cause an error
       let sql = `UPDATE product SET description="${newDescription}" WHERE productID=${productID};`;
-      console.log(longDesc);
+      //console.log(longDesc);
       connection.query(sql, (err, res) => {
         if(err) throw err;
         console.log(res);
       });
       //console.log("product updated");
-    }
+    } 
 
     static async setCategories(productID, newCategories) {//change an items categories in the db, assumes newCategories is an array of strings
       let delSQL = `DELETE FROM incategory WHERE prodID=${productID};`; //removes an items old categories and adds the new ones to the DB
@@ -67,6 +68,11 @@ class Admin {
     }
   
 //METHODS RELATING TO REVIEWS
+    static async getUsers() {
+      let sql = `SELECT * FROM user;`
+      let res = await connection.promise().query(sql);
+      return res[0];
+    }
     static async hideReview() {
       // TODO
     }

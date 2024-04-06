@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`category` (
   PRIMARY KEY (`categoryID`),
   UNIQUE INDEX `categoryID_UNIQUE` (`categoryID` ASC) VISIBLE);
 
-  CREATE TABLE `product` (
+CREATE TABLE IF NOT EXISTS `supawdb`.`product` (
   `productID` int NOT NULL AUTO_INCREMENT,
   `productName` varchar(45) NOT NULL,
   `price` decimal(5,2) NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`purchase` (
   `user` INT NOT NULL,
   `product` INT NOT NULL,
   `quantity` INT NOT NULL,
-  `purchsaseTime` DATETIME NOT NULL,
+  `purchaseTime` DATETIME NOT NULL,
   PRIMARY KEY (`purchaseID`),
   UNIQUE INDEX `purchaseID_UNIQUE` (`purchaseID` ASC) VISIBLE,
   INDEX `userID_idx` (`user` ASC) VISIBLE,
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`purchase` (
     REFERENCES `supawdb`.`user` (`userID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `productID`
+  CONSTRAINT `product`
     FOREIGN KEY (`product`)
     REFERENCES `supawdb`.`product` (`productID`)
     ON DELETE CASCADE
@@ -99,7 +99,6 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`userAddress` (
   `productID` int NOT NULL,
   `reviewText` varchar(200) DEFAULT NULL,
   `rating` int NOT NULL,
-  `reviewcol` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`reviewID`),
   UNIQUE KEY `reviewID_UNIQUE` (`reviewID`),
   KEY `user_idx` (`userID`),
