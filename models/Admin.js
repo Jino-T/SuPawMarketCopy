@@ -75,12 +75,21 @@ class Admin {
       console.log("Category updated");
     }
   
-//METHODS RELATING TO REVIEWS
+//METHODS RELATING TO USERS
     static async getUsers() {
       let sql = `SELECT * FROM user;`
       let res = await connection.promise().query(sql);
       return res[0];
     }
+
+    static async toggleAdmin(userID, currentStatus) {
+      let sql = `UPDATE user SET isAdmin=${!currentStatus} WHERE userID=${userID};`;
+      let res = await connection.promise().query(sql);
+      return res[0];
+    }
+
+//METHODS ABOUT REVIEWS
+
     static async hideReview() {
       // TODO
     }
@@ -98,6 +107,7 @@ class Admin {
   // let longDesc = `W"ow this is a super long and detailed description that is totally not meant to test the length that a description can be in the databse - how long is it? I don't know I didn't keep count.`
   // Admin.setDescription(2, longDesc);
   // Admin.setCategories(2, ["secCat"]);
+  // Admin.toggleAdmin(4,true);
   
   module.exports = Admin;
   

@@ -52,6 +52,11 @@ class AdminController {
         return res;
     }
 
+    static async toggleAdmin(info) {
+        let res = await Admin.toggleAdmin(info.userID, info.currentStatus);
+        return res;
+    }
+
 }
 
 module.exports = AdminController;
