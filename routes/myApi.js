@@ -151,10 +151,11 @@ router.get("/editProducts", async function(req,res) {
   else res.send("Admin Account Required")
 })
 
-router.post("/updateProduct", jsonParser, async function(req,res) {
+router.post("/updateProduct", upload.single("productImg"), async function(req,res) {
   //console.log(JSON.stringify(req.body));
   if(req.session.isLoggedIn === true && req.session.isAdmin === 1) { 
-    await AdminController.updateProduct(req.body);
+    console.log(req.body);
+    await AdminController.updateProduct(req.body,req.file.originalname);
     res.render("pages/editProduct");
   }
   else res.send("Admin Account Required")

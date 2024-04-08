@@ -10,8 +10,17 @@ const ce = React.createElement;
 class productTable extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {showing: "table", products : [], categories: [], prodID: 0, productName: "", price: 0, description: "", inventory: 0, selectedCategories: []}
-    }
+        this.state = {showing: "table", 
+        products : [], 
+        categories: [], 
+        prodID: 0, 
+        productName: "", 
+        price: 0, 
+        description: "", 
+        inventory: 0, 
+        selectedCategories: [],
+        imgPath: ""
+    }}
 
     render() {
         this.getProducts();
@@ -54,6 +63,7 @@ class productTable extends React.Component {
             return ce('div', null,
             ce('h1', null, 'Product Information:'),
             ce('br'),
+            ce('form',{id:"prodInfoForm"}, 
             ce('label',null,'Product Name '),
             ce('br'),
             ce('input', {type: "text", id: "productName", value: this.state.productName, onChange: e => this.changerHandler(e)}),
@@ -67,15 +77,19 @@ class productTable extends React.Component {
             ce('label',null,'Inventory '),
             ce('input', {type: "number", min: "0", id:"inventory", value: this.state.inventory, onChange: e => this.changerHandler(e)}),
             ce('br'),
-            ce('button', {id:"updateButton", onClick: e => this.updateProduct(e)}, 'Update Product'),
-            ce('button', {id:"removeButton", onClick: e => this.deleteProduct(e)}, 'Remove Product'),
             ce('div',{id:'catInput'}, 
             ce('label', null, 'Categories'),
             ce('div',null,"Select multiple with cntrl + click"),
             ce('select',{id:'categories', multiple:'true', onChange: e => this.categoryChange(e)},
             this.state.categories.map((category, index) => 
                 ce('option', {value:category.categoryName, key:index},category.categoryName)
-            )))
+            ))),
+            ce('img',{src:this.state.imgPath, alt:"Current Product Image"}),
+            ce('label',null, 'Change Product Picture'),
+            ce('input',{type:"file", id:"productImg", name:"productImg"}),
+            ce('br')),
+            ce('button', {id:"updateButton", onClick: e => this.updateProduct(e)}, 'Update Product'),
+            ce('button', {id:"removeButton", onClick: e => this.deleteProduct(e)}, 'Remove Product'),
             //ce('span', {id: "create-message"}, this.state.createMessage)
     );
         }
@@ -96,7 +110,8 @@ class productTable extends React.Component {
         productName:item.productName,
         price:item.price,
         description:item.description,
-        inventory: item.inventory
+        inventory: item.inventory,
+        imgPath: item.imagePath
     })
     }
 
@@ -119,12 +134,22 @@ class productTable extends React.Component {
             category[i] = this.state.selectedCategories.item(i).innerHTML;
         }
 
+        let formData = new FormData();
+        formData.append("productID",productID);
+        formData.append("productName",productName);
+        formData.append("price",price);
+        formData.append("inventory",inventory);
+        formData.append("description",description);
+        formData.append("category",category);
+        formData.append("productImg", document.getElementById("productImg").files[0])
+
         //console.log("b4 fetch category(1) = " + category.item(0).innerHTML);
 
         fetch(updateProductRoute, { 
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ productID, productName, price, description, inventory, category})
+        body: formData
+        // headers: {'Content-Type': 'multipart/form-data'},
+        // body: JSON.stringify({ productID, productName, price, description, inventory, category})
         }).then(()=>this.setState({showing:"table"}))
     }
 

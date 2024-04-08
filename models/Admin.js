@@ -58,6 +58,13 @@ class Admin {
       //console.log("product updated");
     } 
 
+    static async setImgPath(productID, newImgPath) {
+      let sql = `UPDATE product SET imagePath="${newImgPath}" WHERE productID=${productID};`;
+      connection.query(sql,(err,res) => {
+        if(err) throw err;
+      });
+    }
+
     static async setCategories(productID, newCategories) {//change an items categories in the db, assumes newCategories is an array of strings
       let delSQL = `DELETE FROM incategory WHERE prodID=${productID};`; //removes an items old categories and adds the new ones to the DB
       connection.promise().query(delSQL).then(() => {
