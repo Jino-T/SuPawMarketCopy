@@ -29,14 +29,17 @@ class AdminController {
         return res;
     }
 
-    static async updateProduct(info, imgName) {
+    static async updateProduct(info) {
         Admin.setProductName(info.productID, info.productName);
         Admin.setPrice(info.productID, info.price);
         Admin.setInventory(info.productID, info.inventory);
         Admin.setDescription(info.productID, info.description);
         Admin.setCategories(info.productID,info.category);
-        Admin.setImgPath(info.productID,"product-images/" + imgName);
         return true;
+    }
+
+    static async updateProductImg(info, imgName) {
+        Admin.setImgPath(info.productID,"product-images/" + imgName);
     }
 
     static async deleteProduct(info) {

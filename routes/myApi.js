@@ -155,7 +155,10 @@ router.post("/updateProduct", upload.single("productImg"), async function(req,re
   //console.log(JSON.stringify(req.body));
   if(req.session.isLoggedIn === true && req.session.isAdmin === 1) { 
     console.log(req.body);
-    await AdminController.updateProduct(req.body,req.file.originalname);
+    await AdminController.updateProduct(req.body);
+    if(req.body.productImg !== "undefined") {
+      await AdminController.updateProductImg(req.body,req.file.originalname)
+    }
     res.render("pages/editProduct");
   }
   else res.send("Admin Account Required")
