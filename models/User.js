@@ -140,7 +140,7 @@ class User {
 
   static async getProductsByCategory(category) {
     let sql = `
-          SELECT ic.prodID 
+          SELECT ic.productID 
           FROM incategory ic
           JOIN category c ON ic.catID = c.categoryID
           WHERE c.categoryName = ?;

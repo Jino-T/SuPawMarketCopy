@@ -25,9 +25,9 @@ router.get("/", function (req, res) {
     res.render("pages/home"); // This will render views/pages/home.ejs
   });
  
- // Product page route
- router.get("/products", function (req, res) {
-  res.render("pages/products"); // This will render views/pages/products.ejs
+  //Product page route
+router.get("/products", function (req, res) {
+ res.render("pages/products"); // This will render views/pages/products.ejs
 });
 
 //cart page route
@@ -43,6 +43,11 @@ router.get("/checkout", function (req, res) {
 //ACCOUNT ROUTES
 router.get("/login", function (req, res) {
   res.render("pages/login"); // This will render views/pages/login.ejs
+});
+
+//ACCOUNT PAGE ROUTE
+router.get("/account", function (req, res) {
+  res.render("pages/account"); // This will render views/pages/login.ejs
 });
 
 //create page route
