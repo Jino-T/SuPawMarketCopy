@@ -27,8 +27,7 @@ class userTable extends React.Component {
                     null,
                     ce('th', null, 'ID'),
                     ce('th', null, 'Name'),
-                    ce('th', null, 'isAdmin'),
-                    ce('th',null, 'Admin Toggle')
+                    ce('th',null, 'Admin Status')
                   )
                 ),
                 ce(
@@ -38,13 +37,13 @@ class userTable extends React.Component {
                     ce(
                       'tr',
                       { key: index },
-                      ce('td', null, user.userID),
-                      ce('td', null, user.username),
-                      ce('td', null, user.isAdmin),
-                      ce('td',null,
-                      ce('button',{onClick: e => this.toggleAdmin(user)}, "Toggle Admin Status")
-                    )
-                    )
+                      ce('td', {class:"userTableData"}, user.userID),
+                      ce('td', {class:"userTableData"}, user.username),
+                      ce('td',{class:"userTableData"},
+                      ce('label',{class: "switch"},
+                      ce('input',{type: "checkbox", checked: user.isAdmin, onChange: e => this.toggleAdmin(user)}),
+                      ce('span',{class:"slider round"})
+                    )))
                   )
                 )
               );

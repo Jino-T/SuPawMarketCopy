@@ -84,7 +84,7 @@ class productTable extends React.Component {
             this.state.categories.map((category, index) => 
                 ce('option', {value:category.categoryName, key:index},category.categoryName)
             ))),
-            ce('img',{src:this.state.imgPath, alt:"Current Product Image"}),
+            ce('img',{src:this.state.imgPath, alt:"Current Product Image", id:"oldProductImage"}),
             ce('label',null, 'Change Product Picture'),
             ce('input',{type:"file", id:"productImg", name:"productImg"}),
             ce('br')),
