@@ -9,7 +9,7 @@ class Address {
       this.state = state;
       this.zip = zip;
     }
-  
+
     static async setShipping(newAddress, userid) {  //inserts new address and updates the shipping userAddress in DB to reflect that
       //console.log('setting shipping');
       let sql = `INSERT INTO address VALUES(0,'${newAddress[0]}','${newAddress[1]}','${newAddress[2]}','${newAddress[3]}',${newAddress[4]}); UPDATE useraddress SET address=(SELECT addressID FROM address WHERE line1='${newAddress[0]}' && line2='${newAddress[1]}' && zip=${newAddress[4]} LIMIT 1) WHERE user = ${userid} && addressType='shipping';`;

@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`category` (
   PRIMARY KEY (`categoryID`),
   UNIQUE INDEX `categoryID_UNIQUE` (`categoryID` ASC) VISIBLE);
 
-  CREATE TABLE `product` (
+CREATE TABLE IF NOT EXISTS `supawdb`.`product` (
   `productID` int NOT NULL AUTO_INCREMENT,
   `productName` varchar(45) NOT NULL,
   `price` decimal(5,2) NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`purchase` (
     REFERENCES `supawdb`.`user` (`userID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `productID`
+  CONSTRAINT `product`
     FOREIGN KEY (`product`)
     REFERENCES `supawdb`.`product` (`productID`)
     ON DELETE CASCADE
@@ -99,7 +99,6 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`userAddress` (
   `productID` int NOT NULL,
   `reviewText` varchar(200) DEFAULT NULL,
   `rating` int NOT NULL,
-  `reviewcol` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`reviewID`),
   UNIQUE KEY `reviewID_UNIQUE` (`reviewID`),
   KEY `user_idx` (`userID`),
@@ -107,4 +106,17 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`userAddress` (
   CONSTRAINT `product` FOREIGN KEY (`productID`) REFERENCES `product` (`productID`),
   CONSTRAINT `user` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
   );
+
+  CREATE TABLE `cart` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `cartUser` int NOT NULL,
+  `prodInCart` int NOT NULL,
+  `quantity` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `userID_idx` (`cartUser`),
+  KEY `prodID_idx` (`prodInCart`),
+  CONSTRAINT `cartUser` FOREIGN KEY (`cartUser`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `prodInCart` FOREIGN KEY (`prodInCart`) REFERENCES `product` (`productID`) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
