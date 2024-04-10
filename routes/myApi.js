@@ -46,12 +46,11 @@ router.get("/checkout", function(req, res) {
 //ACCOUNT PAGE ROUTE
 router.get("/account", function (req, res) {
   if(req.session.isLoggedIn){
-  res.render("pages/account"); // This will render views/pages/login.ejs
+    res.render("pages/account", { username: req.session.username }); // This will render views/pages/account.ejs and pass the username as a variable
   }
   else{
     res.render("pages/login"); // This will render views/pages/login.ejs
   }
-
 });
 
 //create page route
