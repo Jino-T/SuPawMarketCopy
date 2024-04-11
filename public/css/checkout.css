@@ -12,7 +12,6 @@ h1{
     font-family: Arial, sans-serif;
     width: 180px;  /*Splits the container space into two for the tiles, minus the gap */
     margin-left: calc(50% - 90px);
-    margin-bottom: 5px;
 }
 
 .emailLabel{
@@ -24,7 +23,7 @@ h1{
 
 .email{
     font-family: Arial, sans-serif;
-    font-size: 25px;
+    font-size: 20px;
     width: 400px;
 }
 
@@ -40,5 +39,44 @@ h1{
     font-size: 25px;
     width: 300px;
     margin-left: calc(50% - 225px);
+}
+
+.cityLabel{
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    width: 300px;
+    margin-left: calc(20%);
+}
+
+.city{
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    width: 400px;
+}
+
+.stateLabel{
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    width: 300px;
+    margin-left: calc(20%);
+}
+
+.state{
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    width: 400px;
+}
+
+.zipLabel{
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    width: 300px;
+    margin-left: calc(20%);
+}
+
+.zip{
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    width: 400px;
 }
 /* Add any other styles you need here */

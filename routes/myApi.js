@@ -53,9 +53,19 @@ router.get("/account", function (req, res) {
   }
 });
 
+//account edit page route
+router.get("/edit", function(req, res) {
+  if(req.session.isLoggedIn){
+    res.render("pages/edit", { username: req.session.username }); // This will render views/pages/account.ejs and pass the username as a variable
+  }
+  else{
+    res.render("pages/home"); // This will render views/pages/login.ejs
+  }
+});
+
 //create page route
 router.get("/create", function(req, res) {
-  res.render("pages/createaccount"); // This will render views/pages/login.ejs
+  res.render("pages/createaccount"); // This will render views/pages/createaccount.ejs
 });
 
 router.post("/validate", urlencodedParser, async function(req, res) {
