@@ -126,6 +126,14 @@ select{
     width: 150px;
 }
 
+.category-image {
+    width: 35%;
+}
+
+#modOptions {
+    column-count: 2;
+    text-align: center;
+}
 
 /*CSS FOR SWITCHES*/
 .switch {

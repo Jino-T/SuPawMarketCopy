@@ -143,6 +143,7 @@ INSERT INTO `supawdb`.`inCategory` (`id`, `catID`, `prodID`) VALUES ('380', '210
 INSERT INTO `supawdb`.`user` (`userID`, `username`, `password`, `isAdmin`) VALUES ('401', 'walter', 'walter123', '0');
 INSERT INTO `supawdb`.`user` (`userID`, `username`, `password`, `isAdmin`) VALUES ('402', 'adam', 'adam123', '1');
 
+INSERT INTO `supawdb`.`address` (`addressID`, `line1`, `line2`, `city`, `state`, `zip`) VALUES ('1', '', '', '', '', '1');
 INSERT INTO `supawdb`.`address` (`addressID`, `line1`, `line2`, `city`, `state`, `zip`) VALUES ('501', '308 Negra Arroyo Lane', '', 'Albuquerque', 'New Mexico', '87104');
 INSERT INTO `supawdb`.`address` (`addressID`, `line1`, `city`, `state`, `zip`) VALUES ('502', '709 Rainbow Road', 'Austin', 'Texas', '73301');
 
