@@ -5,7 +5,7 @@ const UserController = require("../controllers/UserController");
 const ProductController = require("../controllers/ProductController");
 var app = express();
 const router = express.Router();
-
+const ReviewController = require("../controllers/ReviewController");
 const AdminController = require("../controllers/AdminController");
 var bodyParser = require("body-parser");
 var jsonParser = bodyParser.json();
@@ -209,5 +209,22 @@ router.post("/addToCart", jsonParser, async function(req, res) {
     }
   }
 });
+
+
+
+// Route to get the user ID for a review
+router.get('/reviews/user/:reviewId', ReviewController.getUserID);
+
+// Route to get the product ID for a review
+router.get('/reviews/productID/:reviewId', ReviewController.getProductID);
+
+// Route to get the star rating for a review
+router.get('/reviews/rating/:reviewId', ReviewController.getStarRating);
+
+// Route to get the review text for a review
+router.get('/reviews/text/:reviewId', ReviewController.getReviewText);
+
+router.get('/reviews/reviewIDs/:productID', ReviewController.getReviewIds);
+
 
 module.exports = router;
