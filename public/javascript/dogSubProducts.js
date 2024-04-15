@@ -7,7 +7,7 @@ $(document).ready(function() {
       });
 
       for (let product of response[0]) {
-        fetchProductDetails(product.prodID);
+        fetchProductDetails(product.productID);
       }
     } catch (error) {
       console.error("Error fetching products:", error);
