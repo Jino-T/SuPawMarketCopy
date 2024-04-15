@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`userAddress` (
   UNIQUE KEY `reviewID_UNIQUE` (`reviewID`),
   KEY `user_idx` (`userID`),
   KEY `product_idx` (`productID`),
-  CONSTRAINT `product` FOREIGN KEY (`productID`) REFERENCES `product` (`productID`),
+  CONSTRAINT `reviewProduct` FOREIGN KEY (`productID`) REFERENCES `product` (`productID`),
   CONSTRAINT `user` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
   );
 

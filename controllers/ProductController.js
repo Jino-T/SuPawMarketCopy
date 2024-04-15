@@ -29,7 +29,7 @@ class ProductController {
             if(productName !== null) {
                 res.status(200).json({ productName });
             } else {
-                res.status(404).json({ message: "Product not found" });
+                res.status(404).json({ message: "Product name not found" });
             }
         } catch (error) {
             console.error(error);
@@ -45,7 +45,7 @@ class ProductController {
             if(description !== null) {
                 res.status(200).json({ description });
             } else {
-                res.status(404).json({ message: "Product not found" });
+                res.status(404).json({ message: "Product desc not found" });
             }
         } catch (error) {
             console.error(error);
@@ -61,7 +61,7 @@ class ProductController {
             if(price !== null) {
                 res.status(200).json({ price });
             } else {
-                res.status(404).json({ message: "Product not found" });
+                res.status(404).json({ message: "Product Price not found" });
             }
         } catch (error) {
             console.error(error);
@@ -79,7 +79,7 @@ class ProductController {
             if(imagePath !== null) {
                 res.status(200).json({ imagePath });
             } else {
-                res.status(404).json({ message: "Product not found" });
+                res.status(404).json({ message: "Product img not found" });
             }
         } catch (error) {
             console.error(error);
