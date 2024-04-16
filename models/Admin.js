@@ -82,8 +82,8 @@ class Admin {
     }
   
     //PRODUCT AUDIT METHODS
-    static async recordAdd(userID, productID, productName) {
-      let sql = `INSERT INTO edits VALUES(0, ${userID}, ${productID}, 'Add', NOW(), '${productName}');`;
+    static async recordAdd(userID, productName) {
+      let sql = `INSERT INTO edits VALUES(0, ${userID}, (SELECT MAX(productID) FROM product), 'Add', NOW(), '${productName}');`;
       let res = await connection.promise().query(sql);
       return res[0];
     }
@@ -95,8 +95,10 @@ class Admin {
       return res[0];
     }
 
-    static async recordRemove(userID, productID) {
-
+    static async recordRemove(userID, productID, productName) {
+      let sql = `INSERT INTO edits VALUES(0, ${userID}, null, "Remove", NOW(), '${productName}');`;
+      let res = await connection.promise().query(sql);
+      return res[0];
     }
 
     static async getProductHistory(productID) {

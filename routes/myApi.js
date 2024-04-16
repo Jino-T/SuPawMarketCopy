@@ -185,6 +185,7 @@ router.get("/getCategories", async function(req, res) {
 router.post("/deleteProduct", jsonParser, async function(req, res) {
   if(req.session.isLoggedIn === true && req.session.isAdmin === 1) { 
     await AdminController.deleteProduct(req.body);
+    await AdminController.recordRemove(req.session.userID,req.body);
   }
   else res.send("Admin Account Required")
 })

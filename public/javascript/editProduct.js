@@ -155,11 +155,12 @@ class productTable extends React.Component {
 
     deleteProduct() {
         const productID = this.state.prodID;
+        const productName = this.state.productName
 
         fetch(deleteProductRoute, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({productID})
+            body: JSON.stringify({productID, productName})
         })
         this.setState({showing:"table"})
     }

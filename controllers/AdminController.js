@@ -52,14 +52,16 @@ class AdminController {
     //PRODUCT AUDIT METHODS
 
     static async recordAdd(userID, info) {
-        let id = await User.getProductIDByName(info.productName);
-        //console.log(id[0]);
-        await Admin.recordAdd(userID,id[0].productID, info.productName);
+        await Admin.recordAdd(userID, info.productName);
     }
 
     static async recordEdit(userID, info) {
         //console.log("in recordEdit controller");
         await Admin.recordEdit(userID, info.productID, info.productName);
+    }
+
+    static async recordRemove(userID, info) {
+        await Admin.recordRemove(userID,info.productID,info.productName);
     }
 
 
