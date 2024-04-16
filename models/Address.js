@@ -12,7 +12,7 @@ class Address {
 
     static async setShipping(newAddress, userid) {  //inserts new address and updates the shipping userAddress in DB to reflect that
       //console.log('setting shipping');
-      let sql = `INSERT INTO address VALUES(0,'${newAddress[0]}','${newAddress[1]}','${newAddress[2]}','${newAddress[3]}',${newAddress[4]}); UPDATE useraddress SET address=(SELECT addressID FROM address WHERE line1='${newAddress[0]}' && line2='${newAddress[1]}' && zip=${newAddress[4]} LIMIT 1) WHERE user = ${userid} && addressType='shipping';`;
+      let sql = `INSERT INTO address VALUES(0,'${newAddress[0]}','${newAddress[1]}','${newAddress[2]}','${newAddress[3]}',${newAddress[4]}); UPDATE userAddress SET address=(SELECT addressID FROM address WHERE line1='${newAddress[0]}' && line2='${newAddress[1]}' && zip=${newAddress[4]} LIMIT 1) WHERE user = ${userid} && addressType='shipping';`;
       //assumes newAddress is given as an array in format - [line1, line2, city, state, zip]
         //can pretty easily be changed to accept each part as a different parameter if that's easier with the frontend form
 
@@ -25,7 +25,7 @@ class Address {
 
     static async setBilling(newAddress, userid) { //inserts new address and updates the billing userAddress in DB to reflect that
       console.log('setting billing');
-      let sql = `INSERT INTO address VALUES(0,'${newAddress[0]}','${newAddress[1]}','${newAddress[2]}','${newAddress[3]}',${newAddress[4]}); UPDATE useraddress SET address=(SELECT addressID FROM address WHERE line1='${newAddress[0]}' && line2='${newAddress[1]}' && zip=${newAddress[4]} LIMIT 1) WHERE user = ${userid} && addressType='billing';`;
+      let sql = `INSERT INTO address VALUES(0,'${newAddress[0]}','${newAddress[1]}','${newAddress[2]}','${newAddress[3]}',${newAddress[4]}); UPDATE userAddress SET address=(SELECT addressID FROM address WHERE line1='${newAddress[0]}' && line2='${newAddress[1]}' && zip=${newAddress[4]} LIMIT 1) WHERE user = ${userid} && addressType='billing';`;
       //assumes newAddress is given as an array in format - [line1, line2, city, state, zip] - won't work otherwise
         //can pretty easily be changed to accept each part as a different parameter if that's easier with the frontend form
       connection.query(sql, (err, result) => {
@@ -35,83 +35,106 @@ class Address {
     }
   
     static async getShippingLine1(userid) {
-      let sql = `SELECT line1 FROM address WHERE addressID = (SELECT address FROM useraddress WHERE user=${userid} && addressType='shipping');`;
+      let sql = `SELECT line1 FROM address WHERE addressID = (SELECT address FROM userAddress WHERE user=${userid} && addressType='shipping');`;
       
       let res = await connection.promise().query(sql);
-      return JSON.stringify(res[0]); //returns string of an array containing line 1
+
+      let tmp = JSON.stringify(res[0])
+      console.log(tmp);
+      return tmp;
     }
   
     static async getShippingLine2(userid) {
-      let sql = `SELECT line2 FROM address WHERE addressID = (SELECT address FROM useraddress WHERE user=${userid} && addressType='shipping');`;
+      let sql = `SELECT line2 FROM address WHERE addressID = (SELECT address FROM userAddress WHERE user=${userid} && addressType='shipping');`;
 
       let res = await connection.promise().query(sql);
-      return JSON.stringify(res[0]); //returns string of an array
+
+      let tmp = JSON.stringify(res[0])
+      console.log(tmp);
+      return tmp;
     }
   
     static async getShippingCity(userid) {
-      let sql = `SELECT city FROM address WHERE addressID = (SELECT address FROM useraddress WHERE user=${userid} && addressType='shipping');`;
+      let sql = `SELECT city FROM address WHERE addressID = (SELECT address FROM userAddress WHERE user=${userid} && addressType='shipping');`;
 
       let res = await connection.promise().query(sql);
-      return JSON.stringify(res[0]); //returns string of an array
+      let tmp = JSON.stringify(res[0])
+      console.log(tmp);
+      return tmp;
     }
   
     static async getShippingState(userid) {
-      let sql = `SELECT state FROM address WHERE addressID = (SELECT address FROM useraddress WHERE user=${userid} && addressType='shipping');`;
+      let sql = `SELECT state FROM address WHERE addressID = (SELECT address FROM userAddress WHERE user=${userid} && addressType='shipping');`;
 
       let res = await connection.promise().query(sql);
-      return JSON.stringify(res[0]); //returns string of an array
+      let tmp = JSON.stringify(res[0])
+      console.log(tmp);
+      return tmp;
     }
   
     static async getShippingZip(userid) {
-      let sql = `SELECT zip FROM address WHERE addressID = (SELECT address FROM useraddress WHERE user=${userid} && addressType='shipping');`;
+      let sql = `SELECT zip FROM address WHERE addressID = (SELECT address FROM userAddress WHERE user=${userid} && addressType='shipping');`;
 
       let res = await connection.promise().query(sql);
-      return JSON.stringify(res[0]); //returns string of an array 
+      let tmp = JSON.stringify(res[0])
+      console.log(tmp);
+      return tmp;
     }
 
     static async getBillingLine1(userid) {
-      let sql = `SELECT line1 FROM address WHERE addressID = (SELECT address FROM useraddress WHERE user=${userid} && addressType='billing');`;
+      let sql = `SELECT line1 FROM address WHERE addressID = (SELECT address FROM userAddress WHERE user=${userid} && addressType='billing');`;
 
       let res = await connection.promise().query(sql);
-      return JSON.stringify(res[0]); //returns string of an array
+      let tmp = JSON.stringify(res[0])
+      console.log(tmp);
+      return tmp;
     }
   
     static async getBillingLine2(userid) {
-      let sql = `SELECT line2 FROM address WHERE addressID = (SELECT address FROM useraddress WHERE user=${userid} && addressType='billing');`;
+      let sql = `SELECT line2 FROM address WHERE addressID = (SELECT address FROM userAddress WHERE user=${userid} && addressType='billing');`;
 
       let res = await connection.promise().query(sql);
-      return JSON.stringify(res[0]); //returns string of an array
+      let tmp = JSON.stringify(res[0])
+      console.log(tmp);
+      return tmp;
     }
   
     static async getBillingCity(userid) {
-      let sql = `SELECT city FROM address WHERE addressID = (SELECT address FROM useraddress WHERE user=${userid} && addressType='billing');`;
+      let sql = `SELECT city FROM address WHERE addressID = (SELECT address FROM userAddress WHERE user=${userid} && addressType='billing');`;
 
       let res = await connection.promise().query(sql);
-      return JSON.stringify(res[0]); //returns string of an array
+      let tmp = JSON.stringify(res[0])
+      console.log(tmp);
+      return tmp;
     }
   
     static async getBillingState(userid) {
-      let sql = `SELECT state FROM address WHERE addressID = (SELECT address FROM useraddress WHERE user=${userid} && addressType='billing');`;
+      let sql = `SELECT state FROM address WHERE addressID = (SELECT address FROM userAddress WHERE user=${userid} && addressType='billing');`;
 
       let res = await connection.promise().query(sql);
-      return JSON.stringify(res[0]); //returns string of an array
+      let tmp = JSON.stringify(res[0])
+      console.log(tmp);
+      return tmp;
     }
   
     static async getBillingZip(userid) {
-      let sql = `SELECT zip FROM address WHERE addressID = (SELECT address FROM useraddress WHERE user=${userid} && addressType='billing');`;
+      let sql = `SELECT zip FROM address WHERE addressID = (SELECT address FROM userAddress WHERE user=${userid} && addressType='billing');`;
 
       let res = await connection.promise().query(sql);
-      return JSON.stringify(res[0]); //returns string of an array
+      let tmp = JSON.stringify(res[0])
+      console.log(tmp);
+      return tmp;
     }
 
   }
   
   // Address.setShipping(["1234 Another St","Apt 1","Test City","Testesse",54321],1);
   // Address.setBilling(["4321 Parker Ave","","Trinity","Testylvania",98765],1);
-  // Address.getShippingLine2(1);
-  // Address.getShippingCity(1);
-  // Address.getShippingState(1);
-  // Address.getShippingZip(1);
+  // Address.getShippingLine1(401);
+  // Address.getShippingLine2(401);
+  // Address.getShippingCity(401);
+  // Address.getShippingState(401);
+  // Address.getShippingZip(401);
   // Address.getBillingLine1(1);
   // Address.getBillingLine2(1);
   // Address.getBillingCity(1);
