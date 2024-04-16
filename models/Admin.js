@@ -15,6 +15,12 @@ class Admin {
       let prodInsSQL = `INSERT INTO product VALUES(0, '${productName}','${price}','${inventory}','${description}','${imgPath}')`;
 
       connection.promise().query(prodInsSQL).then(() => { //after product is inserted, assign it categories in db
+        //console.log(categories);
+        if(typeof(categories) === "string") {//if admin only selects one category it passes a string instead of an array
+          let category = categories;
+          categories = [category];
+        }
+
         for(let i of categories){ //for loop necessary if its in multiple cats
           connection.query(`INSERT INTO incategory VALUES(0, (SELECT categoryID FROM category WHERE categoryName='${i}'), (SELECT productID FROM product WHERE productName='${productName}'))`)
         }
