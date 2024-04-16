@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`userAddress` (
   CONSTRAINT `user` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
   );
 
-  CREATE TABLE `cart` (
+  CREATE TABLE IF NOT EXISTS `supawdb`.`cart` (
   `id` int NOT NULL AUTO_INCREMENT,
   `cartUser` int NOT NULL,
   `prodInCart` int NOT NULL,
