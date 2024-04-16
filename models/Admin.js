@@ -31,26 +31,26 @@ class Admin {
   
     static async removeItem(productID) { //removes product from DB
       let sql = `DELETE FROM product WHERE productID=${productID};`;
-      connection.query(sql);
+      await connection.promise().query(sql);
       console.log("product removed");
     }
   
     static async setProductName(productID, newName) {
       let sql = `UPDATE product SET productName="${newName}" WHERE productID=${productID};`;
-      connection.query(sql);
+      await connection.promise().query(sql);
       console.log("product updated"); 
     }
 
     static async setPrice(productID, newPrice) {
       let sql = `UPDATE product SET price='${newPrice}' WHERE productID=${productID};`;
-      connection.query(sql);
+      await connection.promise().query(sql);
       console.log("product updated");
     }
 
     static async setInventory(productID, newInventory){
       //console.log(productID);
       let sql = `UPDATE product SET inventory='${newInventory}' WHERE productID=${productID};`;
-      connection.query(sql);
+      await connection.promise().query(sql);
       console.log("product updated");
     }
   
@@ -82,14 +82,17 @@ class Admin {
     }
   
     //PRODUCT AUDIT METHODS
-    static async recordAdd(userID, productID) {
-      let sql = `INSERT INTO edits VALUES(0, ${userID}, ${productID}, 'Add', NOW());`;
+    static async recordAdd(userID, productID, productName) {
+      let sql = `INSERT INTO edits VALUES(0, ${userID}, ${productID}, 'Add', NOW(), '${productName}');`;
       let res = await connection.promise().query(sql);
       return res[0];
     }
 
-    static async recordEdit(userID, productID) {
-
+    static async recordEdit(userID, productID, productName) {
+      //console.log("in recordEdit model")
+      let sql = `INSERT INTO edits VALUES(0, ${userID}, ${productID}, "Edit", NOW(),  '${productName}');`;
+      let res = await connection.promise().query(sql);
+      return res[0];
     }
 
     static async recordRemove(userID, productID) {

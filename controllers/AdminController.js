@@ -31,20 +31,21 @@ class AdminController {
     }
 
     static async updateProduct(info) {
-        Admin.setProductName(info.productID, info.productName);
-        Admin.setPrice(info.productID, info.price);
-        Admin.setInventory(info.productID, info.inventory);
-        Admin.setDescription(info.productID, info.description);
-        Admin.setCategories(info.productID,info.category);
+        await Admin.setProductName(info.productID, info.productName);
+        await Admin.setPrice(info.productID, info.price);
+        await Admin.setInventory(info.productID, info.inventory);
+        await Admin.setDescription(info.productID, info.description);
+        await Admin.setCategories(info.productID,info.category);
         return true;
     }
 
     static async updateProductImg(info, imgName) {
-        Admin.setImgPath(info.productID,"product-images/" + imgName);
+        await Admin.setImgPath(info.productID,"product-images/" + imgName);
+        return true;
     }
 
     static async deleteProduct(info) {
-        Admin.removeItem(info.productID);
+        await Admin.removeItem(info.productID);
         return true;
     }
 
@@ -53,7 +54,12 @@ class AdminController {
     static async recordAdd(userID, info) {
         let id = await User.getProductIDByName(info.productName);
         //console.log(id[0]);
-        await Admin.recordAdd(userID,id[0].productID);
+        await Admin.recordAdd(userID,id[0].productID, info.productName);
+    }
+
+    static async recordEdit(userID, info) {
+        //console.log("in recordEdit controller");
+        await Admin.recordEdit(userID, info.productID, info.productName);
     }
 
 

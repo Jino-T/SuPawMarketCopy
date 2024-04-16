@@ -158,8 +158,9 @@ router.post("/updateProduct", upload.single("productImg"), async function(req,re
     console.log(req.body);
     await AdminController.updateProduct(req.body);
     if(req.body.productImg !== "undefined") {
-      await AdminController.updateProductImg(req.body,req.file.originalname)
+      await AdminController.updateProductImg(req.body,req.file.originalname);
     }
+    await AdminController.recordEdit(req.session.userID,req.body);
     res.render("pages/editProduct");
   }
   else res.send("Admin Account Required")
