@@ -15,10 +15,12 @@ body {
     flex-direction: column; /* Stack elements vertically */
 }
 
+
 .product-image {
-    width: 50%; /* Half of its container's width */
+    width: 50%; /* Adjust width as needed */
     height: auto; /* Maintain aspect ratio */
-  }
+    /* Removed the margin-right property as it is no longer necessary */
+}
   
   
   /* Optionally, if needed, set a maximum height for the image or its container */
@@ -33,14 +35,26 @@ body {
     background-color: #8e99a2; /* Continuous grey background */
 }
 
+.product-image-container {
+    display: flex; /* Use flexbox to center the image */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    width: 100%; /* Take full width to center within the card header */
+    height: auto; /* Adjust height as necessary */
+}
+
+/* Ensure the product image fills its container while maintaining aspect ratio */
 .product-image {
-    border-radius: 5px;
-    margin-right: 20px;
+    max-width: 100%; /* Image can be as wide as its container without overflowing */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* If you want rounded corners */
 }
 
 .header-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    flex-direction: column; /* Stack children vertically */
 }
 
 .card-title {
