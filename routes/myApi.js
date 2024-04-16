@@ -127,31 +127,32 @@ router.get("/admin", function(req,res) {
   else res.send("Admin Account Required")
 })
 
-router.get("/addProduct", function(req,res) {
+router.get("/addProduct", function(req,res) { //Renders page with a form for admins to add a product
   if(req.session.isLoggedIn === true && req.session.isAdmin === 1) {
     res.render("pages/addProduct");
   }
   else res.send("Admin Account Required")
 })
 
-router.post("/validateProduct", upload.single("productImg"), async function(req,res) {
+router.post("/validateProduct", upload.single("productImg"), async function(req,res) { //adds a product to the database
   //console.log(req.body);
   //console.log(req.file.originalname)
   if(req.session.isLoggedIn === true && req.session.isAdmin === 1) {
     await AdminController.addProduct(req.body, req.file.originalname);
+    await AdminController.recordAdd(req.session.userID,req.body)
     res.render("pages/adminDash");
   }
   else res.send("Admin Account Required")
 })
 
-router.get("/editProducts", async function(req,res) {
+router.get("/editProducts", async function(req,res) {//renders table of all products and allows admins to edit products
   if(req.session.isLoggedIn === true && req.session.isAdmin === 1) { 
     res.render("pages/editProduct");
   }
   else res.send("Admin Account Required")
 })
 
-router.post("/updateProduct", upload.single("productImg"), async function(req,res) {
+router.post("/updateProduct", upload.single("productImg"), async function(req,res) { //updates product info
   //console.log(JSON.stringify(req.body));
   if(req.session.isLoggedIn === true && req.session.isAdmin === 1) { 
     console.log(req.body);

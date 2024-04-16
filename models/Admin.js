@@ -9,7 +9,7 @@ class Admin {
       this.email = email;
     }
 
-//METHODS RELATING TO PRODUCTS
+//PRODUCT METHODS
     static async addItem(productName, price, inventory, description, categories, imgPath='') { //adds product to DB including what categories its in
       //assumes categories is an array of strings of already existing product categories
       let prodInsSQL = `INSERT INTO product VALUES(0, '${productName}','${price}','${inventory}','${description}','${imgPath}')`;
@@ -75,7 +75,26 @@ class Admin {
       console.log("Category updated");
     }
   
-//METHODS RELATING TO USERS
+    //PRODUCT AUDIT METHODS
+    static async recordAdd(userID, productID) {
+      let sql = `INSERT INTO edits VALUES(0, ${userID}, ${productID}, 'Add', NOW());`;
+      let res = await connection.promise().query(sql);
+      return res[0];
+    }
+
+    static async recordEdit(userID, productID) {
+
+    }
+
+    static async recordRemove(userID, productID) {
+
+    }
+
+    static async getProductHistory(productID) {
+
+    }
+
+    //USER METHODS
     static async getUsers() {
       let sql = `SELECT * FROM user;`
       let res = await connection.promise().query(sql);
@@ -88,8 +107,7 @@ class Admin {
       return res[0];
     }
 
-//METHODS ABOUT REVIEWS
-
+//REVIEW METHODS
     static async hideReview() {
       // TODO
     }

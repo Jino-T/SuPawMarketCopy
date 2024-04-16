@@ -116,11 +116,17 @@ class User {
       // Logic to search for products
     }
   
-    static async getProducts() { //returns a string of the list of all productsIDs in the database
+    static async getProducts() { //returns all productsIDs in the database
       let sql = `SELECT productID FROM product;`
 
       let res = await connection.promise().query(sql);
-      return JSON.stringify(res[0]);
+      return res[0];
+    }
+
+    static async getProductIDByName(productName) { //returns a string of the list of all productsIDs in the database
+      let sql = `SELECT productID FROM product WHERE productName='${productName}';`;
+      let res = await connection.promise().query(sql);
+      return res[0];
     }
 
     static async getProductInfo() { //returns a string of the list of all productsIDs in the database

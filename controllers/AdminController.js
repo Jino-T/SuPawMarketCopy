@@ -8,14 +8,15 @@ const User = require('../models/User');
 
 class AdminController {
 
-    static async addProduct(info, imgName) {
+    //PRODUCT METHODS
+    static async addProduct(info, imgName='') {
         // console.log("cotoller user: " + info.username);
         // console.log("controller pass: " + info.password);
         // console.log(info.productName);
         // console.log(info.categories);
         // console.log(info.categories);
         // let categories = info.categories.split(",");
-        Admin.addItem(info.productName,info.price,info.inventory,info.productDesc,info.categories, "product-images/" + imgName);
+        await Admin.addItem(info.productName,info.price,info.inventory,info.productDesc,info.categories, "product-images/" + imgName);
         //console.log(check)
     }
 
@@ -47,6 +48,16 @@ class AdminController {
         return true;
     }
 
+    //PRODUCT AUDIT METHODS
+
+    static async recordAdd(userID, info) {
+        let id = await User.getProductIDByName(info.productName);
+        //console.log(id[0]);
+        await Admin.recordAdd(userID,id[0].productID);
+    }
+
+
+    //USER METHODS
     static async getUsers() {
         let res = await Admin.getUsers();
         return res;

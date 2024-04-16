@@ -108,3 +108,17 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`userAddress` (
   CONSTRAINT `user` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
   );
 
+  CREATE TABLE IF NOT EXISTS `supawdb`.`edits` (
+  `editID` int NOT NULL AUTO_INCREMENT,
+  `userID` int NOT NULL,
+  `prodID` int NOT NULL,
+  `editType` varchar(45) NOT NULL,
+  `editTime` datetime NOT NULL,
+  PRIMARY KEY (`editID`),
+  UNIQUE KEY `editID_UNIQUE` (`editID`),
+  KEY `userID_idx` (`userID`),
+  KEY `prodID_idx` (`prodID`),
+  CONSTRAINT `adminID` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `changedProductID` FOREIGN KEY (`prodID`) REFERENCES `product` (`productID`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
