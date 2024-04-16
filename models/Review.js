@@ -150,11 +150,9 @@ class Review {
   //Review.getReviewText(801);
 
 
-  // Review.setUserId(801, 402);
-  // Review.setProductId(801, 120);
-  // Review.setStarRating(801, 3);
-  // Review.setReviewText(801, "bowow");
-
-  Review.getReviewIds(101);
+  //Review.setUserId(801, 402);
+  //Review.setProductId(801, 120);
+  //Review.setStarRating(801, 3);
+  //Review.setReviewText(801, "bowow");
 
   module.exports = Review;

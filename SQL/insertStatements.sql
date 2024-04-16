@@ -146,6 +146,7 @@ INSERT INTO `supawdb`.`user` (`userID`, `username`, `password`, `isAdmin`) VALUE
 INSERT INTO `supawdb`.`user` (`userID`, `username`, `password`, `isAdmin`) VALUES ('404', 'josh', 'josh123', '0');
 INSERT INTO `supawdb`.`user` (`userID`, `username`, `password`, `isAdmin`) VALUES ('405', 'sammy', 'sammy123', '0');
 
+INSERT INTO `supawdb`.`address` (`addressID`, `line1`, `line2`, `city`, `state`, `zip`) VALUES ('1', 'Default Line1', 'Default Line2', 'Default City', 'Default State', '00000');
 INSERT INTO `supawdb`.`address` (`addressID`, `line1`, `line2`, `city`, `state`, `zip`) VALUES ('501', '308 Negra Arroyo Lane', '', 'Albuquerque', 'New Mexico', '87104');
 INSERT INTO `supawdb`.`address` (`addressID`, `line1`, `city`, `state`, `zip`) VALUES ('502', '709 Rainbow Road', 'Austin', 'Texas', '73301');
 
