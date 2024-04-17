@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/navbar') %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/create.css">
+    <title>Create An Account</title>
+</head>
+<body>
+    <header>
+        <h1>Create an Account</h1>
+        <nav>
+            <ul>
+                <!--<li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>-->
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <img src="https://cdn4.iconfinder.com/data/icons/man-user-human-person-business-profile-avatar/100/20-1User_13-512.png" alt="LOGINICON???" class="login_image" />
+        <form method="post" action="/create">
+            <label for="Name" class = userLabel>Username:</label>
+            <input type="text" id="Name" name="username" placeholder="Your Username" class = "user"></input>
+
+            <label for="Pass" class = passLabel>Password:</label>
+            <input type="password" id="Pass" name="password" placeholder = "Your Password" class = "pass"></input>
+
+           <button type="submit" class=button value="create">Create Account</button>
+           <a href="/login" class = back>Back to Login</a>
+           <a href="/" class = home>Home</a>
+        </form>
+    </main>
+</body>
+</html>

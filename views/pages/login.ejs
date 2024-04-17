@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <%- include('../partials/navbar') %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/login.css">
@@ -12,13 +13,13 @@
         <nav>
             <ul>
                 <!--<li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>-->
+                <li><a href="/about">About</a></li> "../img/loginimage2.png" -->
             </ul>
         </nav>
     </header>
     <main>
-        <img src="../img/loginimage2.png" alt="LOGINICON???" class="login_image" />
-
+        
+        <img src="https://cdn4.iconfinder.com/data/icons/man-user-human-person-business-profile-avatar/100/20-1User_13-512.png" alt="LOGINICON???" class="login_image" />
         <form method="post" action="/validate">
             <label for="Name" class = userLabel>Username:</label>
             <input type="text" id="Name" name="username" placeholder="Your Username" class = "user"></input>
@@ -27,26 +28,10 @@
             <input type="password" id="Pass" name="password" placeholder = "Your Password" class = "pass"></input>
 
             <button type="submit" class=button value="login">Login!</button>  
-        </form>
-<br><br>
-        <form method="post" action="/create">
-            <label for="Name" class = userLabel>Username:</label>
-            <input type="text" id="Name" name="username" placeholder="Your Username" class = "user"></input>
+            <a href="/create" class = "create">Create an Account</a>
+            <a href="/" class = "home">Home</a>
 
-            <label for="Pass" class = passLabel>Password:</label>
-            <input type="password" id="Pass" name="password" placeholder = "Your Password" class = "pass"></input>
-
-            <button type="submit" class=button value="create">Create Account</button> 
-        </form>
-
-
-        <!--<div class="product-tile"> MAKE CLASS CALLED LOGIN_IMAGE AND INPUT STYLE INFO THERE
-            <a href="/products">
-            </a>
-            <h3 class="product-title dog-products-header">Our Dog Products</h3>
-        </div>
-
-        <img src="../img/loginicon.jpg" alt="LOGIN_ICON"> -->
+        </form> 
     </main>
 </body>
 </html>
