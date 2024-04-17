@@ -16,7 +16,7 @@ class Product {
     if (result.length > 0) {
       return result[0].inventory;
     } else {
-      console.log("Product not found");
+      console.log("1Product not found");
       return null;
     }
   }
@@ -28,7 +28,7 @@ class Product {
       return result[0].imagePath;
 
     } else {
-      console.log("Product not found");
+      console.log("2Product not found");
       return null;
     }
   }
@@ -40,7 +40,7 @@ class Product {
     if (result.length > 0) {
       return result[0].productName;
     } else {
-      console.log("Product not found");
+      console.log("3Product not found");
       return null;
     }
   }
@@ -52,7 +52,7 @@ class Product {
     if (result.length > 0) {
       return result[0].description;
     } else {
-      console.log("Product not found");
+      console.log("4Product not found");
       return null;
     }
   }
@@ -64,7 +64,7 @@ class Product {
     if (result.length > 0) {
       return result[0].price;
     } else {
-      console.log("Product not found");
+      console.log("5Product not found");
       return null;
     }
   }
