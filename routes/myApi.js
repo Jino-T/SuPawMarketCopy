@@ -8,6 +8,7 @@ const router = express.Router();
 
 const AdminController = require("../controllers/AdminController");
 var bodyParser = require("body-parser");
+const AddressController = require("../controllers/AddressController");
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
@@ -224,5 +225,10 @@ router.post("/addToCart", jsonParser, async function(req, res) {
     }
   }
 });
+
+router.post("/updateShippingAddress", urlencodedParser, async function(req, res) {
+  await AddressController.setShippingAddress(req.session.userID,req.body);
+  res.render("pages/account", { username: req.session.username });
+})
 
 module.exports = router;

@@ -16,26 +16,31 @@
         <img src="https://cdn4.iconfinder.com/data/icons/man-user-human-person-business-profile-avatar/100/20-1User_13-512.png" alt="LOGINICON???" class="login_image" />
         <b id="accountLabel" class="accountLabel"><%= username %></b>
     <div></div>
+        
+    <form method="post" action="updateShippingAddress">
         <label for="email" class = emailLabel>Email:</label>
-            <input type="email" id="email" name="email" placeholder = "Enter Email" class = "email"></input>
-    <div></div>
+        <input type="email" id="email" name="email" placeholder = "Enter Email" class = "email"></input>
+        <div></div>
         <label for="address" class = emailLabel>Shipping Address:</label>
-            <input type="address" id="address" name="address" placeholder = "Enter Shipping Address" class = "email"></input>
-    <div></div>
+        <input type="text" id="address" name="address" placeholder = "Enter Shipping Address" class = "email"></input>
+        <div></div>
         <label for="address2" class = emailLabel>Shipping Address Line 2:</label>
-            <input type="address2" id="address2" name="address2" placeholder = "Line 2 If You Need It" class = "email"></input>
-    <div></div>
+        <input type="text" id="address2" name="address2" placeholder = "Line 2 If You Need It" class = "email"></input>
+        <div></div>
         <label for="city" class = cityLabel>City:</label>
-            <input type="city" id="city" name="city" placeholder = "Enter City" class = "city"></input>
-    <div></div>
+        <input type="text" id="city" name="city" placeholder = "Enter City" class = "city"></input>
+        <div></div>
         <label for="state" class = stateLabel>State:</label>
-            <input type="state" id="state" name="state" placeholder = "Enter State" class = "state"></input>
-    <div></div>
+        <input type="text" id="state" name="state" placeholder = "Enter State" class = "state"></input>
+        <div></div>
         <label for="zip" class = zipLabel>Zipcode:</label>
-            <input type="zip" id="zip" name="zip" placeholder = "Enter Zipcode" class = "zip"></input>
-    <div></div>
+        <input type="number" id="zip" name="zip" placeholder = "Enter Zipcode" class = "zip"></input>
+        <div></div>
         <label for="phonenumber" class = phoneLabel>Phone Number:</label>
-            <input type="phonenumber" id="phonenumber" name="phonenumber" placeholder = "Enter Phone Number" class = "email"></input>
+        <input type="tel" id="phonenumber" name="phonenumber" placeholder = "Enter Phone Number" class = "email"></input>
+        <button type="submit" class=button value="Update Address">Update Your Information</button>
+    </form>
+
     <br></br>
         <a href="/account" class="backaccount">Back to Account Page</a>
         <a href="/" class="home">Home</a>
