@@ -64,6 +64,12 @@ class AdminController {
         await Admin.recordRemove(userID,info.productID,info.productName);
     }
 
+    static async getProductHistory(info) {
+        //console.log(info);
+        let res = await Admin.getProductHistory(info.prodID);
+        //console.log(res);
+        return res;
+    }
 
     //USER METHODS
     static async getUsers() {

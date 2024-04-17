@@ -102,6 +102,9 @@ class Admin {
     }
 
     static async getProductHistory(productID) {
+      let sql = `SELECT edits.userID, edits.editType, edits.editTime, edits.productName, user.username FROM edits INNER JOIN user ON user.userID = edits.userID AND edits.prodID = ${productID};`;
+      let res = await connection.promise().query(sql);
+      return res[0];
 
     }
 

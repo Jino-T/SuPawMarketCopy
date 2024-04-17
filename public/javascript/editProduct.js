@@ -4,6 +4,7 @@ const productDataRoute = document.getElementById("productData").value;
 const updateProductRoute = document.getElementById("editProdData").value;
 const deleteProductRoute = document.getElementById("delProd").value;
 const categoryDataRoute = document.getElementById("categoryData").value;
+const productHistoryRoute = document.getElementById("productHistoryRoute").value;
 const ce = React.createElement;
 
 
@@ -13,6 +14,7 @@ class productTable extends React.Component {
         this.state = {showing: "table", 
         products : [], 
         categories: [], 
+        productHistory: [],
         prodID: 0, 
         productName: "", 
         price: 0, 
@@ -60,7 +62,7 @@ class productTable extends React.Component {
               );
         }
         else if(this.state.showing === "product") {
-            return ce('div', null,
+            return ce('div', null, //create form for admin to edit
             ce('h1', null, 'Product Information:'),
             ce('br'),
             ce('form',{id:"prodInfoForm"}, 
@@ -90,7 +92,35 @@ class productTable extends React.Component {
             ce('br')),
             ce('button', {id:"updateButton", onClick: e => this.updateProduct(e)}, 'Update Product'),
             ce('button', {id:"removeButton", onClick: e => this.deleteProduct(e)}, 'Remove Product'),
-            //ce('span', {id: "create-message"}, this.state.createMessage)
+            ce('br'),
+            ce( //create table with all product edit history
+                'table',
+                null,
+                ce(
+                  'thead',
+                  null,
+                  ce(
+                    'tr',
+                    null,
+                    ce('th', null, 'User'),
+                    ce('th', null, 'Edit Type'),
+                    ce('th', null, 'Time'),
+                  )
+                ),
+                ce(
+                  'tbody',
+                  null,
+                  this.state.productHistory.map((item, index) =>
+                    ce(
+                      'tr',
+                      { key: index },
+                      ce('td', {class:"historyTable"}, item.username),
+                      ce('td', {class:"historyTable"}, item.editType),
+                      ce('td', {class:"historyTable"}, item.editTime),
+                    )
+                  )
+                )
+              )
     );
         }
         
@@ -101,10 +131,19 @@ class productTable extends React.Component {
     }
 
     getCategories() {
-        fetch(categoryDataRoute).then(res => res.json()).then(categories => this.setState({ categories }));
+        fetch(categoryDataRoute).then(res => res.json()).then(categories => {this.setState({ categories })});
+    }
+
+    getProductHistory(prodID) {
+        fetch(productHistoryRoute, { 
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({prodID})
+        }).then(res => res.json()).then(productHistory => this.setState({ productHistory })).then(() => console.log(this.state.productHistory));
     }
 
     getEditForm(item) {
+        this.getProductHistory(item.productID);
         this.setState({showing: "product",
         prodID:item.productID,
         productName:item.productName,
@@ -112,7 +151,8 @@ class productTable extends React.Component {
         description:item.description,
         inventory: item.inventory,
         imgPath: item.imagePath
-    })
+        })
+
     }
 
     changerHandler(e) {

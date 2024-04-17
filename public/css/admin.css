@@ -107,6 +107,10 @@ tr:hover {
     text-align: center;
 }
 
+.historyTable{
+  text-align: center;
+}
+
 #catInput {
     position: absolute;
     right: 5%;
