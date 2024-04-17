@@ -11,32 +11,21 @@
     <header>
         <h1>Your Cart</h1>
     </header>
+    <!-- cart.ejs -->
     <main>
-        <b class = label1>Items</b> <b class = label2>Price</b> <b class = label3>Quantity</b> <b class = label4>Total</b>
-        <br> </br>
-        <img src="../img/PLACEHOLDER.png" alt="Placeholder TEXT" class = product> 
-        <b class = price> $10.00 </b> 
-        <button id = "plus" type="button" class=plusButton> + </button>
-        <b id = "qty" class="quantity"> 1 </b>
-        <button id = "minus" type="button" class=minusButton> - </button>
-        <b id = "total" class="total"> 10 </b>
-
-        <br></br>
-
-        <img src="../img/PLACEHOLDER.png" alt="Placeholder TEXT" class = product> 
-        <b class = price> $20.00 </b> 
-        <button id = "plus2" type="button" class=plusButton> + </button>
-        <b id = "qty2" class="quantity"> 1 </b>
-        <button id = "minus2" type="button" class=minusButton> - </button>
-        <b id = "total2" class="total"> 20 </b>
-
-        <br></br>
-
-        <div><b class="subtotal"> Subtotal: </b> <b id = "subtotal" class="subnum"> 30 </b> <button id = "update" type="button" class=updateButton> Update </button></div>
-        <div><b class="sales"> Sales Tax: </b> <b id = "sales" class="salesnum"> 2.4 </b> <a href="/checkout" class = "checkoutlink">Checkout!</a></div>
-        <div><b class="grand"> Grand Total: </b> <b id = "grand" class="grandnum"> 32 </b> </div>
-        
-<script src="/javascript/cart.js"></script>
+      <header>
+          <h1>Your Cart</h1>
+      </header>
+      <div id="cartContainer" ></div> <!-- Updated Container -->
+      <div><b class="subtotal">Subtotal: </b><b id="subtotal" class="subnum">0</b></div>
+      <div><b class="sales">Sales Tax: </b><b id="sales" class="salesnum">0</b> <a href="/checkout" class="checkoutlink">Checkout!</a></div>
+      <div><b class="grand">Grand Total: </b><b id="grand" class="grandnum">0</b></div>
+      
+      <script>
+        var userID = '<%= userID %>'; // Set global variable
+      </script>      
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="/javascript/cart.js"></script>
     </main>
 </body>
 </html>

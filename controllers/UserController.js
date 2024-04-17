@@ -57,7 +57,27 @@ class UserController {
             console.error("Error adding item to cart:", error);
             
         }
-    }    
+    }
+    
+    static async getCart(req, res) {
+        try {
+            const userID = req.params.userID;
+            const cartItems = await User.getCart(userID);
+            res.json(cartItems);
+        } catch (error) {
+            console.error("Error fetching cart:", error);
+            res.status(500).json({ message: "Internal server error" });
+        }
+    }
+
+    
+    static async removeFromCart(userID, productID) {
+        try {
+            const result = await User.removeFromCart(userID, productID);
+        } catch (error) {
+            console.error("Error adding item to cart:", error);
+        }
+    } 
 }
 
 

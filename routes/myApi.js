@@ -30,7 +30,9 @@ router.get("/products", function(req, res) {
 
 //cart page route
 router.get("/cart", function(req, res) {
-  res.render("pages/cart"); // This will render views/pages/cart.ejs
+  if (req.session.isLoggedIn === true) {
+  res.render("pages/cart", {userID: req.session.userID}); // This will render views/pages/cart.ejs
+  } else res.render("/login");
 });
 
 //checkout page route
@@ -226,5 +228,8 @@ router.get('/reviews/text/:reviewId', ReviewController.getReviewText);
 
 router.get('/reviews/reviewIDs/:productID', ReviewController.getReviewIds);
 
+router.get('/user/getCart/:userID', UserController.getCart);
+
+router.get("/user/removeItem/:userID/:productID", UserController.removeFromCart);
 
 module.exports = router;
