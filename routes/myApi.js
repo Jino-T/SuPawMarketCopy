@@ -32,7 +32,7 @@ router.get("/products", function(req, res) {
 router.get("/cart", function(req, res) {
   if (req.session.isLoggedIn === true) {
   res.render("pages/cart", {userID: req.session.userID}); // This will render views/pages/cart.ejs
-  } else res.render("/login");
+  } else res.redirect("/login");
 });
 
 //checkout page route
