@@ -46,6 +46,18 @@ class UserController {
         res.status(500).send("Internal Server Error");
         }
     }
+
+    static async addToCart(userID, info) {
+        try {
+            const productID = info.productID;
+            const quantity = info.quantity;
+
+            const result = await User.addToCart(productID, userID, quantity);
+        } catch (error) {
+            console.error("Error adding item to cart:", error);
+            
+        }
+    }    
 }
 
 
