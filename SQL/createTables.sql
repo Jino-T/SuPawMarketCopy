@@ -107,7 +107,21 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`userAddress` (
   CONSTRAINT `user` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
   );
 
-  CREATE TABLE `cart` (
+  CREATE TABLE `edits` (
+  `editID` int NOT NULL AUTO_INCREMENT,
+  `userID` int NOT NULL,
+  `prodID` int DEFAULT NULL,
+  `editType` varchar(45) NOT NULL,
+  `editTime` datetime NOT NULL,
+  `productName` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`editID`),
+  UNIQUE KEY `editID_UNIQUE` (`editID`),
+  KEY `userID_idx` (`userID`),
+  KEY `prodID_idx` (`prodID`),
+  CONSTRAINT `adminID` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `changedProductID` FOREIGN KEY (`prodID`) REFERENCES `product` (`productID`) ON DELETE SET NULL ON UPDATE CASCADE
+) ;
+  CREATE TABLE IF NOT EXISTS `supawdb`.`cart` (
   `id` int NOT NULL AUTO_INCREMENT,
   `cartUser` int NOT NULL,
   `prodInCart` int NOT NULL,
