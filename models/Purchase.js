@@ -11,11 +11,11 @@ class Purchase {
     }
   
     //adds purchase to the database; Example function call: Purchase.addPurchase(702, 401, 120, 5, '2022-03-30 09:49:30')
-    static async addPurchase(purchaseID, userID, productID, quantity, purchaseTime) {
+    static async addPurchase(userID, productID, quantity, purchaseTime) {
       console.log("Adding a purchase to the database");
+      let sql = `INSERT INTO purchase VALUES(0,'${userID}','${productID}','${quantity}','${purchaseTime}');` 
 
-      let sql = `INSERT INTO \`supawdb\`.\`purchase\` (\`purchaseID\`, \`user\`, \`product\`, \`quantity\`, \`purchaseTime\`) VALUES ('?', '?', '?', '?', ?);`
-      await connection.promise().query(sql, [purchaseID, userID, productID, quantity, purchaseTime]);
+      await connection.promise().query(sql, [userID, productID, quantity, purchaseTime]);
       console.log("Purchase Added");
     }
 
@@ -122,7 +122,7 @@ class Purchase {
   
   //Test data
   //Run: node ./models/Purchase.js
-    //Purchase.addPurchase(702, 401, 120, 5, '2022-03-30 09:49:30')
+    //Purchase.addPurchase(401, 120, 5, '2022-03-30 09:49:30')
     //Purchase.getUserID(701);
     //Purchase.getProductID(701);
     //Purchase.getQuantity(701);
