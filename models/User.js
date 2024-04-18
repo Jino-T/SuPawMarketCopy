@@ -144,23 +144,22 @@ class User {
     let sql = `SELECT * FROM purchase WHERE user=${userID};`;
     let res = await connection.promise().query(sql);
 
-    return res[0];
-  }
+      return res[0];
+    }
+  
+//SEARCH AND GET METHODS
+    static async searchProduct(keyword) {
+      let sql = `SELECT productID FROM product WHERE productName LIKE '%${keyword}%';`
+      let res = await connection.promise().query(sql);
+      return JSON.stringify(res[0]);
+    }
+  
+    static async getProducts() { //returns all productsIDs in the database
+      let sql = `SELECT productID FROM product;`
 
-  //SEARCH AND GET METHODS
-  static async searchProduct(keyword) {
-    let sql = `SELECT productID FROM product WHERE productName LIKE '%${keyword}%';`;
-    let res = await connection.promise().query(sql);
-    return JSON.stringify(res[0]);
-  }
-
-  static async getProducts() {
-    //returns a string of the list of all productsIDs in the database
-    let sql = `SELECT productID FROM product;`;
-
-    let res = await connection.promise().query(sql);
-    return JSON.stringify(res[0]);
-  }
+      let res = await connection.promise().query(sql);
+      return JSON.stringify(res[0]);
+    }
 
   static async getProductInfo() {
     //returns a string of the list of all productsIDs in the database
@@ -176,6 +175,12 @@ class User {
 
     let res = await connection.promise().query(sql);
     return JSON.stringify(res[0]);
+  }
+
+  static async getCategories() {
+    let sql = `SELECT categoryName FROM category;`;
+    let res = await connection.promise().query(sql);
+    return res[0];
   }
 
   static async getProductsByCategory(category) {

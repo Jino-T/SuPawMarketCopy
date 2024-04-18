@@ -13,12 +13,17 @@
     </header>
 
     <main>
-        <form method="post" action="/validateProduct">
+
+        <input type="hidden" id="categoryData" value="/getCategories">
+
+        <form method="post" action="/validateProduct" enctype="multipart/form-data">
             <label for="productName" class = prodLabel>Product Name</label>
+            <br>
             <input type="text" id="productName" name="productName" placeholder="Product Name" class = "productName"></input>
             <br>
 
             <label for="productDesc" class = descLabel>Description</label>
+            <br>
             <textarea id="productDesc" name="productDesc" placeholder = "Product Description" class = "productDesc"></textarea>
             <br>
 
@@ -29,11 +34,23 @@
             <input type="number" min="0" id="inventory" name="inventory" placeholder = "0" class = "inventory"></input>
             <br>
 
-            <label for="categories" class = catLabel>Categories (You can enter multiple categories with each separate by a comma, don't include spaces after comma):</label>
-            <input type="text" id="categories" name="categories" placeholder = "Enter your categories here" class = "categories"></input>
-            <br>
+            <div id="catInput">
+                <label for="categories" class = catLabel>Categories</label>
+                <div> Select multiple with cntrl + click </div>
+                <select name="categories" id="categories" multiple required>
+                </select>
+            </div>
 
+            <label for="productImg" class = imageLabel>Upload a Product Image</label>
+            <br>
+            <input type="file" id="productImg" name="productImg" required="true"></input>
+            <br>
+            <br>
             <button type="submit" class=button value="Add Product">Add Product</button>  
         </form> 
+
+        <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+        <script src="/javascript/addProduct.js"></script>
     </main>
 </body>
