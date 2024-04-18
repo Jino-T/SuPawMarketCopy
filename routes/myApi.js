@@ -48,7 +48,9 @@ router.get("/products", function(req, res) {
 
 //cart page route
 router.get("/cart", function(req, res) {
-  res.render("pages/cart"); // This will render views/pages/cart.ejs
+  if (req.session.isLoggedIn === true) {
+  res.render("pages/cart", {userID: req.session.userID}); // This will render views/pages/cart.ejs
+  } else res.redirect("/login");
 });
 
 //checkout page route
@@ -278,5 +280,22 @@ router.get('/reviews/text/:reviewId', ReviewController.getReviewText);
 
 router.get('/reviews/reviewIDs/:productID', ReviewController.getReviewIds);
 
+router.get('/user/getCart/:userID', UserController.getCart);
+
+router.post("/removeItem", jsonParser, async function(req, res) {
+  if (!req.session.isLoggedIn) {
+      return res.status(403).json({ success: false, message: "Not authorized" });
+  }
+
+  try {
+      const removalSuccess = await UserController.removeFromCart(req, res);
+      if (removalSuccess) {
+          return res.status(200).json({ success: true, message: "Item removed successfully" });
+      }
+  } catch (error) {
+      console.error("Error removing item from cart:", error);
+      return res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+});
 
 module.exports = router;
