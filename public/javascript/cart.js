@@ -35,17 +35,23 @@ $(document).ready(function() {
         const total = (price * quantity).toFixed(2);
         const productHtml = `
             <div class="product-item" data-productid="${productId}">
-                <img src="${imagePath}" alt="${productName}">
-                <div>${productName}</div>
-                <div>Price: $${formattedPrice}</div>
-                <button type="button" class="minusButton" data-productid="${productId}">-</button>
-                <span class="product-quantity" data-productid="${productId}" data-price="${formattedPrice}">${quantity}</span>
-                <button type="button" class="plusButton" data-productid="${productId}">+</button>
-                <div>Total: $<span class="product-total" data-totalid="${productId}">${total}</span></div>
+                <div class="product-details">
+                    <img src="${imagePath}" alt="${productName}">
+                    <div>${productName}</div>
+                </div>
+                <div>${formattedPrice}</div>
+                <div class="quantity-controls">
+                    <button type="button" class="minusButton" data-productid="${productId}">-</button>
+                    <span class="product-quantity" data-productid="${productId}" data-price="${formattedPrice}">${quantity}</span>
+                    <button type="button" class="plusButton" data-productid="${productId}">+</button>
+                </div>
+                <div class="total-price"> $<span class="product-total" data-totalid="${productId}">${total}</span></div>
             </div>
         `;
         $('#cartContainer').append(productHtml);
+        updateCartSummary();
     }
+    
 
     $('#cartContainer').on('click', '.plusButton', function() {
         const productId = $(this).data('productid');
@@ -127,17 +133,26 @@ $(document).ready(function() {
         updateCartSummary();
     }
 
-    function updateCartSummary() {
-        let subtotal = 0;
-        $('.product-total').each(function() {
-            subtotal += parseFloat($(this).text());
-        });
-        $('#subtotal').text(subtotal.toFixed(2));
-        const salesTax = subtotal * 0.08;
-        $('#sales').text(salesTax.toFixed(2));
-        const grandTotal = subtotal + salesTax;
-        $('#grand').text(grandTotal.toFixed(2));
-    }
+// Include this function in your cart.js
+function formatCurrency(value) {
+    return '$' + parseFloat(value).toFixed(2);
+}
+
+// Then update the updateCartSummary function like so:
+function updateCartSummary() {
+    let subtotal = 0;
+    $('.product-total').each(function() {
+        subtotal += parseFloat($(this).text().replace('$', '')); // Remove the dollar sign before parsing
+    });
+    $('.subnum').text(formatCurrency(subtotal));
+    const salesTax = subtotal * 0.08; // Assuming 8% sales tax
+    $('.salesnum').text(formatCurrency(salesTax));
+    const grandTotal = subtotal + salesTax;
+    $('.grandnum').text(formatCurrency(grandTotal));
+}
+
+// Remember to update anywhere you set the text of prices to use the formatCurrency function.
+
 
     fetchCart();
 });

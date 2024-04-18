@@ -13,10 +13,20 @@
     </header>
     <!-- cart.ejs -->
     <main>
+<!-- Add this inside the main tag where appropriate -->
+      <div class="cart-header">
+        <div>Item</div>
+        <div>Price</div>
+        <div>Quantity</div>
+        <div>Total</div>
+      </div>
       <div id="cartContainer" ></div> <!-- Updated Container -->
-      <div><b class="subtotal">Subtotal: </b><b id="subtotal" class="subnum">0</b></div>
-      <div><b class="sales">Sales Tax: </b><b id="sales" class="salesnum">0</b> <a href="/checkout" class="checkoutlink">Checkout!</a></div>
-      <div><b class="grand">Grand Total: </b><b id="grand" class="grandnum">0</b></div>
+      <!-- When updating totals, wrap the dollar sign with a span having a class 'dollar-sign' -->
+      <div><b class="subtotal">Subtotal: </b><b id="subtotal" class="subnum">0.00</b></div>
+      <div><b class="sales">Sales Tax: </b><b id="sales" class="salesnum">0.00</b></div>
+      <div><b class="grand">Grand Total: </b><b id="grand" class="grandnum">0.00</b><a href="/checkout" class="checkoutlink">Checkout!</a></div>
+
+      
       
       <script>
         var userID = '<%= userID %>'; // Set global variable

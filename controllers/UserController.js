@@ -71,7 +71,6 @@ class UserController {
 static async removeFromCart(req, res) {
     const { userID, productID } = req.body;
     try {
-        console.log("Removing item from cart", userID, productID);
         const result = await User.removeFromCart(userID, productID);
     } catch (error) {
         console.error("Error removing item from cart:", error);

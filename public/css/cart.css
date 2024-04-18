@@ -31,15 +31,28 @@ h1 {
 /* Product item styles */
 .product-item {
     display: flex;
-    align-items: center;
-    margin-bottom: 20px; /* Space between product items */
+    align-items: center; /* Centers items vertically */
+    justify-content: space-between; /* Spreads items evenly */
+    padding: 10px 0; /* Adds padding above and below each item */
 }
 
-.product-item img {
-    width: 70px; /* Fixed width for images */
-    height: 70px; /* Fixed height for images */
-    object-fit: cover; /* Cover fit for images */
+.product-details {
+    display: flex;
+    align-items: center;
 }
+
+.product-details img {
+    margin-right: 55px; /* Adds space to the right of the image */
+}
+
+
+.product-item img {
+    width: 100px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+    object-fit: cover; /* Ensures images cover the area properly */
+    border-radius: 5px; /* Optional: if you want rounded corners */
+}
+
 
 .product-name,
 .product-price,
@@ -59,11 +72,12 @@ h1 {
     display: block; /* Take full width */
     font-size: 25px;
     margin-top: 20px; /* Space above totals */
+    color:#333
 }
 
 .subnum, .salesnum, .grandnum {
     font-size: 25px;
-    color: grey;
+    color: #000000;
     display: inline; /* Align with labels */
     margin-left: 20px; /* Space from labels */
 }
@@ -94,21 +108,90 @@ button.updateButton:hover {
 }
 
 /* Ensure the minus and plus buttons look good */
-.minusButton, .plusButton {
-    width: 30px;
-    height: 30px;
-    border-radius: 15px; /* Round shape */
-    border: 1px solid #ddd; /* Light border */
-    background-color: #fff;
+.plusButton, .minusButton {
+    border: 1px solid #ccc; /* Adds a border */
+    background-color: white;
     color: #333;
-    font-size: 18px;
-    line-height: 28px; /* Vertical centering */
-    text-align: center; /* Horizontal centering */
-    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px; /* Optional: for rounded corners */
+    margin: 0 5px; /* Adds margin to the left and right */
+    cursor: pointer; /* Changes the cursor to a pointer on hover */
+    color: black; /* Changes the button text to black */
+
 }
+
+/* Other styles remain the same */
+
+/* Change color of all text to black */
+main, .subtotal, .sales, .grand, .subtotal, .salesnum, .grandnum, .checkoutlink {
+    color: black; /* Sets text color to black */
+}
+
+/* Styles for the headers */
+/* Update grid-template-columns to reflect four categories: image & name, price, quantity, and total */
+.cart-header, .product-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.cart-header > div {
+    font-size: 20px; /* Example size, adjust as needed */
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 0;
+}
+
+
+.cart-header > div, .product-item > div, .product-item > img {
+    text-align: center;
+}
+
+/* Align the quantity controls with the "Quantity" header */
+.quantity-controls {
+    justify-content: center; /* Center the plus and minus buttons */
+}
+
+/* Align the product total with the "Total" header */
+.total-price {
+    text-align: center;
+}
+
+/* You might not need the margin-right on .product-item > div, .product-item > img anymore */
+
+
+
+
 
 .minusButton:hover, .plusButton:hover {
     background-color: #e7e7e7;
 }
+
+.cart-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto auto; /* Adjust the number of columns as needed */
+    gap: 10px; /* Adds space between grid items */
+    margin-bottom: 10px; /* Adds space below each item */
+}
+
+.totals {
+    background-color: #f8f8f8; /* Light background for the totals section */
+    padding: 10px;
+    border-radius: 5px; /* Optional: for rounded corners */
+    margin-top: 20px; /* Adds space above the totals section */
+}
+
+.totals div {
+    margin-bottom: 5px; /* Adds space below each total line */
+}
+
+@media (max-width: 768px) {
+    .cart-item {
+        grid-template-columns: auto 1fr auto; /* Stacks items vertically on smaller screens */
+    }
+}
+
 
 /* Add any additional custom styles below */
