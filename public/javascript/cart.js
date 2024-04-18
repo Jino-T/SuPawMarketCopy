@@ -20,7 +20,7 @@ $(document).ready(function() {
         try {
             const [productNameResponse, priceResponse, imageResponse] = await Promise.all([
                 $.ajax({ url: `/product/name/${productId}`, type: "GET" }),
-                $.ajax({ url: `/product/price/${productId}`, type: "GET" }),
+                $.ajax({ url: `/product/price/${productId}`, type: "GET" }), // Corrected the URL closure
                 $.ajax({ url: `/product/image/${productId}`, type: "GET" })
             ]);
 
@@ -34,7 +34,7 @@ $(document).ready(function() {
         const formattedPrice = price.toFixed(2);
         const total = (price * quantity).toFixed(2);
         const productHtml = `
-            <div class="product-item">
+            <div class="product-item" data-productid="${productId}">
                 <img src="${imagePath}" alt="${productName}">
                 <div>${productName}</div>
                 <div>Price: $${formattedPrice}</div>
@@ -55,7 +55,7 @@ $(document).ready(function() {
         quantity++;
         quantitySpan.text(quantity);
         updateProductTotal(productId, quantity, price);
-        addToCart(productId, 1); // Add one to the cart
+        addToCart(productId, 1);
     });
 
     $('#cartContainer').on('click', '.minusButton', function() {
@@ -63,19 +63,21 @@ $(document).ready(function() {
         const quantitySpan = $(this).siblings('.product-quantity');
         const price = parseFloat(quantitySpan.data('price'));
         let quantity = parseInt(quantitySpan.text());
+    
         if (quantity > 1) {
             quantity--;
             quantitySpan.text(quantity);
             updateProductTotal(productId, quantity, price);
-            addToCart(productId, -1); // Subtract one from the cart
+            addToCart(productId, -1);
+        } else {
+            // Directly remove the item if the quantity is exactly 1
+            removeItemFromCart(productId); // Call to remove item from the cart
+            // Optionally set the quantity to zero before removal for visual feedback
+            quantitySpan.text(0);
+            updateProductTotal(productId, 0, price); // This will update the total to $0.00
         }
     });
-
-    function updateProductTotal(productId, quantity, price) {
-        const total = (price * quantity).toFixed(2);
-        $(`[data-totalid="${productId}"]`).text(total);
-        updateCartSummary();
-    }
+    
 
     async function addToCart(productID, quantity) {
         try {
@@ -84,7 +86,7 @@ $(document).ready(function() {
                 url: "/addToCart",
                 type: "POST",
                 headers: { "Content-Type": "application/json" },
-                data: data, 
+                data: data,
                 success: function(response) {
                     console.log("Product added or updated in cart:", response);
                 },
@@ -95,6 +97,34 @@ $(document).ready(function() {
         } catch (error) {
             console.error("Error adding or subtracting product in cart:", error);
         }
+    }
+
+    async function removeItemFromCart(productID) {
+        try {
+            await $.ajax({
+                url: `/removeItem`,
+                type: "POST",
+                headers: { "Content-Type": "application/json" },
+                data: JSON.stringify({ userID: userID, productID: productID }), // Send the data as JSON
+                success: function(response) {
+                    console.log("Product removed from cart:", response);
+                    $(`div[data-productid="${productID}"]`).remove(); // Remove the product element from DOM
+                    updateCartSummary(); // Update cart summary after removal
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error removing product from cart:", error);
+                }
+            });
+        } catch (error) {
+            console.error("Error during AJAX call to remove product:", error);
+        }
+    }
+    
+
+    function updateProductTotal(productId, quantity, price) {
+        const total = (price * quantity).toFixed(2);
+        $(`[data-totalid="${productId}"]`).text(total);
+        updateCartSummary();
     }
 
     function updateCartSummary() {

@@ -230,6 +230,20 @@ router.get('/reviews/reviewIDs/:productID', ReviewController.getReviewIds);
 
 router.get('/user/getCart/:userID', UserController.getCart);
 
-router.get("/user/removeItem/:userID/:productID", UserController.removeFromCart);
+router.post("/removeItem", jsonParser, async function(req, res) {
+  if (!req.session.isLoggedIn) {
+      return res.status(403).json({ success: false, message: "Not authorized" });
+  }
+
+  try {
+      const removalSuccess = await UserController.removeFromCart(req, res);
+      if (removalSuccess) {
+          return res.status(200).json({ success: true, message: "Item removed successfully" });
+      }
+  } catch (error) {
+      console.error("Error removing item from cart:", error);
+      return res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+});
 
 module.exports = router;

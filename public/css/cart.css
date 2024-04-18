@@ -3,126 +3,112 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
 }
+
 main {
     color: white; /* This sets the text color to white for contrast */
     padding: 20px; /* Add some padding around the main content */
 }
 
-h1{
-    font-family: Arial, sans-serif;
-    width: 180px;  /*Splits the container space into two for the tiles, minus the gap */
-    margin-left: calc(50% - 90px);
-    margin-bottom: 5px;
+h1 {
+    text-align: center; /* Center the title */
+    margin-bottom: 10px; /* Add some space below the title */
 }
 
-.label1{
+/* Styling for the labels above the cart items */
+.label1, .label2, .label3, .label4 {
     font-family: Arial, sans-serif;
     font-size: 25px;
-    width: 10px;  /*Splits the container space into two for the tiles, minus the gap */
-    margin-left: 10%;
+    display: inline-block; /* Make labels inline */
     margin-bottom: 15px;
 }
 
-.label2{
+/* Adjust the label widths and margins to align with the cart item details */
+.label1 { width: 15%; }
+.label2 { width: 20%; margin-left: 10%; }
+.label3 { width: 25%; }
+.label4 { width: 25%; margin-left: 5%; }
+
+/* Product item styles */
+.product-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* Space between product items */
+}
+
+.product-item img {
+    width: 70px; /* Fixed width for images */
+    height: 70px; /* Fixed height for images */
+    object-fit: cover; /* Cover fit for images */
+}
+
+.product-name,
+.product-price,
+.product-quantity,
+.product-total {
     font-family: Arial, sans-serif;
-    font-size: 25px;
-    width: 100px;  /*Splits the container space into two for the tiles, minus the gap */
-    margin-left: 25%;
-    margin-bottom: 15px;
-}
-
-.label3{
-    font-family: Arial, sans-serif;
-    font-size: 25px;
-    width: 100px;  /*Splits the container space into two for the tiles, minus the gap */
-    margin-left: 15%;
-    margin-bottom: 15px;
-}
-
-.label4{
-    font-family: Arial, sans-serif;
-    font-size: 25px;
-    width: 100px;  /*Splits the container space into two for the tiles, minus the gap */
-    margin-left: 15%;
-    margin-bottom: 15px;
-}
-
-.product{
-    margin-left: 7%;
-    height: 70px;
-    width: 250px;
-}
-
-.price{
-    font-style: Arial, sans-serif;
     font-size: 20px;
-    margin-left: calc(25% - 145px);
+    margin-right: 15px; /* Space between cart columns */
 }
 
-.quantity{
-    font-style: Arial, sans-serif;
-    font-size: 20px;
-    margin-left: 15px;
+.product-quantity input {
+    width: 50px; /* Width of quantity input */
+    text-align: center; /* Center text inside quantity input */
 }
 
-
-.total{
-    font-style: Arial, sans-serif;
-    font-size: 20px;
-    margin-left: calc(15% + 10px);
-}
-
-.subtotal{
-    font-style: Arial, sans-serif;
-    width: 20px;
+.subtotal, .sales, .grand {
+    display: block; /* Take full width */
     font-size: 25px;
-    margin-left: calc(15% + 10px);
+    margin-top: 20px; /* Space above totals */
 }
 
-.sales{
-    font-style: Arial, sans-serif;
-    width: 20px;
+.subnum, .salesnum, .grandnum {
     font-size: 25px;
-    margin-left: calc(15% + 10px);
+    color: grey;
+    display: inline; /* Align with labels */
+    margin-left: 20px; /* Space from labels */
 }
 
-.grand{
-    font-style: Arial, sans-serif;
-    width: 20px;
-    font-size: 25px;
-    margin-left: calc(15% + 10px);
-}
-
-.subnum{
-    color: grey; 
-    font-style: Arial, sans-serif;
-    font-size: 25px;
-    margin-left: calc(2% + 30px);
-}
-
-.salesnum{
-    color: grey; 
-    font-style: Arial, sans-serif;
-    font-size: 25px;
-    margin-left: calc(2% + 20px);
-}
-
-.grandnum{
-    color: grey; 
-    font-style: Arial, sans-serif;
-    font-size: 25px;
-    margin-left: calc(2%);
-}
-
-.checkoutlink{
-    color: white; 
-    font-style: Arial, sans-serif;
+.checkoutlink {
+    display: block; /* Take full width */
+    text-align: center; /* Center checkout link */
+    color: white;
     font-size: 30px;
-    margin-left: calc(30%);
+    margin-top: 30px; /* Space above checkout link */
 }
 
-.updateButton{
+/* Button styles */
+button.updateButton {
     width: 80px;
-    margin-left: 50px;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 16px;
+    background-color: #f8f8f8;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
-/* Add any other styles you need here */
+
+button.updateButton:hover {
+    background-color: #e7e7e7;
+}
+
+/* Ensure the minus and plus buttons look good */
+.minusButton, .plusButton {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px; /* Round shape */
+    border: 1px solid #ddd; /* Light border */
+    background-color: #fff;
+    color: #333;
+    font-size: 18px;
+    line-height: 28px; /* Vertical centering */
+    text-align: center; /* Horizontal centering */
+    cursor: pointer;
+}
+
+.minusButton:hover, .plusButton:hover {
+    background-color: #e7e7e7;
+}
+
+/* Add any additional custom styles below */
