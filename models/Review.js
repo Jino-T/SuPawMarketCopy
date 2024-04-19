@@ -20,8 +20,6 @@ class Review {
 
     //returns userID for given review id; Example call: Review.getUserID(801);
     static async getUserID(reviewId) {
-      console.log('getting user id for review: ' + reviewId.toString());
-
       let sql = `SELECT userID FROM review WHERE reviewID = ?;`;
       const [result] = await connection.promise().query(sql, [reviewId]);
       if (result.length > 0) {
@@ -35,7 +33,6 @@ class Review {
     
     //returns productID for given review id; Example call: Review.getProductID(801);
     static async getProductID(reviewId) {
-      console.log('getting product id for review: ' + reviewId.toString());
 
       let sql = `SELECT productID FROM review WHERE reviewID = ?;`;
       const [result] = await connection.promise().query(sql, [reviewId]);
@@ -50,12 +47,10 @@ class Review {
 
     //returns star rating for given review id; Example call: Review.getStarRating(801);
     static async getStarRating(reviewId) {
-      console.log('getting star rating for review: ' + reviewId.toString());
 
       let sql = `SELECT rating FROM review WHERE reviewID = ?;`;
       const [result] = await connection.promise().query(sql, [reviewId]);
       if (result.length > 0) {
-        console.log(result[0].rating);
         return result[0].rating;
       } else {
         console.log("Review not found");
@@ -63,13 +58,25 @@ class Review {
       }
     }
 
+    //returns review id for the given product id; Example call: Review.getReviewid(101);
+    static async getReviewIds(productID) {
+      let sql = `SELECT reviewID FROM review WHERE productID = ?;`;
+      const [results] = await connection.promise().query(sql, [productID]);
+      if (results.length > 0) {
+        const reviewIDs = results.map(row => row.reviewID);
+        return reviewIDs;
+      } else {
+        console.log("No reviews found for productID:", productID);
+        return [];
+      }
+    }
+      
+
     //returns review text for the given review id; Example call: Review.getReviewText(801);
     static async getReviewText(reviewId) {
-      console.log('getting review Text for review: ' + reviewId.toString());
       let sql = `SELECT reviewText FROM review WHERE reviewID = ?;`;
       const [result] = await connection.promise().query(sql, [reviewId]);
       if (result.length > 0) {
-        console.log(result[0].reviewText);
         return result[0].reviewText;
       } else {
         console.log("Review not found");
@@ -136,9 +143,9 @@ class Review {
   //Review.getReviewText(801);
 
 
-  Review.setUserId(801, 402);
-  Review.setProductId(801, 120);
-  Review.setStarRating(801, 3);
-  Review.setReviewText(801, "bowow");
+  //Review.setUserId(801, 402);
+  //Review.setProductId(801, 120);
+  //Review.setStarRating(801, 3);
+  //Review.setReviewText(801, "bowow");
 
   module.exports = Review;

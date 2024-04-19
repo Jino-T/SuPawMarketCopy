@@ -1,4 +1,23 @@
 $(document).ready(function() {
+
+  async function fetchReviewDetails(reviewID) {
+    const reviewTextResponse = await $.ajax({
+      url: `/reviews/text/${reviewID}`,
+      type: "GET"
+    });
+    const reviewRatingResponse = await $.ajax({
+      url: `/reviews/rating/${reviewID}`,
+      type: "GET"
+    });
+    // Assuming reviewRatingResponse.rating returns a number 0-5, convert to stars
+    const starRating = "★".repeat(reviewRatingResponse.rating) + "☆".repeat(5 - reviewRatingResponse.rating);
+
+    return {
+      reviewText: reviewTextResponse.reviewText,
+      starRating
+    };
+  }
+
   async function fetchProductDetails(productId) {
     try {
       const nameResponse = await $.ajax({
@@ -18,23 +37,29 @@ $(document).ready(function() {
         type: "GET"
       });
 
-      // Sample static image URL and star rating
-      imageUrl = "../" + imageResponse.imagePath;
-      const starRatingHtml = "★★★★★"; // Replace with dynamic star rating based on product data
-      const price = "$29.99"; // Replace with the actual product price
-      // Sample static reviews
-      const reviewHtml = `
+      const reviewIDsResponse = await $.ajax({
+        url: `/reviews/reviewIDs/${productId}`,
+        type: "GET"
+      });
+
+      let allReviewHtml = "";
+
+      for (const reviewID of reviewIDsResponse.reviewIDs) {
+        const { reviewText, starRating } = await fetchReviewDetails(reviewID);
+
+        allReviewHtml += `
           <div class="review">
             <div class="review-icon">👤</div>
-            <p class="review-text">REVIEW1: blahblah blah blah blah blah blahblah blah blahblah blah blah blah blah blah blah blah blah</p>
-            <div class="product-rating review-rating">★★★★☆</div>
-          </div>
-          <div class="review">
-            <div class="review-icon">👤</div>
-            <p class="review-text">REVIEW2: blahblah blah blah blah blah blahblah blah blahblah blah blah blah blah blah blah blah blah</p>
-            <div class="product-rating review-rating">★★★☆☆</div>
+            <p class="review-text">${reviewText}</p>
+            <div class="product-rating review-rating">${starRating}</div>
           </div>
         `;
+      }
+
+
+      // Sample static image URL and star rating
+      imageUrl = "../" + imageResponse.imagePath;
+      const price = priceResponse.price; // Replace with the actual product price
 
       const productHtml = `
         <div class="card product-card">
@@ -42,21 +67,21 @@ $(document).ready(function() {
           <div>
             <div class="header-container">
               <h2 class="card-title">${nameResponse.productName}</h2>
-              <div class="star-rating">★★★★★</div>
-            </div> 
-            <!-- Moving the image here -->
-            <img src=${imageUrl} class="product-image" alt="${nameResponse.productName}">
+              <div class="product-image-container"> <!-- Container to center the image -->
+                 <img src=${imageUrl} class="product-image" alt="${nameResponse.productName}">
+              </div>
+            </div>             
             <div class="card-body">
               <p class="product-description">${descriptionResponse.description}</p>
             </div>
             <div class="product-price">
-              <span class="price">${priceResponse.price}</span>
+              <span class="price">${price}</span>
               <button class="btn btn-success add-to-cart" data-productID="${productId}">Add to Cart</button>
             </div>
           </div>
         </div>
         <div class="card-footer">
-          <div class="reviews">${reviewHtml}</div>
+          <div class="reviews">${allReviewHtml}</div>
           <div class="review-button">
             <button class="btn btn-primary leave-review">Leave a Review</button>
           </div>
