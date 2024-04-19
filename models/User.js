@@ -117,6 +117,7 @@ class User {
         if (err) throw err;
       });
     }
+  }
   
 //CART AND CHECKOUT METHODS
     static async addToCart(productID, userID, quantity) {
