@@ -14,36 +14,30 @@ let Zip;
 async function getLine1() {
     let res = await fetch(line1DataRoute);
     line1 = await res.json();
-    line1 = line1[0].line1;
     return line1;
 }
 
 async function getLine2() {
     let res = await fetch(line2DataRoute);
     line2 = await res.json();
-    line2 = line2[0].line2;
-    console.log(line2)
     return line2;
 }
 
 async function getCity() {
     let res = await fetch(cityDataRoute);
     City = await res.json();
-    City = City[0].city;
     return City;
 }
 
 async function getState() {
     let res = await fetch(stateDataRoute);
     State = await res.json();
-    State = State[0].state;
     return State;
 }
 
 async function getZip() {
     let res = await fetch(zipDataRoute);
     Zip = await res.json();
-    Zip = Zip[0].zip;
     return Zip;
 }
 
