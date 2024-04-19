@@ -267,7 +267,7 @@ router.post("/validateCheckout", async function(req, res) {
     let info = await UserController.getCart(req.session.userID);
     //console.log(req.session.userID);
     await UserController.checkout(req.session.userID, info);
-    res.send("Checked out");
+    res.render("pages/checkoutComplete");
   }
 })
 

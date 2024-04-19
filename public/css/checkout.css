@@ -15,6 +15,10 @@ h1{
     margin-bottom: 5px;
 }
 
+h2 {
+    text-align: center;
+}
+
 .emailLabel{
     font-family: Arial, sans-serif;
     font-size: 25px;
