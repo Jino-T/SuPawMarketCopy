@@ -324,7 +324,7 @@ router.post("/addToCart", jsonParser, async function(req, res) {
 
 router.post("/validateCheckout", async function(req, res) {
   if(req.session.isLoggedIn) {
-    let info = await UserController.getCart(req.session.userID);
+    let info = await UserController.getCartByID(req.session.userID);
     //console.log(req.session.userID);
     await UserController.checkout(req.session.userID, info);
     res.render("pages/checkoutComplete");

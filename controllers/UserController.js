@@ -78,7 +78,7 @@ static async removeFromCart(req, res) {
         }
     }
     
-    static async getCart(userID) {
+    static async getCartByID(userID) {
         let res = await User.getCart(userID);
         return res;
     }
