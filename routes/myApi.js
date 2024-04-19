@@ -12,11 +12,10 @@ const AddressController = require("../controllers/AddressController");
 
 //FOR PARSING DIFFERENT OBJECTS
 var bodyParser = require("body-parser");
-//const AddressController = require("../controllers/AddressController");
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 const multer = require('multer');
-const AddressController = require("../controllers/AddressController");
+
 
 //FOR IMAGE UPLOAD
 const storage = multer.diskStorage({
@@ -184,7 +183,7 @@ router.get("/getProducts", async function(req, res) {
     res.json(responseData);
   }
   else res.send("Admin Account Required");
-})
+});
 
 router.get("/getShipping", async function(req, res) {
   if (req.session.isLoggedIn === true) {
@@ -192,7 +191,7 @@ router.get("/getShipping", async function(req, res) {
     res.json(responseData);
   }
   else res.send("Must be Logged In");
-})
+});
 
 router.get("/line2", async function(req, res) {
   if (req.session.isLoggedIn === true) {
@@ -200,7 +199,7 @@ router.get("/line2", async function(req, res) {
     res.json(responseData);
   }
   else res.send("Must be Logged In");
-})
+});
 
 router.get("/getCity", async function(req, res) {
   if (req.session.isLoggedIn === true) {
@@ -208,7 +207,7 @@ router.get("/getCity", async function(req, res) {
     res.json(responseData);
   }
   else res.send("Must be Logged In");
-})
+});
 
 router.get("/getState", async function(req, res) {
   if (req.session.isLoggedIn === true) {
@@ -216,7 +215,7 @@ router.get("/getState", async function(req, res) {
     res.json(responseData);
   }
   else res.send("Must be Logged In");
-})
+});
 
 router.get("/getZip", async function(req, res) {
   if (req.session.isLoggedIn === true) {
@@ -224,7 +223,7 @@ router.get("/getZip", async function(req, res) {
     res.json(responseData);
   }
   else res.send("Must be Logged In");
-})
+});
 
 router.post("/getProductHistory", jsonParser, async function(req, res) {
   if(req.session.isLoggedIn === true && req.session.isAdmin === 1) {
@@ -233,7 +232,7 @@ router.post("/getProductHistory", jsonParser, async function(req, res) {
     res.json(responseData);
   }
   else res.send("Admin Account Required")
-})
+});
 
 router.get("/getCategories", async function(req, res) {
   if(req.session.isLoggedIn === true && req.session.isAdmin === 1) { 
@@ -241,7 +240,7 @@ router.get("/getCategories", async function(req, res) {
     res.json(responseData);
   }
   else res.send("Admin Account Required");
-})
+});
 
 router.post("/deleteProduct", jsonParser, async function(req, res) {
   if (req.session.isLoggedIn === true && req.session.isAdmin === 1) {
@@ -249,7 +248,7 @@ router.post("/deleteProduct", jsonParser, async function(req, res) {
     await AdminController.recordRemove(req.session.userID,req.body);
   }
   else res.send("Admin Account Required")
-})
+});
 
 router.get("/manageUsers", async function(req, res) {
   if (req.session.isLoggedIn === true && req.session.isAdmin === 1) {
@@ -263,14 +262,14 @@ router.get("/getUsers", async function(req, res) {
     res.json(responseData)
   }
   else res.send("Admin Account Required");
-})
+});
 
 router.post("/toggleAdmin", jsonParser, async function(req, res) {
   if(req.session.isLoggedIn === true && req.session.isAdmin === 1) { 
     await AdminController.toggleAdmin(req.body);
   }
   else res.send("Admin Account Required")
-})
+});
 // Dog Products item page route
 router.get("/dogItemProduct", function(req, res) {
   res.render("pages/dogItemProduct"); // This will render views/pages/dogItemProduct.ejs
@@ -330,40 +329,42 @@ router.post("/validateCheckout", async function(req, res) {
     await UserController.checkout(req.session.userID, info);
     res.render("pages/checkoutComplete");
   }
-})
+});
 
 router.get("/getAddressLine1", async function(req, res) {
   let responseData = await AddressController.getShippingLine1(req.session.userID);
   //console.log(responseData);
   res.json(responseData);
-})
+});
 
 router.get("/getAddressLine2", async function(req, res) {
   let responseData = await AddressController.getShippingLine2(req.session.userID);
   //console.log(responseData);
   res.json(responseData);
-})
+});
 
 router.get("/getAddressCity", async function(req, res) {
   let responseData = await AddressController.getShippingCity(req.session.userID);
   //console.log(responseData);
   res.json(responseData);
-})
+});
 
 router.get("/getAddressState", async function(req, res) {
   let responseData = await AddressController.getShippingState(req.session.userID);
   //console.log(responseData);
   res.json(responseData);
-})
+});
 
 router.get("/getAddressZip", async function(req, res) {
   let responseData = await AddressController.getShippingZip(req.session.userID);
   //console.log(responseData);
   res.json(responseData);
+});
+
 router.post("/updateShippingAddress", urlencodedParser, async function(req, res) {
   await AddressController.setShippingAddress(req.session.userID,req.body);
-  res.render("pages/account", { username: req.session.username });
-})
+  res.render("pages/account", { username: req.session.username })
+});
 
 
 // Route to get the user ID for a review
