@@ -54,7 +54,7 @@ router.get("/products", function(req, res) {
 router.get("/cart", function(req, res) {
   if (req.session.isLoggedIn === true) {
   res.render("pages/cart", {userID: req.session.userID}); // This will render views/pages/cart.ejs
-  } else res.redirect("/login");
+  } else res.redirect("/account");
 });
 
 //checkout page route
@@ -125,11 +125,6 @@ router.post("/create", urlencodedParser, async function(req, res) {
   } else {
     res.send("Username already in use");
   }
-});
-
-//cart page route
-router.get("/cart", function(req, res) {
-  res.render("pages/cart"); // This will render views/pages/cart.ejs
 });
 
 //checkout page route
