@@ -7,6 +7,8 @@ var app = express();
 const router = express.Router();
 const ReviewController = require("../controllers/ReviewController");
 const AdminController = require("../controllers/AdminController");
+const AddressController = require("../controllers/AddressController");
+
 
 //FOR PARSING DIFFERENT OBJECTS
 var bodyParser = require("body-parser");
@@ -64,7 +66,7 @@ router.get("/checkout", function(req, res) {
 //ACCOUNT PAGE ROUTE
 router.get("/account", function (req, res) {
   if(req.session.isLoggedIn){
-    res.render("pages/account", { username: req.session.username }); // This will render views/pages/account.ejs and pass the username as a variable
+    res.render("pages/account", { username: req.session.username, userID: req.session.userID }); // This will render views/pages/account.ejs and pass the username as a variable
   }
   else{
     res.render("pages/login"); // This will render views/pages/login.ejs
@@ -178,6 +180,46 @@ router.get("/getProducts", async function(req, res) {
     res.json(responseData);
   }
   else res.send("Admin Account Required");
+})
+
+router.get("/getShipping", async function(req, res) {
+  if (req.session.isLoggedIn === true) {
+    let responseData = await AddressController.getShippingLine1(req.session.userID);
+    res.json(responseData);
+  }
+  else res.send("Must be Logged In");
+})
+
+router.get("/line2", async function(req, res) {
+  if (req.session.isLoggedIn === true) {
+    let responseData = await AddressController.getShippingLine2(req.session.userID);
+    res.json(responseData);
+  }
+  else res.send("Must be Logged In");
+})
+
+router.get("/getCity", async function(req, res) {
+  if (req.session.isLoggedIn === true) {
+    let responseData = await AddressController.getShippingCity(req.session.userID);
+    res.json(responseData);
+  }
+  else res.send("Must be Logged In");
+})
+
+router.get("/getState", async function(req, res) {
+  if (req.session.isLoggedIn === true) {
+    let responseData = await AddressController.getShippingState(req.session.userID);
+    res.json(responseData);
+  }
+  else res.send("Must be Logged In");
+})
+
+router.get("/getZip", async function(req, res) {
+  if (req.session.isLoggedIn === true) {
+    let responseData = await AddressController.getShippingZip(req.session.userID);
+    res.json(responseData);
+  }
+  else res.send("Must be Logged In");
 })
 
 router.post("/getProductHistory", jsonParser, async function(req, res) {
