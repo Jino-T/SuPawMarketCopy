@@ -40,7 +40,7 @@ class Address {
       let res = await connection.promise().query(sql);
 
       let tmp = res[0]
-      console.log("tmp1" + tmp);
+      console.log(tmp);
       return tmp;
     }
   
@@ -50,7 +50,7 @@ class Address {
       let res = await connection.promise().query(sql);
 
       let tmp = res[0]
-      console.log("tmp2" + tmp);
+      console.log(tmp);
       return tmp;
     }
   
@@ -85,7 +85,7 @@ class Address {
       let sql = `SELECT line1 FROM address WHERE addressID = (SELECT address FROM userAddress WHERE user=${userid} && addressType='billing');`;
 
       let res = await connection.promise().query(sql);
-      let tmp = JSON.stringify(res[0])
+      let tmp = res[0]
       console.log(tmp);
       return tmp;
     }
@@ -94,7 +94,7 @@ class Address {
       let sql = `SELECT line2 FROM address WHERE addressID = (SELECT address FROM userAddress WHERE user=${userid} && addressType='billing');`;
 
       let res = await connection.promise().query(sql);
-      let tmp = JSON.stringify(res[0])
+      let tmp = res[0]
       console.log(tmp);
       return tmp;
     }
@@ -103,7 +103,7 @@ class Address {
       let sql = `SELECT city FROM address WHERE addressID = (SELECT address FROM userAddress WHERE user=${userid} && addressType='billing');`;
 
       let res = await connection.promise().query(sql);
-      let tmp = JSON.stringify(res[0])
+      let tmp = res[0]
       console.log(tmp);
       return tmp;
     }
@@ -112,7 +112,7 @@ class Address {
       let sql = `SELECT state FROM address WHERE addressID = (SELECT address FROM userAddress WHERE user=${userid} && addressType='billing');`;
 
       let res = await connection.promise().query(sql);
-      let tmp = JSON.stringify(res[0])
+      let tmp = res[0]
       console.log(tmp);
       return tmp;
     }
@@ -121,7 +121,7 @@ class Address {
       let sql = `SELECT zip FROM address WHERE addressID = (SELECT address FROM userAddress WHERE user=${userid} && addressType='billing');`;
 
       let res = await connection.promise().query(sql);
-      let tmp = JSON.stringify(res[0])
+      let tmp = res[0]
       console.log(tmp);
       return tmp;
     }

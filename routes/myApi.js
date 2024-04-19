@@ -16,6 +16,7 @@ var bodyParser = require("body-parser");
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 const multer = require('multer');
+const AddressController = require("../controllers/AddressController");
 
 //FOR IMAGE UPLOAD
 const storage = multer.diskStorage({
@@ -322,6 +323,43 @@ router.post("/addToCart", jsonParser, async function(req, res) {
   }
 });
 
+router.post("/validateCheckout", async function(req, res) {
+  if(req.session.isLoggedIn) {
+    let info = await UserController.getCart(req.session.userID);
+    //console.log(req.session.userID);
+    await UserController.checkout(req.session.userID, info);
+    res.render("pages/checkoutComplete");
+  }
+})
+
+router.get("/getAddressLine1", async function(req, res) {
+  let responseData = await AddressController.getShippingLine1(req.session.userID);
+  //console.log(responseData);
+  res.json(responseData);
+})
+
+router.get("/getAddressLine2", async function(req, res) {
+  let responseData = await AddressController.getShippingLine2(req.session.userID);
+  //console.log(responseData);
+  res.json(responseData);
+})
+
+router.get("/getAddressCity", async function(req, res) {
+  let responseData = await AddressController.getShippingCity(req.session.userID);
+  //console.log(responseData);
+  res.json(responseData);
+})
+
+router.get("/getAddressState", async function(req, res) {
+  let responseData = await AddressController.getShippingState(req.session.userID);
+  //console.log(responseData);
+  res.json(responseData);
+})
+
+router.get("/getAddressZip", async function(req, res) {
+  let responseData = await AddressController.getShippingZip(req.session.userID);
+  //console.log(responseData);
+  res.json(responseData);
 router.post("/updateShippingAddress", urlencodedParser, async function(req, res) {
   await AddressController.setShippingAddress(req.session.userID,req.body);
   res.render("pages/account", { username: req.session.username });

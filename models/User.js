@@ -117,32 +117,61 @@ class User {
         if (err) throw err;
       });
     }
-    return true;
-  }
+  
+//CART AND CHECKOUT METHODS
+    static async addToCart(productID, userID, quantity) {
+      //all parameters should be ints
+      let sqlCheck = `SELECT * FROM cart WHERE cartUser=${userID} AND prodInCart=${productID};`;
+      const check = await connection.promise().query(sqlCheck);
+      if (check[0].length > 0) {
+        let currentQuantity = check[0][0].quantity;
+        let newQuantity = currentQuantity + quantity;
+        let sqlUpdate = `UPDATE cart SET quantity=${newQuantity} WHERE cartUser=${userID} AND prodInCart=${productID};`;
+        connection.query(sqlUpdate, (err, result) => {
+          if (err) throw err;
+        });
+      } else {
+        let sqlInsert = `INSERT INTO cart VALUES(0,${userID},${productID},${quantity});`;
+        connection.query(sqlInsert, (err, result) => {
+          if (err) throw err;
+        });
+      }
+      return true;
+    }
+  
+    static async removeFromCart(productID, userID) {
+      let sql = `DELETE FROM cart WHERE cartUser=${userID} && prodInCart=${productID};`
+      connection.query(sql, (err, result) => {
+        if(err) throw err;
+      })
+      return true;
+    }
 
-  static async removeFromCart(userID, productID) {
-    let sql = `DELETE FROM cart WHERE cartUser=${userID} && prodInCart=${productID};`;
-    connection.query(sql, (err, result) => {
-      if (err) throw err;
-    });
-    return true;
-  }
+    static async clearCart(userID) {
+      let sql = `DELETE FROM cart WHERE cartUser=${userID};`
+      connection.query(sql, (err, result) => {
+        if(err) throw err;
+      })
+      return true;
+    }
+  
+    static async getCart(userID) {
+      let sql = `SELECT prodInCart, quantity FROM cart WHERE cartUser=${userID};`
+      let res = await connection.promise().query(sql);
 
-  static async getCart(userID) {
-    let sql = `SELECT prodInCart, quantity FROM cart WHERE cartUser=${userID};`;
-    let res = await connection.promise().query(sql);
-
-    return res[0];
-  }
-
-  static async checkout() {
-    // Logic to checkout
-    return true;
-  }
-
-  static async getOrderHistory(userID) {
-    let sql = `SELECT * FROM purchase WHERE user=${userID};`;
-    let res = await connection.promise().query(sql);
+      return res[0];
+    }
+  
+    static async checkout(userID, prodID, quantity) {
+      let sql = `INSERT INTO purchase VALUES(0, ${userID}, ${prodID}, ${quantity}, NOW());`;
+      let res = await connection.promise().query(sql);
+      await this.clearCart(userID);
+      return res;
+    }
+  
+    static async getOrderHistory(userID) {
+      let sql = `SELECT * FROM purchase WHERE user=${userID};`
+      let res = await connection.promise().query(sql);
 
       return res[0];
     }
