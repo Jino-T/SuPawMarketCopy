@@ -12,6 +12,11 @@
         <h1>Checkout</h1>
     </header>
     <main>
+        <input type="hidden" id="line1Data" value="/getAddressLine1">
+        <input type="hidden" id="line2Data" value="/getAddressLine2">
+        <input type="hidden" id="cityData" value="/getAddresscity">
+        <input type="hidden" id="stateData" value="/getAddressstate">
+        <input type="hidden" id="zipData" value="/getAddresszip">
 
             
     <form method="post" action="/validateCheckout"> 
@@ -43,5 +48,11 @@
     <b class = "thanks"> Thank You So Much For Your Order!</b>
 
 </main>
+
+
+<script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+<script src="/javascript/checkout.js"></script>
+
 </body>
 </html>
