@@ -5,6 +5,7 @@ const UserController = require("../controllers/UserController");
 const ProductController = require("../controllers/ProductController");
 var app = express();
 const router = express.Router();
+const session = require('express-session');
 const ReviewController = require("../controllers/ReviewController");
 const AdminController = require("../controllers/AdminController");
 
@@ -88,7 +89,7 @@ router.post("/validate", urlencodedParser, async function(req, res) {
     //console.log(req.session.userID)
     res.render("pages/home");
   } else {
-    res.send("Wrong username or password");
+    res.redirect("/login");
   }
 });
 
