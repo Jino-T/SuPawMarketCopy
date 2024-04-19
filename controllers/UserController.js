@@ -57,7 +57,21 @@ class UserController {
             console.error("Error adding item to cart:", error);
             
         }
-    }    
+    }
+    
+    static async getCart(userID) {
+        let res = await User.getCart(userID);
+        return res;
+    }
+
+    static async checkout(userID, info) {
+        //console.log(info);
+        for(let i of info) {
+            await User.checkout(userID, i.prodInCart, i.quantity);
+        }
+        return true;
+    }
+
 }
 
 

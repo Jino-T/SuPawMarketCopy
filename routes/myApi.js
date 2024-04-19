@@ -262,6 +262,15 @@ router.post("/addToCart", jsonParser, async function(req, res) {
   }
 });
 
+router.post("/validateCheckout", async function(req, res) {
+  if(req.session.isLoggedIn) {
+    let info = await UserController.getCart(req.session.userID);
+    //console.log(req.session.userID);
+    await UserController.checkout(req.session.userID, info);
+    res.send("Checked out");
+  }
+})
+
 
 
 // Route to get the user ID for a review
