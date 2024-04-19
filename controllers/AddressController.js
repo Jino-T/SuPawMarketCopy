@@ -14,7 +14,7 @@ class AddressController {
     // sets shipping address to the new address
     static async setShippingAddress(userID, newAddress) {
         try {
-            const result = await Address.setShipping(newAddress, userID);
+            const result = await Address.setShipping([newAddress.address,newAddress.address2,newAddress.city,newAddress.state,newAddress.zip], userID);
             return result;
         } catch (error) {
             console.error("Error setting shipping address:", error);

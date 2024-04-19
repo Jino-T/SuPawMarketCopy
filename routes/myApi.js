@@ -10,6 +10,7 @@ const AdminController = require("../controllers/AdminController");
 
 //FOR PARSING DIFFERENT OBJECTS
 var bodyParser = require("body-parser");
+const AddressController = require("../controllers/AddressController");
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 const multer = require('multer');
@@ -59,18 +60,33 @@ router.get("/checkout", function(req, res) {
 });
 
 //ACCOUNT ROUTES
-router.get("/login", function(req, res) {
-  res.render("pages/login"); // This will render views/pages/login.ejs
-});
+//router.get("/login", function(req, res) {
+  //res.render("pages/login"); // This will render views/pages/login.ejs
+//});
 
 //ACCOUNT PAGE ROUTE
 router.get("/account", function (req, res) {
-  res.render("pages/account"); // This will render views/pages/login.ejs
+  if(req.session.isLoggedIn){
+    res.render("pages/account", { username: req.session.username }); // This will render views/pages/account.ejs and pass the username as a variable
+  }
+  else{
+    res.render("pages/login"); // This will render views/pages/login.ejs
+  }
+});
+
+//account edit page route
+router.get("/edit", function(req, res) {
+  if(req.session.isLoggedIn){
+    res.render("pages/edit", { username: req.session.username }); // This will render views/pages/account.ejs and pass the username as a variable
+  }
+  else{
+    res.render("pages/home"); // This will render views/pages/login.ejs
+  }
 });
 
 //create page route
 router.get("/create", function(req, res) {
-  res.render("pages/createaccount"); // This will render views/pages/login.ejs
+  res.render("pages/createaccount"); // This will render views/pages/createaccount.ejs
 });
 
 router.post("/validate", urlencodedParser, async function(req, res) {
@@ -264,6 +280,10 @@ router.post("/addToCart", jsonParser, async function(req, res) {
   }
 });
 
+router.post("/updateShippingAddress", urlencodedParser, async function(req, res) {
+  await AddressController.setShippingAddress(req.session.userID,req.body);
+  res.render("pages/account", { username: req.session.username });
+})
 
 
 // Route to get the user ID for a review

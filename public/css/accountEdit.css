@@ -18,103 +18,94 @@ main {
 
 h1{
     font-family: Arial, sans-serif;
-    width: 250px;  /*Splits the container space into two for the tiles, minus the gap */
+    width: 320px;  /*Splits the container space into two for the tiles, minus the gap */
     display: block;
-    margin-left: calc(50% - 125px);
+    margin-left: calc(50% - 160px);
     margin-bottom: 15px
 }
 
-.preaccountLabel{
-    font-family: Arial, sans-serif;
-    font-size: 25px;
-    width: 150px;
-    margin-left: 5%;
-}
-
 .accountLabel{
-    color: black; /* This sets the text color to white for contrast */
-    font-family: Arial, sans-serif;
-    font-size: 25px;
-    width: 150px;
-    margin-left: 3%;
-}
-
-.preaddressLabel{
     font-family: Arial, sans-serif;
     font-size: 25px;
     width: 150px;
     margin-left: 5%;
 }
 
-.addressLabel{
-    color: black; /* This sets the text color to white for contrast */
+.emailLabel{
     font-family: Arial, sans-serif;
     font-size: 25px;
-    width: 150px;
-    margin-left: 4.5%;
-}
-
-.preline2Label{
-    font-family: Arial, sans-serif;
-    font-size: 25px;
-    width: 150px;
+    width: 300px;
     margin-left: 5%;
 }
 
-.line2Label{
-    color: black; /* This sets the text color to white for contrast */
+.email{
     font-family: Arial, sans-serif;
-    font-size: 25px;
-    width: 150px;
-    margin-left: 6.75%;
-}
-
-.precityLabel{
-    font-family: Arial, sans-serif;
-    font-size: 25px;
-    width: 150px;
-    margin-left: 5%;
+    font-size: 20px;
+    width: 400px;
 }
 
 .cityLabel{
-    color: black; /* This sets the text color to white for contrast */
     font-family: Arial, sans-serif;
     font-size: 25px;
-    width: 150px;
-    margin-left: 8.5%;
+    width: 300px;
+    margin-left: 5%;
 }
 
-.prestateLabel{
+.city{
     font-family: Arial, sans-serif;
-    font-size: 25px;
-    width: 150px;
-    margin-left: 5%;
+    font-size: 20px;
+    width: 400px;
 }
 
 .stateLabel{
-    color: black; /* This sets the text color to white for contrast */
     font-family: Arial, sans-serif;
     font-size: 25px;
-    width: 150px;
-    margin-left: 7.5%;
-}
-
-.prezipLabel{
-    font-family: Arial, sans-serif;
-    font-size: 25px;
-    width: 150px;
+    width: 300px;
     margin-left: 5%;
 }
 
-.zipLabel{
-    color: black; /* This sets the text color to white for contrast */
+.state{
     font-family: Arial, sans-serif;
-    font-size: 25px;
-    width: 150px;
-    margin-left: 4.8%;
+    font-size: 20px;
+    width: 400px;
 }
 
-.edit{
+.zipLabel{
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    width: 300px;
+    margin-left: 32%;
+}
+
+.zip{
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    width: 400px;
+}
+
+.phoneLabel{
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    width: 300px;
+    margin-left: 32%;
+}
+
+.backaccount{
+    font-family: Arial, sans-serif;
+    color: white;
+    width: 175px;
+    margin-left: calc(50% - 85px);
+}
+
+.pass{
+    font-family: Arial, sans-serif;
+    width: 175px;
+    display: block;
+    margin-left: calc(50% - 87.5px);
+    margin-bottom: 0.5rem;
+}
+
+.create{
     font-family: Arial, sans-serif;
     color: white;
     width: 134px;
@@ -131,3 +122,30 @@ h1{
     margin-left: calc(50% - 27px);
     margin-bottom: 0.5rem;
 }
+
+.userLabel{
+    font-family: Arial, sans-serif;
+    width: 150px;
+    display: block;
+    margin-left: calc(50% - 75px);
+    margin-bottom: 5px;
+
+}
+
+.passLabel{
+    font-family: Arial, sans-serif;
+    width: 150px;
+    display: block;
+    margin-left: calc(50% - 75px);
+    margin-bottom: 5px;
+}
+
+.button{
+    background-color: #dddddd;
+    font-family: Arial, sans-serif;
+    width: 150px;
+    display: block;
+    margin-left: calc(50% - 75px);
+    margin-bottom: 5px;
+}
+/* Add any other styles you need here */
