@@ -14,7 +14,7 @@ class AddressController {
     // sets shipping address to the new address
     static async setShippingAddress(userID, newAddress) {
         try {
-            const result = await Address.setShipping(newAddress, userID);
+            const result = await Address.setShipping([newAddress.address,newAddress.address2,newAddress.city,newAddress.state,newAddress.zip], userID);
             return result;
         } catch (error) {
             console.error("Error setting shipping address:", error);
@@ -36,7 +36,17 @@ class AddressController {
     static async getShippingLine1(userID) {
         try {
             let res = await Address.getShippingLine1(userID);
-            return res;
+            let res2 = res[0].line1
+            console.log("res" + res)
+            console.log("res2" + res2)
+            if (res2 !== null && res2 !== undefined && res2 != 1) {
+                return res2;
+            } else {
+                res2 = "Please Enter Address Information!"
+                // Return a placeholder if no address is found
+                return res2;
+            }
+            //return res;
             //const line1 = await Address.getShippingLine1(userID);
             //if(line1 !== null) {
             //    res.status(200).json({ line1 });
@@ -53,7 +63,16 @@ class AddressController {
     static async getShippingLine2(userID) {
         try {
             let res = await Address.getShippingLine2(userID);
-            return res;
+            let res2 = res[0].line2
+            console.log("line2res" + res)
+            console.log("line2res2" + res2)
+            if (res2 !== null && res2 !== undefined && res2 != 1) {
+                return res2;
+            } else {
+                res2 = "Please Enter Address Information!"
+                // Return a placeholder if no address is found
+                return res2;
+            }
             //const addressId = req.params.addressId;
             //const line2 = await Address.getShippingLine2(addressId);
             //if(line2 !== null) {
@@ -71,7 +90,16 @@ class AddressController {
     static async getShippingCity(userID) {
         try {
             let res = await Address.getShippingCity(userID);
-            return res;
+            let res2 = res[0].city
+            console.log("cityres" + res)
+            console.log("cityres2" + res2)
+            if (res2 !== null && res2 !== undefined && res2 != 1) {
+                return res2;
+            } else {
+                res2 = "Please Enter Address Information!"
+                // Return a placeholder if no address is found
+                return res2;
+            }
 
             //const addressId = req.params.addressId;
             //const city = await Address.getShippingCity(addressId);
@@ -90,7 +118,16 @@ class AddressController {
     static async getShippingState(userID) {
         try {
             let res = await Address.getShippingState(userID);
-            return res;
+            let res2 = res[0].state
+            console.log("stateres" + res)
+            console.log("stateres2" + res2)
+            if (res2 !== null && res2 !== undefined && res2 != 1) {
+                return res2;
+            } else {
+                res2 = "Please Enter Address Information!"
+                // Return a placeholder if no address is found
+                return res2;
+            }
 
             //const addressId = req.params.addressId;
             //const state = await Address.getShippingState(addressId);
@@ -109,7 +146,16 @@ class AddressController {
     static async getShippingZip(userID) {
         try {
             let res = await Address.getShippingZip(userID);
-            return res;
+            let res2 = res[0].zip
+            console.log("zipres" + res)
+            console.log("zipres2" + res2)
+            if (res2 !== null && res2 !== undefined && res2 != 1) {
+                return res2;
+            } else {
+                res2 = "Please Enter Address Information!"
+                // Return a placeholder if no address is found
+                return res2;
+            }
             //const addressId = req.params.addressId;
             //const zip = await Address.getShippingZip(addressId);
             //if(zip !== null) {

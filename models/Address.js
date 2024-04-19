@@ -76,7 +76,7 @@ class Address {
       let sql = `SELECT zip FROM address WHERE addressID = (SELECT address FROM userAddress WHERE user=${userid} && addressType='shipping');`;
 
       let res = await connection.promise().query(sql);
-      let tmp = res[0]
+      let tmp = res[0];
       console.log(tmp);
       return tmp;
     }

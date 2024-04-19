@@ -7,9 +7,12 @@ var app = express();
 const router = express.Router();
 const ReviewController = require("../controllers/ReviewController");
 const AdminController = require("../controllers/AdminController");
+const AddressController = require("../controllers/AddressController");
+
 
 //FOR PARSING DIFFERENT OBJECTS
 var bodyParser = require("body-parser");
+//const AddressController = require("../controllers/AddressController");
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 const multer = require('multer');
@@ -49,7 +52,9 @@ router.get("/products", function(req, res) {
 
 //cart page route
 router.get("/cart", function(req, res) {
-  res.render("pages/cart"); // This will render views/pages/cart.ejs
+  if (req.session.isLoggedIn === true) {
+  res.render("pages/cart", {userID: req.session.userID}); // This will render views/pages/cart.ejs
+  } else res.redirect("/login");
 });
 
 //checkout page route
@@ -58,18 +63,33 @@ router.get("/checkout", function(req, res) {
 });
 
 //ACCOUNT ROUTES
-router.get("/login", function(req, res) {
-  res.render("pages/login"); // This will render views/pages/login.ejs
-});
+//router.get("/login", function(req, res) {
+  //res.render("pages/login"); // This will render views/pages/login.ejs
+//});
 
 //ACCOUNT PAGE ROUTE
 router.get("/account", function (req, res) {
-  res.render("pages/account"); // This will render views/pages/login.ejs
+  if(req.session.isLoggedIn){
+    res.render("pages/account", { username: req.session.username, userID: req.session.userID }); // This will render views/pages/account.ejs and pass the username as a variable
+  }
+  else{
+    res.render("pages/login"); // This will render views/pages/login.ejs
+  }
+});
+
+//account edit page route
+router.get("/edit", function(req, res) {
+  if(req.session.isLoggedIn){
+    res.render("pages/edit", { username: req.session.username }); // This will render views/pages/account.ejs and pass the username as a variable
+  }
+  else{
+    res.render("pages/home"); // This will render views/pages/login.ejs
+  }
 });
 
 //create page route
 router.get("/create", function(req, res) {
-  res.render("pages/createaccount"); // This will render views/pages/login.ejs
+  res.render("pages/createaccount"); // This will render views/pages/createaccount.ejs
 });
 
 router.post("/validate", urlencodedParser, async function(req, res) {
@@ -164,6 +184,46 @@ router.get("/getProducts", async function(req, res) {
     res.json(responseData);
   }
   else res.send("Admin Account Required");
+})
+
+router.get("/getShipping", async function(req, res) {
+  if (req.session.isLoggedIn === true) {
+    let responseData = await AddressController.getShippingLine1(req.session.userID);
+    res.json(responseData);
+  }
+  else res.send("Must be Logged In");
+})
+
+router.get("/line2", async function(req, res) {
+  if (req.session.isLoggedIn === true) {
+    let responseData = await AddressController.getShippingLine2(req.session.userID);
+    res.json(responseData);
+  }
+  else res.send("Must be Logged In");
+})
+
+router.get("/getCity", async function(req, res) {
+  if (req.session.isLoggedIn === true) {
+    let responseData = await AddressController.getShippingCity(req.session.userID);
+    res.json(responseData);
+  }
+  else res.send("Must be Logged In");
+})
+
+router.get("/getState", async function(req, res) {
+  if (req.session.isLoggedIn === true) {
+    let responseData = await AddressController.getShippingState(req.session.userID);
+    res.json(responseData);
+  }
+  else res.send("Must be Logged In");
+})
+
+router.get("/getZip", async function(req, res) {
+  if (req.session.isLoggedIn === true) {
+    let responseData = await AddressController.getShippingZip(req.session.userID);
+    res.json(responseData);
+  }
+  else res.send("Must be Logged In");
 })
 
 router.post("/getProductHistory", jsonParser, async function(req, res) {
@@ -300,6 +360,9 @@ router.get("/getAddressZip", async function(req, res) {
   let responseData = await AddressController.getShippingZip(req.session.userID);
   //console.log(responseData);
   res.json(responseData);
+router.post("/updateShippingAddress", urlencodedParser, async function(req, res) {
+  await AddressController.setShippingAddress(req.session.userID,req.body);
+  res.render("pages/account", { username: req.session.username });
 })
 
 
@@ -317,5 +380,22 @@ router.get('/reviews/text/:reviewId', ReviewController.getReviewText);
 
 router.get('/reviews/reviewIDs/:productID', ReviewController.getReviewIds);
 
+router.get('/user/getCart/:userID', UserController.getCart);
+
+router.post("/removeItem", jsonParser, async function(req, res) {
+  if (!req.session.isLoggedIn) {
+      return res.status(403).json({ success: false, message: "Not authorized" });
+  }
+
+  try {
+      const removalSuccess = await UserController.removeFromCart(req, res);
+      if (removalSuccess) {
+          return res.status(200).json({ success: true, message: "Item removed successfully" });
+      }
+  } catch (error) {
+      console.error("Error removing item from cart:", error);
+      return res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+});
 
 module.exports = router;
