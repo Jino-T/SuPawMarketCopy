@@ -12,7 +12,7 @@ const AddressController = require("../controllers/AddressController");
 
 //FOR PARSING DIFFERENT OBJECTS
 var bodyParser = require("body-parser");
-const AddressController = require("../controllers/AddressController");
+//const AddressController = require("../controllers/AddressController");
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 const multer = require('multer');
