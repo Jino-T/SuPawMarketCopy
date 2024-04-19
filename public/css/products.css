@@ -36,6 +36,7 @@ h3 {
 }
 
 /* Style adjustments for the category images */
+/* Style adjustments for the category images */
 .category-image {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds some shadow for depth */
     border-radius: 0.25rem; /* Rounds the corners of the images */
@@ -43,6 +44,9 @@ h3 {
     display: block; /* Ensures the image is a block element to center it */
     margin-left: auto; /* Centers the image horizontally */
     margin-right: auto; /* Centers the image horizontally */
+    width: 250px; /* Sets a fixed width for all images */
+    height: 250px; /* Sets a fixed height for all images */
+    object-fit: cover; /* Ensures the images cover the area without stretching */
 }
 
 /* Ensures the main content is centered and not stretching too wide */
