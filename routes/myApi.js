@@ -5,6 +5,7 @@ const UserController = require("../controllers/UserController");
 const ProductController = require("../controllers/ProductController");
 var app = express();
 const router = express.Router();
+const session = require('express-session');
 const ReviewController = require("../controllers/ReviewController");
 const AdminController = require("../controllers/AdminController");
 const AddressController = require("../controllers/AddressController");
@@ -106,7 +107,7 @@ router.post("/validate", urlencodedParser, async function(req, res) {
     //console.log(req.session.userID)
     res.render("pages/home");
   } else {
-    res.send("Wrong username or password");
+    res.redirect("/login");
   }
 });
 
@@ -284,6 +285,23 @@ router.get("/dogSubProducts", function(req, res) {
 router.get("/dogProducts", function(req, res) {
   res.render("pages/dogProducts"); // This will render views/pages/products.ejs
 });
+
+// Cat Products Item Routes
+router.get("/catItemProduct", function(req, res) {
+  res.render("pages/catItemProduct"); 
+});
+
+// Cat Products page route
+router.get("/catSubProducts", function(req, res) {
+  res.render("pages/catSubProducts"); 
+});
+
+// Product page route
+router.get("/catProducts", function(req, res) {
+  res.render("pages/catProducts"); 
+});
+
+// Cat Product item page route ^^
 
 // Get product quantity
 router.get("/product/quantity/:productId", ProductController.getQuantity);
