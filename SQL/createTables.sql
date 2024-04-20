@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`product` (
   PRIMARY KEY (`productID`),
   UNIQUE KEY `productID_UNIQUE` (`productID`));
 
-CREATE TABLE IF NOT EXISTS `supawdb`.`inCategory` (
+CREATE TABLE IF NOT EXISTS `supawdb`.`incategory` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `catID` INT NOT NULL,
   `productID` INT NOT NULL,
