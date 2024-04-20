@@ -102,7 +102,7 @@ body {
 
 .price {
     font-size: 1.5rem;
-    color: #28a745; /* Green color for price */
+    color: #ffffff; /* Green color for price */
     font-weight: bold;
     margin-right: 1rem; /* Space between price and button */
 }
