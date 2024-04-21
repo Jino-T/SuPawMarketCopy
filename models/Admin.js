@@ -36,6 +36,7 @@ class Admin {
     }
   
     static async setProductName(productID, newName) {
+      console.log(productID);
       let sql = `UPDATE product SET productName="${newName}" WHERE productID=${productID};`;
       await connection.promise().query(sql);
       console.log("product updated"); 
@@ -72,7 +73,7 @@ class Admin {
     }
 
     static async setCategories(productID, newCategories) {//change an items categories in the db, assumes newCategories is an array of strings
-      let delSQL = `DELETE FROM incategory WHERE prodID=${productID};`; //removes an items old categories and adds the new ones to the DB
+      let delSQL = `DELETE FROM incategory WHERE productID=${productID};`; //removes an items old categories and adds the new ones to the DB
       connection.promise().query(delSQL).then(() => {
         for(let i of newCategories){ //for loop necessary if there are multiple newCategories
           connection.query(`INSERT INTO incategory VALUES(0, (SELECT categoryID FROM category WHERE categoryName='${i}'), (SELECT productID FROM product WHERE productID='${productID}'))`)
