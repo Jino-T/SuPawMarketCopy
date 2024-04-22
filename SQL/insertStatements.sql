@@ -140,11 +140,11 @@ INSERT INTO `supawdb`.`incategory` (`id`, `catID`, `productID`) VALUES ('378', '
 INSERT INTO `supawdb`.`incategory` (`id`, `catID`, `productID`) VALUES ('379', '210', '139');
 INSERT INTO `supawdb`.`incategory` (`id`, `catID`, `productID`) VALUES ('380', '210', '140');
 
-INSERT INTO `supawdb`.`user` (`userID`, `username`, `password`, `isAdmin`) VALUES ('401', 'walter', 'walter123', '0');
-INSERT INTO `supawdb`.`user` (`userID`, `username`, `password`, `isAdmin`) VALUES ('402', 'adam', 'adam123', '1');
-INSERT INTO `supawdb`.`user` (`userID`, `username`, `password`, `isAdmin`) VALUES ('403', 'whitney', 'whitney123', '0');
-INSERT INTO `supawdb`.`user` (`userID`, `username`, `password`, `isAdmin`) VALUES ('404', 'josh', 'josh123', '0');
-INSERT INTO `supawdb`.`user` (`userID`, `username`, `password`, `isAdmin`) VALUES ('405', 'sammy', 'sammy123', '0');
+INSERT INTO `supawdb`.`user` (`userID`, `username`, `password`, `isAdmin`) VALUES ('401', 'walter', '$2b$10$nJoBPlk1YQk7k5bwPPPIF.T4L7BSFSH.TfYU6O4YNBK20S7PMdHzq', '0');
+INSERT INTO `supawdb`.`user` (`userID`, `username`, `password`, `isAdmin`) VALUES ('402', 'adam', '$2b$10$nJoBPlk1YQk7k5bwPPPIF.T4L7BSFSH.TfYU6O4YNBK20S7PMdHzq', '1');
+INSERT INTO `supawdb`.`user` (`userID`, `username`, `password`, `isAdmin`) VALUES ('403', 'whitney', '$2b$10$nJoBPlk1YQk7k5bwPPPIF.T4L7BSFSH.TfYU6O4YNBK20S7PMdHzq', '0');
+INSERT INTO `supawdb`.`user` (`userID`, `username`, `password`, `isAdmin`) VALUES ('404', 'josh', '$2b$10$nJoBPlk1YQk7k5bwPPPIF.T4L7BSFSH.TfYU6O4YNBK20S7PMdHzq', '0');
+INSERT INTO `supawdb`.`user` (`userID`, `username`, `password`, `isAdmin`) VALUES ('405', 'sammy', '$2b$10$nJoBPlk1YQk7k5bwPPPIF.T4L7BSFSH.TfYU6O4YNBK20S7PMdHzq', '0');
 
 INSERT INTO `supawdb`.`address` (`addressID`, `line1`, `line2`, `city`, `state`, `zip`) VALUES ('1', 'Default Line1', 'Default Line2', 'Default City', 'Default State', '00000');
 INSERT INTO `supawdb`.`address` (`addressID`, `line1`, `line2`, `city`, `state`, `zip`) VALUES ('501', '308 Negra Arroyo Lane', '', 'Albuquerque', 'New Mexico', '87104');
