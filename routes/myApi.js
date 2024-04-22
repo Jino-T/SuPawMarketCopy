@@ -61,11 +61,6 @@ router.get("/checkout", function(req, res) {
   res.render("pages/checkout"); // This will render views/pages/checkout.ejs
 });
 
-//ACCOUNT ROUTES
-// router.get("/login", function(req, res) {
-//   res.render("pages/login"); // This will render views/pages/login.ejs
-// });
-
 //ACCOUNT PAGE ROUTE
 router.get("/account", function (req, res) {
   if(req.session.isLoggedIn){
