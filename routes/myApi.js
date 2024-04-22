@@ -5,7 +5,6 @@ const UserController = require("../controllers/UserController");
 const ProductController = require("../controllers/ProductController");
 var app = express();
 const router = express.Router();
-const session = require('express-session');
 const ReviewController = require("../controllers/ReviewController");
 const AdminController = require("../controllers/AdminController");
 const AddressController = require("../controllers/AddressController");
@@ -63,9 +62,9 @@ router.get("/checkout", function(req, res) {
 });
 
 //ACCOUNT ROUTES
-//router.get("/login", function(req, res) {
-  //res.render("pages/login"); // This will render views/pages/login.ejs
-//});
+// router.get("/login", function(req, res) {
+//   res.render("pages/login"); // This will render views/pages/login.ejs
+// });
 
 //ACCOUNT PAGE ROUTE
 router.get("/account", function (req, res) {
@@ -107,7 +106,7 @@ router.post("/validate", urlencodedParser, async function(req, res) {
     //console.log(req.session.userID)
     res.render("pages/home");
   } else {
-    res.redirect("/login");
+    res.redirect("/account");
   }
 });
 
@@ -123,7 +122,7 @@ router.post("/create", urlencodedParser, async function(req, res) {
     req.session.userID = await UserController.getUserID(req.body.username);
     res.render("pages/home");
   } else {
-    res.send("Username already in use");
+    res.redirect('/create');
   }
 });
 
@@ -161,8 +160,8 @@ router.get("/editProducts", async function(req,res) {//renders table of all prod
   } else res.send("Admin Account Required");
 });
 
-router.post("/updateProduct", jsonParser, async function(req, res) {
-  //console.log(JSON.stringify(req.body));
+router.post("/updateProduct", upload.single("productImg"), async function(req, res) {
+  console.log(req);
   if (req.session.isLoggedIn === true && req.session.isAdmin === 1) {
     await AdminController.updateProduct(req.body);
     if(req.body.productImg !== "undefined") {
@@ -268,7 +267,11 @@ router.post("/toggleAdmin", jsonParser, async function(req, res) {
 });
 // Dog Products item page route
 router.get("/dogItemProduct", function(req, res) {
-  res.render("pages/dogItemProduct"); // This will render views/pages/dogItemProduct.ejs
+  if (req.session.isLoggedIn) {
+    res.render("pages/dogItemProduct"); // This will render views/pages/dogItemProduct.ejs
+  } else {
+    res.redirect("/account");
+  }
 });
 
 // Dog Products page route
@@ -332,7 +335,7 @@ router.post("/addToCart", jsonParser, async function(req, res) {
         .status(500)
         .json({ success: false, message: "Internal Server Error" });
     }
-  }
+  } 
 });
 
 router.post("/validateCheckout", async function(req, res) {

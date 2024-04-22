@@ -183,6 +183,7 @@ class productTable extends React.Component {
         formData.append("category",category);
         formData.append("productImg", document.getElementById("productImg").files[0])
 
+        console.log(formData);
         //console.log("b4 fetch category(1) = " + category.item(0).innerHTML);
 
         fetch(updateProductRoute, { 
