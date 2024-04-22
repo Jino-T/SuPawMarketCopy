@@ -35,13 +35,13 @@ class AddressController {
     // Get line1 of a shipping address
     static async getShippingLine1(userID) {
         try {
-            let res = await Address.getShippingLine1(userID);
-            let res2 = res[0].line1
-            console.log("res" + res)
+            let res = await Address.getShippingLine1(userID); //GETS userIDm from session
+            let res2 = res[0].line1 //res returns a library. Must index into it and pull the data under "line1" in DB
+            console.log("res" + res) //Troubleshooting
             console.log("res2" + res2)
-            if (res2 !== null && res2 !== undefined && res2 != 1) {
-                return res2;
-            } else {
+            if (res2 !== null && res2 !== undefined && res2 != 1) { // If it's been updated, display updated information
+                return res2; //NOTE THAT IF THE CODE IS NOT RECOGNIZING THAT THE ADDRESS IS EMPTY, POPULATING THE DEFAULT ADDRESS TO ALL 1s FORCES THIS CASE
+            } else {         //I.E IN DB, ROW MARKED 1 IN ADDRESS TABLE SHOULD BE ALL 1s
                 res2 = "Please Enter Address Information!"
                 // Return a placeholder if no address is found
                 return res2;
@@ -60,7 +60,7 @@ class AddressController {
     }
 
     // Get line2 of a a shipping ddress
-    static async getShippingLine2(userID) {
+    static async getShippingLine2(userID) { //SEE ABOVE FOR NOTES
         try {
             let res = await Address.getShippingLine2(userID);
             let res2 = res[0].line2
@@ -87,7 +87,7 @@ class AddressController {
     }
 
     // Get city of a a shipping ddress
-    static async getShippingCity(userID) {
+    static async getShippingCity(userID) { //SEE ABOVE FOR NOTES
         try {
             let res = await Address.getShippingCity(userID);
             let res2 = res[0].city
@@ -115,7 +115,7 @@ class AddressController {
     }
 
     // Get state of a shipping address
-    static async getShippingState(userID) {
+    static async getShippingState(userID) { //SEE ABOVE FOR NOTES
         try {
             let res = await Address.getShippingState(userID);
             let res2 = res[0].state
@@ -143,7 +143,7 @@ class AddressController {
     }
 
     // Get zip of a shipping address
-    static async getShippingZip(userID) {
+    static async getShippingZip(userID) { //SEE ABOVE FOR NOTES
         try {
             let res = await Address.getShippingZip(userID);
             let res2 = res[0].zip

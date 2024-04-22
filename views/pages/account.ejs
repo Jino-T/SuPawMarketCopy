@@ -15,7 +15,7 @@
         
         <img src="https://cdn4.iconfinder.com/data/icons/man-user-human-person-business-profile-avatar/100/20-1User_13-512.png" alt="LOGINICON???" class="login_image" />
         <b id="preaccountLabel" class="preaccountLabel">Username:</b>
-        <b id="accountLabel" class="accountLabel"><%= username %></b>
+        <b id="accountLabel" class="accountLabel"><%= username %></b> <!--Pulls username from session; See API-->
 
         <div></div>
         <b id="preaddressLabel" class="preaddressLabel">Address:</b>
@@ -35,29 +35,30 @@
         <br></br>
         <a href="/edit" class="edit">Edit Your Account</a>
         <a href="/" class="home">Home</a>
+        <!--ASSOCIATED JAVASCRIPT STARTS HERE-->
+        <script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script> <!--Must load Jquery-->
 
-        <script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script> 
         <script>
-            const address1 = document.getElementById('addressLabel');
+            const address1 = document.getElementById('addressLabel'); //Must load each element individually using ID
             const line2 = document.getElementById('line2Label');
             const cityLabel = document.getElementById('cityLabel');
             const stateLabel = document.getElementById('stateLabel');
             const zipLabel = document.getElementById('zipLabel');
 
             //<script>script src="/jquery-3.7.1.min.js"
-            async function UpdateLine1() {
+            async function UpdateLine1() { //Function to import Line1 data from DB onto page
                 const fetchShipping = await $.ajax({
-                    url: `/getShipping`,
+                    url: `/getShipping`, //outlined in API
                     type: "GET"
                     });
 
-                console.log("fetchShipping" + fetchShipping)
-                address1.innerHTML = fetchShipping;
+                console.log("fetchShipping" + fetchShipping) //For troubleshooting
+                address1.innerHTML = fetchShipping; //physically update address1 to DB information
                 return;
             }
 
-            async function UpdateLine2() {
-                const fetchLine2 = await $.ajax({
+            async function UpdateLine2() { 
+                const fetchLine2 = await $.ajax({ //See function above for convention
                     url: `/line2`,
                     type: "GET"
                     });
@@ -67,7 +68,7 @@
                 return;
             }
 
-            async function UpdateCity() {
+            async function UpdateCity() { //See function above for convention
                 const fetchCity = await $.ajax({
                     url: `/getCity`,
                     type: "GET"
@@ -78,7 +79,7 @@
                 return;
             }
 
-            async function UpdateState() {
+            async function UpdateState() { //See function above for convention
                 const fetchState = await $.ajax({
                     url: `/getState`,
                     type: "GET"
@@ -89,7 +90,7 @@
                 return;
             }
 
-            async function UpdateZip() {
+            async function UpdateZip() { //See function above for convention
                 const fetchZip = await $.ajax({
                     url: `/getZip`,
                     type: "GET"
@@ -100,12 +101,12 @@
                 return;
             }
 
-            UpdateLine1();
-            UpdateLine2();
+            UpdateLine1(); //Call all the functions when the page runs
+            UpdateLine2(); //These all default (through the address controller) to using the userID pulled from the session, which is why they dont take in a userID here
             UpdateCity();
             UpdateState();
             UpdateZip();
-            console.log("IM RUNNING")
+            console.log("IM RUNNING") //For troubleshooting
 
         </script>
 
