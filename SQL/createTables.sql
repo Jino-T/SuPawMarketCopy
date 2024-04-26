@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `supawdb`.`userAddress` (
   CONSTRAINT `user` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
   );
 
-  CREATE TABLE `edits` (
+  CREATE TABLE IF NOT EXISTS `supawdb`.`edits` (
   `editID` int NOT NULL AUTO_INCREMENT,
   `userID` int NOT NULL,
   `prodID` int DEFAULT NULL,
