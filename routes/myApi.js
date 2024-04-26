@@ -156,7 +156,7 @@ router.get("/editProducts", async function(req,res) {//renders table of all prod
 });
 
 router.post("/updateProduct", upload.single("productImg"), async function(req, res) {
-  console.log(req);
+  //console.log(req);
   if (req.session.isLoggedIn === true && req.session.isAdmin === 1) {
     await AdminController.updateProduct(req.body);
     if(req.body.productImg !== "undefined") {

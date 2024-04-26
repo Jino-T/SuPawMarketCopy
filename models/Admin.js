@@ -73,9 +73,13 @@ class Admin {
     }
 
     static async setCategories(productID, newCategories) {//change an items categories in the db, assumes newCategories is an array of strings
+      //console.log(newCategories);
+      let newCat = newCategories.split(",");
+      //console.log(newCat);
       let delSQL = `DELETE FROM incategory WHERE productID=${productID};`; //removes an items old categories and adds the new ones to the DB
       connection.promise().query(delSQL).then(() => {
-        for(let i of newCategories){ //for loop necessary if there are multiple newCategories
+        for(let i of newCat){ //for loop necessary if there are multiple newCategories
+          console.log(i);
           connection.query(`INSERT INTO incategory VALUES(0, (SELECT categoryID FROM category WHERE categoryName='${i}'), (SELECT productID FROM product WHERE productID='${productID}'))`)
         }
       })

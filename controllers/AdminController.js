@@ -31,7 +31,7 @@ class AdminController {
     }
 
     static async updateProduct(info) {
-        console.log(info);
+        console.log(info.category);
         await Admin.setProductName(info.productID, info.productName);
         await Admin.setPrice(info.productID, info.price);
         await Admin.setInventory(info.productID, info.inventory);
