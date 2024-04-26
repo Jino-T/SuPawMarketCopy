@@ -410,4 +410,14 @@ router.post("/removeItem", jsonParser, async function(req, res) {
   }
 });
 
+router.get('/logout',(req, res) => {
+  if(req.session.isLoggedIn === true){
+  req.session.destroy(); 
+  res.render("pages/home", {justLoggedOut: true})
+  } else{
+    res.render("pages/home", {wasNotLoggedIn: true})
+  }
+
+});
+
 module.exports = router;
