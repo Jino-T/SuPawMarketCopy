@@ -101,7 +101,7 @@ router.post("/validate", urlencodedParser, async function(req, res) {
     //console.log(req.session.userID)
     res.render("pages/home");
   } else {
-    res.redirect("/account");
+    res.render('pages/login', {invalidLogin:true});
   }
 });
 
@@ -117,7 +117,7 @@ router.post("/create", urlencodedParser, async function(req, res) {
     req.session.userID = await UserController.getUserID(req.body.username);
     res.render("pages/home");
   } else {
-    res.redirect('/create');
+    res.render('pages/createaccount', {accountExists: true});
   }
 });
 
@@ -408,6 +408,16 @@ router.post("/removeItem", jsonParser, async function(req, res) {
       console.error("Error removing item from cart:", error);
       return res.status(500).json({ success: false, message: "Internal Server Error" });
   }
+});
+
+router.get('/logout',(req, res) => {
+  if(req.session.isLoggedIn === true){
+  req.session.destroy(); 
+  res.render("pages/home", {justLoggedOut: true})
+  } else{
+    res.render("pages/home", {wasNotLoggedIn: true})
+  }
+
 });
 
 module.exports = router;

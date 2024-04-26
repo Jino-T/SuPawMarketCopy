@@ -8,8 +8,14 @@
     <title>Create An Account</title>
 </head>
 <body>
+   
     <header>
+       
         <h1>Create an Account</h1>
+        <% if(typeof(accountExists) != "undefined"){ %>
+            <p id="errormsg"> Account exists already</p>
+            <p id="errormsg"> Please try again or login </p>
+           <% } %>
         <nav>
             <ul>
                 <!--<li><a href="/">Home</a></li>

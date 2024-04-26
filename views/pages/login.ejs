@@ -9,7 +9,11 @@
 </head>
 <body>
     <header>
-        <h1>Please Login or Create an Account</h1>
+        <h1>Please Login or Create an Account</h1> 
+        <% if(typeof(invalidLogin) != "undefined"){ %>
+            <p> Invalid username/password combination. </p>
+            <p> Please try again or create an account. </p>
+           <% } %>
         <nav>
             <ul>
                 <!--<li><a href="/">Home</a></li>
