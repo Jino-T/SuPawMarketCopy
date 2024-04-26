@@ -131,3 +131,8 @@ h1{
     margin-left: calc(50% - 27px);
     margin-bottom: 0.5rem;
 }
+.errormsg{
+    text-align: center;
+    font-family: Arial, sans-serif;
+    
+}

@@ -101,7 +101,7 @@ router.post("/validate", urlencodedParser, async function(req, res) {
     //console.log(req.session.userID)
     res.render("pages/home");
   } else {
-    res.redirect("/account");
+    res.render('pages/login', {invalidLogin:true});
   }
 });
 
@@ -117,7 +117,7 @@ router.post("/create", urlencodedParser, async function(req, res) {
     req.session.userID = await UserController.getUserID(req.body.username);
     res.render("pages/home");
   } else {
-    res.redirect('/create');
+    res.render('pages/createaccount', {accountExists: true});
   }
 });
 
