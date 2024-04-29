@@ -54,6 +54,8 @@ router.get("/", function(req, res) {
   res.render("pages/home"); // This will render views/pages/home.ejs
 });
 
+
+
 // Product page route
 router.get("/products", function(req, res) {
   res.render("pages/products"); // This will render views/pages/products.ejs
@@ -95,6 +97,43 @@ router.get("/edit", function(req, res) {
 router.get("/create", function(req, res) {
   res.render("pages/createaccount"); // This will render views/pages/createaccount.ejs
 });
+
+router.post("/submitReview", jsonParser, async function(req, res) {
+  try {
+    const userID = req.session.userID;
+    const { productId, reviewText, starRating } = req.body; 
+
+    // Call the controller function with the userID and other parameters
+    await ReviewController.submitReview(userID, productId, reviewText, starRating);
+
+    // Send a success response
+    res.status(201).json({ success: true, message: "Review submitted successfully" });
+  } catch (error) {
+    console.error("Error submitting review in myAPI.js:", error);
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
+});
+/*
+router.post("/addToCart", jsonParser, async function(req, res) {
+  if (req.session.isLoggedIn) {
+    try {
+      const userID = req.session.userID;
+      await UserController.addToCart(userID, req.body);
+
+      // Respond with success message
+      res
+        .status(200)
+        .json({ success: true, message: "Item added to cart successfully" });
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal Server Error" });
+    }
+  } 
+});
+*/
+
 
 router.post("/validate", urlencodedParser, async function(req, res) {
   // console.log(req);

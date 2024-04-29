@@ -9,6 +9,25 @@ class Review {
       this.reviewText = reviewText;     // string
     }
 
+    static async submitReview(userID, productId, reviewText, starRating) {
+      try {
+        // Logic to insert review into database
+        // Example using MySQL query:
+        // const query = "INSERT INTO reviews (productId, reviewText, starRating) VALUES (?, ?, ?)";
+        // await db.query(query, [productId, reviewText, starRating]);
+        
+
+        //let sql = `INSERT INTO \`supawdb\`.\`review\` (\`reviewID\`, \`userID\`, \`productID\`, \`reviewText\`, \`rating\`) VALUES ('?', '?', '?', ?, '?');`
+        let sql = `INSERT INTO \`supawdb\`.\`review\` (\`userID\`, \`productID\`, \`reviewText\`, \`rating\`) VALUES (?, ?, ?, ?)`;
+        await connection.promise().query(sql, [userID, productId, reviewText, starRating]);
+        console.log("Review submitted successfully");
+        return true;
+      } catch (error) {
+        console.error("Error submitting review:", error);
+        return false;
+      }
+    }
+
     //addes review in the database; Example function call: Review.addReview(802, 403, 102, `wow`, 2);
     static async addReview(reviewID, userID, productID, reviewText, rating) {
       console.log("Adding a review to the database");
