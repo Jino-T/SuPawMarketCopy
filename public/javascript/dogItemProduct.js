@@ -140,7 +140,7 @@ $(document).ready(function() {
 
   $(document).on("click", ".leave-review", function() {
     const productId = urlParams.get("productID");
-    const reviewText = prompt("Type out your review and reasoning:");
+    const reviewText = prompt("Type out your review (200 characters or less):");
     const starRating = parseInt(prompt("Enter star rating (A number 0-5):")); // Assuming user enters a number
     if (reviewText !== null && starRating >= 0 && starRating <= 5) {
       submitReview(productId, reviewText, starRating);
