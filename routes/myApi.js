@@ -31,6 +31,13 @@ const storage = multer.diskStorage({
 // Then we will set the storage 
 const upload = multer({ storage: storage });
 
+router.use(function(req,res,next){
+  res.locals.isAdmin = req.session.isAdmin;
+  res.locals.isLoggedIn = req.session.isLoggedIn;
+  res.locals.justLoggedOut = req.session.justLoggedOut;
+  res.locals.username = req.session.username;
+  next();
+});
 
 app.use(
   bodyParser.urlencoded({
@@ -39,8 +46,11 @@ app.use(
 );
 app.use(bodyParser.json());
 
+
 router.get("/", function(req, res) {
-  const sessionData = req.session;
+  if (!res.locals.justLoggedOut){
+    const sessionData = req.session;
+  }
   res.render("pages/home"); // This will render views/pages/home.ejs
 });
 
@@ -138,7 +148,7 @@ router.post("/validate", urlencodedParser, async function(req, res) {
     req.session.isAdmin = await UserController.checkIsAdmin(req.body.username);
     req.session.userID = await UserController.getUserID(req.body.username);
     //console.log(req.session.userID)
-    res.render("pages/home");
+    res.redirect("/");
   } else {
     res.render('pages/login', {invalidLogin:true});
   }
@@ -452,9 +462,11 @@ router.post("/removeItem", jsonParser, async function(req, res) {
 router.get('/logout',(req, res) => {
   if(req.session.isLoggedIn === true){
   req.session.destroy(); 
-  res.render("pages/home", {justLoggedOut: true})
+  const sessionData = req.session;
+  res.locals.justLoggedOut = true;
+  res.redirect("/")
   } else{
-    res.render("pages/home", {wasNotLoggedIn: true})
+    res.render("pages/home")
   }
 
 });
