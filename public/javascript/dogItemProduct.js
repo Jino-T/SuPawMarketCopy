@@ -116,6 +116,38 @@ $(document).ready(function() {
     }
   }
   
+  async function submitReview(productId, reviewText, starRating) {
+    try {
+      const data = JSON.stringify({ productId, reviewText, starRating });
+      await $.ajax({
+        url: "/submitReview",
+        type: "POST",
+        headers: { "Content-Type": "application/json" },
+        data: data,
+        success: function(response) {
+          console.log("Review submitted successfully:", response);
+          // After successful submission, fetch and display updated product details
+          fetchProductDetails(productId);
+        },
+        error: function(xhr, status, error) {
+          console.error("Error submitting review:", error);
+        }
+      });
+    } catch (error) {
+      console.error("Error submitting review:", error);
+    }
+  }
+
+  $(document).on("click", ".leave-review", function() {
+    const productId = urlParams.get("productID");
+    const reviewText = prompt("Type out your review and reasoning:");
+    const starRating = parseInt(prompt("Enter star rating (A number 0-5):")); // Assuming user enters a number
+    if (reviewText !== null && starRating >= 0 && starRating <= 5) {
+      submitReview(productId, reviewText, starRating);
+    }
+  });
+
+
 
   // Event listener for Add to Cart button
   $(document).on("click", ".add-to-cart", function() {

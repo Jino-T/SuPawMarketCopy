@@ -3,6 +3,37 @@ const Review = require('../models/Review');
 
 class ReviewController {
 
+  /*static async submitReview(req, res) {
+    try {
+      const { productId, reviewText, starRating } = req.body;
+
+      // Validate review data
+      if (!productId || !reviewText || !starRating || isNaN(starRating) || starRating < 0 || starRating > 5) {
+        return res.status(400).json({ error: "Invalid review data" });
+      }
+
+      // Submit review using the Review model
+      const success = await Review.submitReview(productId, reviewText, starRating);
+      if (success) {
+        return res.status(201).json({ success: true, message: "Review submitted successfully" });
+      } else {
+        return res.status(500).json({ error: "Internal server error" });
+      }
+    } catch (error) {
+      console.error("Error submitting review:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }*/
+  static async submitReview(userID, productId, reviewText, starRating) {
+    try {
+      // Call the model function with the parameters
+      await Review.submitReview(userID, productId, reviewText, starRating);
+    } catch (error) {
+      console.error("Error submitting review in ReviewController:", error);
+      throw error; // Propagate the error to the caller
+    }
+  }
+  
   static async addReview(req, res) {
     try {
       const { reviewID, userID, productID, reviewText, rating } = req.body;
