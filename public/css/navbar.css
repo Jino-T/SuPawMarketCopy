@@ -11,6 +11,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    
 }
 
 .hamburger {
@@ -34,6 +35,7 @@ body {
     left: 0;
     border-radius: 0 0 10px 10px; /* Rounded corners on the bottom */
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1;
 }
 
 .vertical-menu .nav-link {
@@ -56,8 +58,8 @@ body {
   
 
 .navbar-logo {
-    display: flex;
-    align-items: center;
+    display:block; 
+    margin-left: 25%;
 }
 
 .search-container {
@@ -110,6 +112,7 @@ body {
 .navbar-profile {
     display: flex;
     align-items: center;
+    text-align: left;
     justify-content: center;
     padding: 0 10px;
 }

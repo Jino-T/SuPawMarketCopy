@@ -11,6 +11,7 @@ class User {
     this.email = email;
     this.shippingInfo = shippingInfo;
     this.cart = [];
+    this.isAdmin = 0;
   }
 
   //ACCOUNT INFORMATION METHODS
