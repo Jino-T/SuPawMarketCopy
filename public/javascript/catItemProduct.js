@@ -126,6 +126,7 @@ $(document).ready(function() {
         success: function(response) {
           console.log("Review submitted successfully:", response);
           // After successful submission, fetch and display updated product details
+          $("#productContainer").empty(); 
           fetchProductDetails(productId);
         },
         error: function(xhr, status, error) {
