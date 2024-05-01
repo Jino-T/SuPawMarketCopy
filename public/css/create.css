@@ -9,7 +9,7 @@ main {
 }
 
 .login_image{
-    width: calc(25% - 12.5px);  /*Splits the container space into two for the tiles, minus the gap */
+    width: calc(50px);  /*Splits the container space into two for the tiles, minus the gap */
     display: block;
     margin-left: auto;
     margin-right: auto;
